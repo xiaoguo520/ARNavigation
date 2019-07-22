@@ -1,0 +1,1226 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03C6C5F922C1D08000657845 /* libBrightSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C6C5F022C1D08000657845 /* libBrightSDK.a */; };
+		03C6C5FA22C1D08000657845 /* BRTBeaconDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */; };
+		03C6C5FB22C1D08000657845 /* BRTBeacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F322C1D08000657845 /* BRTBeacon.h */; };
+		03C6C5FC22C1D08000657845 /* OpenUDIDIOS7.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F422C1D08000657845 /* OpenUDIDIOS7.h */; };
+		03C6C5FD22C1D08000657845 /* BRTBeaconRegion.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F522C1D08000657845 /* BRTBeaconRegion.h */; };
+		03C6C5FE22C1D08000657845 /* BRTBeaconSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F622C1D08000657845 /* BRTBeaconSDK.h */; };
+		03C6C5FF22C1D08000657845 /* BRTTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F722C1D08000657845 /* BRTTools.h */; };
+		03C6C60022C1D08000657845 /* BRTBeaconManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F822C1D08000657845 /* BRTBeaconManager.h */; };
+		03C6C60722C1F64E00657845 /* InWalkIbeaconManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C60522C1F64E00657845 /* InWalkIbeaconManager.h */; };
+		03C6C60822C1F64E00657845 /* InWalkIbeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C6C60622C1F64E00657845 /* InWalkIbeaconManager.m */; };
+		1230B75D20A3EB12009CB95A /* InWalkWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75020A3EB12009CB95A /* InWalkWebImageManager.m */; };
+		1230B75E20A3EB12009CB95A /* InWalkWebImageDownloaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75120A3EB12009CB95A /* InWalkWebImageDownloaderOperation.h */; };
+		1230B75F20A3EB12009CB95A /* InWalkImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75220A3EB12009CB95A /* InWalkImageCache.h */; };
+		1230B76120A3EB12009CB95A /* InWalkWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75420A3EB12009CB95A /* InWalkWebImageDownloader.m */; };
+		1230B76220A3EB12009CB95A /* InWalkWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75520A3EB12009CB95A /* InWalkWebImageCompat.m */; };
+		1230B76320A3EB12009CB95A /* InWalkImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75620A3EB12009CB95A /* InWalkImageCache.m */; };
+		1230B76420A3EB12009CB95A /* InWalkWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75720A3EB12009CB95A /* InWalkWebImageDownloaderOperation.m */; };
+		1230B76520A3EB12009CB95A /* InWalkWebImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75820A3EB12009CB95A /* InWalkWebImageManager.h */; };
+		1230B76620A3EB12009CB95A /* InWalkWebImageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75920A3EB12009CB95A /* InWalkWebImageOperation.h */; };
+		1230B76720A3EB12009CB95A /* InWalkWebImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75A20A3EB12009CB95A /* InWalkWebImageDownloader.h */; };
+		1230B76820A3EB12009CB95A /* InWalkImageCacheConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75B20A3EB12009CB95A /* InWalkImageCacheConfig.m */; };
+		1230B76920A3EB12009CB95A /* InWalkWebImageCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75C20A3EB12009CB95A /* InWalkWebImageCompat.h */; };
+		1273CAD320A321A300CC0236 /* InWalkPropertyKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CABD20A321A300CC0236 /* InWalkPropertyKey.h */; };
+		1273CAD420A321A300CC0236 /* NSObject+InWalkClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CABE20A321A300CC0236 /* NSObject+InWalkClass.h */; };
+		1273CAD520A321A300CC0236 /* NSString+InWalkExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CABF20A321A300CC0236 /* NSString+InWalkExtension.h */; };
+		1273CAD620A321A300CC0236 /* InWalkPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC020A321A300CC0236 /* InWalkPropertyType.m */; };
+		1273CAD720A321A300CC0236 /* NSObject+InWalkProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC120A321A300CC0236 /* NSObject+InWalkProperty.h */; };
+		1273CAD820A321A300CC0236 /* InWalkExtensionConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC220A321A300CC0236 /* InWalkExtensionConst.h */; };
+		1273CAD920A321A300CC0236 /* NSObject+InWalkKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC320A321A300CC0236 /* NSObject+InWalkKeyValue.m */; };
+		1273CADA20A321A300CC0236 /* InWalkProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC420A321A300CC0236 /* InWalkProperty.m */; };
+		1273CADB20A321A300CC0236 /* InWalkFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC520A321A300CC0236 /* InWalkFoundation.h */; };
+		1273CADC20A321A300CC0236 /* NSObject+InWalkCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC620A321A300CC0236 /* NSObject+InWalkCoding.m */; };
+		1273CADD20A321A300CC0236 /* InWalkExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC720A321A300CC0236 /* InWalkExtension.h */; };
+		1273CADE20A321A300CC0236 /* InWalkExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC820A321A300CC0236 /* InWalkExtensionConst.m */; };
+		1273CADF20A321A300CC0236 /* NSObject+InWalkProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC920A321A300CC0236 /* NSObject+InWalkProperty.m */; };
+		1273CAE020A321A300CC0236 /* InWalkPropertyType.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CACA20A321A300CC0236 /* InWalkPropertyType.h */; };
+		1273CAE120A321A300CC0236 /* NSObject+InWalkClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CACB20A321A300CC0236 /* NSObject+InWalkClass.m */; };
+		1273CAE220A321A300CC0236 /* NSString+InWalkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CACC20A321A300CC0236 /* NSString+InWalkExtension.m */; };
+		1273CAE320A321A300CC0236 /* InWalkPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CACD20A321A300CC0236 /* InWalkPropertyKey.m */; };
+		1273CAE420A321A300CC0236 /* InWalkProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CACE20A321A300CC0236 /* InWalkProperty.h */; };
+		1273CAE520A321A300CC0236 /* NSObject+InWalkKeyValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CACF20A321A300CC0236 /* NSObject+InWalkKeyValue.h */; };
+		1273CAE620A321A300CC0236 /* NSObject+InWalkCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAD020A321A300CC0236 /* NSObject+InWalkCoding.h */; };
+		1273CAE820A321A300CC0236 /* InWalkFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAD220A321A300CC0236 /* InWalkFoundation.m */; };
+		1280F3E920A17DFA00E662E4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1280F3E820A17DFA00E662E4 /* CoreMotion.framework */; };
+		1280F40620A195D000E662E4 /* InWalkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F40220A195D000E662E4 /* InWalkManager.m */; };
+		1280F40720A195D000E662E4 /* InWalkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1280F40320A195D000E662E4 /* InWalkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3003AB9521AE9BB30044E14E /* InWalkPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 3003AB9321AE9BB30044E14E /* InWalkPath.h */; };
+		3003AB9621AE9BB30044E14E /* InWalkPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3003AB9421AE9BB30044E14E /* InWalkPath.m */; };
+		3019F755228D17B700F47EFF /* UIImage+ColorPick.h in Headers */ = {isa = PBXBuildFile; fileRef = 3019F753228D17B700F47EFF /* UIImage+ColorPick.h */; };
+		3019F756228D17B700F47EFF /* UIImage+ColorPick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3019F754228D17B700F47EFF /* UIImage+ColorPick.m */; };
+		3019F7592296802200F47EFF /* PopView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3019F7572296802200F47EFF /* PopView.h */; };
+		3019F75A2296802200F47EFF /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3019F7582296802200F47EFF /* PopView.m */; };
+		3019F7602298568D00F47EFF /* GradientLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3019F75E2298568C00F47EFF /* GradientLayer.h */; };
+		3019F7612298568D00F47EFF /* GradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3019F75F2298568C00F47EFF /* GradientLayer.m */; };
+		3038CF2121B8B87900E82193 /* ViewUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3038CF1F21B8B87900E82193 /* ViewUtil.h */; };
+		3038CF2221B8B87900E82193 /* ViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3038CF2021B8B87900E82193 /* ViewUtil.m */; };
+		3038CF2521B8BA3900E82193 /* UIView+Toast.h in Headers */ = {isa = PBXBuildFile; fileRef = 3038CF2321B8BA3800E82193 /* UIView+Toast.h */; };
+		3038CF2621B8BA3900E82193 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 3038CF2421B8BA3900E82193 /* UIView+Toast.m */; };
+		3044D68121E1B61D006D17EF /* ZXSSpuTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D67B21E1B61C006D17EF /* ZXSSpuTableViewCell.h */; };
+		3044D68421E1B61D006D17EF /* ZXSNuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D67E21E1B61C006D17EF /* ZXSNuTableViewCell.m */; };
+		3044D68521E1B61D006D17EF /* ZXSSpuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D67F21E1B61D006D17EF /* ZXSSpuTableViewCell.m */; };
+		3044D68621E1B61D006D17EF /* ZXSNuTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D68021E1B61D006D17EF /* ZXSNuTableViewCell.h */; };
+		3044D69121E1B662006D17EF /* PlateNumberUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D68F21E1B662006D17EF /* PlateNumberUI.h */; };
+		3044D69221E1B662006D17EF /* PlateNumberUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D69021E1B662006D17EF /* PlateNumberUI.m */; };
+		3044D69521E1B678006D17EF /* LocateResultUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D69321E1B678006D17EF /* LocateResultUI.m */; };
+		3044D69621E1B678006D17EF /* LocateResultUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D69421E1B678006D17EF /* LocateResultUI.h */; };
+		3044D69B21E1B68E006D17EF /* StartPositionUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D69721E1B68E006D17EF /* StartPositionUI.m */; };
+		3044D69C21E1B68E006D17EF /* StartPositionUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D69821E1B68E006D17EF /* StartPositionUI.h */; };
+		3044D69D21E1B68E006D17EF /* StartPositionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D69921E1B68E006D17EF /* StartPositionModel.h */; };
+		3044D69E21E1B68E006D17EF /* StartPositionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D69A21E1B68E006D17EF /* StartPositionModel.m */; };
+		3044D6A321E1B6A5006D17EF /* NavigationModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D69F21E1B6A4006D17EF /* NavigationModel.h */; };
+		3044D6A421E1B6A5006D17EF /* NavigationUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D6A021E1B6A4006D17EF /* NavigationUI.m */; };
+		3044D6A521E1B6A5006D17EF /* NavigationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D6A121E1B6A5006D17EF /* NavigationModel.m */; };
+		3044D6A621E1B6A5006D17EF /* NavigationUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D6A221E1B6A5006D17EF /* NavigationUI.h */; };
+		3044D6A921E1BB4B006D17EF /* InWalkUIManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3044D6A721E1BB4B006D17EF /* InWalkUIManager.h */; };
+		3044D6AA21E1BB4B006D17EF /* InWalkUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044D6A821E1BB4B006D17EF /* InWalkUIManager.m */; };
+		3044D6AF21E24A1A006D17EF /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3044D6AE21E24A1A006D17EF /* Media.xcassets */; };
+		305B6825225DFAC700C6B460 /* RvtsUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B6823225DFAC700C6B460 /* RvtsUI.h */; };
+		305B6826225DFAC700C6B460 /* RvtsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B6824225DFAC700C6B460 /* RvtsUI.m */; };
+		305B682A22678C4A00C6B460 /* RZCarPlateNoTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B682822678C4A00C6B460 /* RZCarPlateNoTextField.h */; };
+		305B682B22678C4A00C6B460 /* RZCarPlateNoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B682922678C4A00C6B460 /* RZCarPlateNoTextField.m */; };
+		305B683522678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B683322678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.h */; };
+		305B683622678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B683422678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.m */; };
+		305B683922678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B683722678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.h */; };
+		305B683A22678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B683822678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.m */; };
+		305B683D22678DE200C6B460 /* RZCarPlateNoKeyBoardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B683B22678DE200C6B460 /* RZCarPlateNoKeyBoardView.h */; };
+		305B683E22678DE200C6B460 /* RZCarPlateNoKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B683C22678DE200C6B460 /* RZCarPlateNoKeyBoardView.m */; };
+		305B684122678DED00C6B460 /* RZCarPlateNoKeyBoardCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B683F22678DED00C6B460 /* RZCarPlateNoKeyBoardCell.h */; };
+		305B684222678DED00C6B460 /* RZCarPlateNoKeyBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B684022678DED00C6B460 /* RZCarPlateNoKeyBoardCell.m */; };
+		305B684522678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B684322678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.h */; };
+		305B684622678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B684422678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.m */; };
+		305B687822708F6300C6B460 /* InWalkReverse4CarModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B687622708F6300C6B460 /* InWalkReverse4CarModel.h */; };
+		305B687922708F6300C6B460 /* InWalkReverse4CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B687722708F6300C6B460 /* InWalkReverse4CarModel.m */; };
+		305B687D22714E3800C6B460 /* RvtsResultUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B687B22714E3800C6B460 /* RvtsResultUI.h */; };
+		305B687E22714E3800C6B460 /* RvtsResultUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B687C22714E3800C6B460 /* RvtsResultUI.m */; };
+		305B688222744C3000C6B460 /* InputBgMapUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B688022744C3000C6B460 /* InputBgMapUI.h */; };
+		305B688322744C3000C6B460 /* InputBgMapUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B688122744C3000C6B460 /* InputBgMapUI.m */; };
+		305B6887227484A600C6B460 /* PhonePoseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 305B6885227484A600C6B460 /* PhonePoseUI.h */; };
+		305B6888227484A600C6B460 /* PhonePoseUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 305B6886227484A600C6B460 /* PhonePoseUI.m */; };
+		308B390B22A5355300F3956E /* g_mall.png in Resources */ = {isa = PBXBuildFile; fileRef = 308B390922A5355200F3956E /* g_mall.png */; };
+		308B390C22A5355300F3956E /* p_parking.png in Resources */ = {isa = PBXBuildFile; fileRef = 308B390A22A5355200F3956E /* p_parking.png */; };
+		308B390F22A64F9600F3956E /* InWalkPointDesc.h in Headers */ = {isa = PBXBuildFile; fileRef = 308B390D22A64F9600F3956E /* InWalkPointDesc.h */; };
+		308B391022A64F9700F3956E /* InWalkPointDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 308B390E22A64F9600F3956E /* InWalkPointDesc.m */; };
+		308B391222A6615B00F3956E /* shop_1_yiger.png in Resources */ = {isa = PBXBuildFile; fileRef = 308B391122A6615A00F3956E /* shop_1_yiger.png */; };
+		308B391522A661BB00F3956E /* shop_2_aika.png in Resources */ = {isa = PBXBuildFile; fileRef = 308B391322A661BA00F3956E /* shop_2_aika.png */; };
+		308B391622A661BB00F3956E /* shop_3_yigao.png in Resources */ = {isa = PBXBuildFile; fileRef = 308B391422A661BA00F3956E /* shop_3_yigao.png */; };
+		308B391A22A661C300F3956E /* gif_2_aika.gif in Resources */ = {isa = PBXBuildFile; fileRef = 308B391722A661C200F3956E /* gif_2_aika.gif */; };
+		308B391B22A661C300F3956E /* gif_1_yiger.gif in Resources */ = {isa = PBXBuildFile; fileRef = 308B391822A661C200F3956E /* gif_1_yiger.gif */; };
+		308B391E22A67E6A00F3956E /* gif_3_yigao.gif in Resources */ = {isa = PBXBuildFile; fileRef = 308B391D22A67E6A00F3956E /* gif_3_yigao.gif */; };
+		308B392722A7A3A700F3956E /* gif_arrow.gif in Resources */ = {isa = PBXBuildFile; fileRef = 308B392622A7A3A700F3956E /* gif_arrow.gif */; };
+		308B392B22A7A94300F3956E /* gif_arrow_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 308B392A22A7A94300F3956E /* gif_arrow_2.gif */; };
+		308B392D22A7B84F00F3956E /* ad_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 308B392C22A7B84F00F3956E /* ad_video.mp4 */; };
+		308B393122A8FD5600F3956E /* zhuoyue_b2.png in Resources */ = {isa = PBXBuildFile; fileRef = 308B393022A8FD5600F3956E /* zhuoyue_b2.png */; };
+		320A2D6720BD2E7000178F18 /* InWalkNavigationPathPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 320A2D6520BD2E7000178F18 /* InWalkNavigationPathPoint.h */; };
+		320A2D6820BD2E7000178F18 /* InWalkNavigationPathPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 320A2D6620BD2E7000178F18 /* InWalkNavigationPathPoint.m */; };
+		3218AA6B20C7DB850027A921 /* InWalkLocationModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3218AA6920C7DB850027A921 /* InWalkLocationModel.h */; };
+		3218AA6C20C7DB850027A921 /* InWalkLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3218AA6A20C7DB850027A921 /* InWalkLocationModel.m */; };
+		32233CA320E63C5D00FF6BB4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32233CA220E63C5D00FF6BB4 /* SceneKit.framework */; };
+		3233931020B806F80022647E /* InWalkNavigationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3233930E20B806F80022647E /* InWalkNavigationManager.h */; };
+		3233931120B806F80022647E /* InWalkNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3233930F20B806F80022647E /* InWalkNavigationManager.m */; };
+		3247DEFA20A155DE00F6F45B /* InWalkAR.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DEF820A155DE00F6F45B /* InWalkAR.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3258C71620D3BE7A00565DB0 /* InWalkLocationNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3258C71420D3BE7900565DB0 /* InWalkLocationNavigation.h */; };
+		3258C71720D3BE7A00565DB0 /* InWalkLocationNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3258C71520D3BE7900565DB0 /* InWalkLocationNavigation.m */; };
+		3258C71920D3C56000565DB0 /* InWalkInnerPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3258C71820D3C56000565DB0 /* InWalkInnerPoint.m */; };
+		3258C71C20D3C61C00565DB0 /* InWalkPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 3258C71A20D3C61C00565DB0 /* InWalkPoint.h */; };
+		3258C71D20D3C61C00565DB0 /* InWalkPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3258C71B20D3C61C00565DB0 /* InWalkPoint.m */; };
+		326AFDBB20B5A0A200F0639A /* InWalkNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 326AFDB220B5A0A100F0639A /* InWalkNode.m */; };
+		326AFDBC20B5A0A200F0639A /* InWalkInnerPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFDB320B5A0A100F0639A /* InWalkInnerPoint.h */; };
+		326AFDC220B5A0A200F0639A /* InWalkNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFDB920B5A0A200F0639A /* InWalkNode.h */; };
+		326AFEC220B5A35000F0639A /* InWalkDijkstra.m in Sources */ = {isa = PBXBuildFile; fileRef = 326AFEBC20B5A35000F0639A /* InWalkDijkstra.m */; };
+		326AFEC320B5A35000F0639A /* InWalkDijkstra.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFEBD20B5A35000F0639A /* InWalkDijkstra.h */; };
+		326AFEC420B5A35000F0639A /* InWalkPriorityDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFEBE20B5A35000F0639A /* InWalkPriorityDictionary.h */; };
+		326AFEC520B5A35000F0639A /* InWalkPriorityDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 326AFEBF20B5A35000F0639A /* InWalkPriorityDictionary.mm */; };
+		3271D588210827D7003EE9CC /* InWalkMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 3271D586210827D7003EE9CC /* InWalkMap.h */; };
+		3271D589210827D7003EE9CC /* InWalkMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3271D587210827D7003EE9CC /* InWalkMap.m */; };
+		32739BDD212FBA4700CF6A14 /* InWalkARAnchor.h in Headers */ = {isa = PBXBuildFile; fileRef = 32739BDB212FBA4700CF6A14 /* InWalkARAnchor.h */; };
+		32739BDE212FBA4700CF6A14 /* InWalkARAnchor.m in Sources */ = {isa = PBXBuildFile; fileRef = 32739BDC212FBA4700CF6A14 /* InWalkARAnchor.m */; };
+		327ADB1420EA2DA40079E1DD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 327ADB1320EA2DA30079E1DD /* CoreLocation.framework */; };
+		329A19F320EDB63100EC608F /* InWalkARManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 329A19F120EDB63100EC608F /* InWalkARManager.h */; };
+		329A19F420EDB63100EC608F /* InWalkARManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 329A19F220EDB63100EC608F /* InWalkARManager.m */; };
+		329F5DD420C14476000F496D /* InWalkImageCacheConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 329F5DD320C14476000F496D /* InWalkImageCacheConfig.h */; };
+		32B12BB120F8BA3B00E1E256 /* InWalkMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 32B12BAF20F8BA3B00E1E256 /* InWalkMapView.h */; };
+		32B12BB220F8BA3B00E1E256 /* InWalkMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B12BB020F8BA3B00E1E256 /* InWalkMapView.m */; };
+		32BBF9432100775300B58399 /* WFLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 32BBF9412100775300B58399 /* WFLine.h */; };
+		32BBF9442100775300B58399 /* WFLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BBF9422100775300B58399 /* WFLine.m */; };
+		32C732612101C6EB0062202E /* WFImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 32C7325F2101C6EB0062202E /* WFImage.h */; };
+		32C732622101C6EB0062202E /* WFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C732602101C6EB0062202E /* WFImage.m */; };
+		32E2D90020FE07FB00268817 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E2D8FF20FE07FB00268817 /* CoreGraphics.framework */; };
+		32EFB01B20B815C900913425 /* InWalkItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 32EFB01920B815C900913425 /* InWalkItem.h */; };
+		32EFB01C20B815C900913425 /* InWalkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFB01A20B815C900913425 /* InWalkItem.m */; };
+		32EFB01F20B81D9E00913425 /* InWalkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFB01D20B81D9D00913425 /* InWalkModel.m */; };
+		32EFB02020B81D9E00913425 /* InWalkModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 32EFB01E20B81D9D00913425 /* InWalkModel.h */; };
+		32F88A6021008DDF00EB01F7 /* WFCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 32F88A5E21008DDF00EB01F7 /* WFCircle.h */; };
+		32F88A6121008DDF00EB01F7 /* WFCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F88A5F21008DDF00EB01F7 /* WFCircle.m */; };
+		32F88A642100975900EB01F7 /* WFShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 32F88A622100975900EB01F7 /* WFShape.h */; };
+		32F88A652100975900EB01F7 /* WFShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F88A632100975900EB01F7 /* WFShape.m */; };
+		32F88A6821009B0A00EB01F7 /* InWalkMapManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 32F88A6621009B0A00EB01F7 /* InWalkMapManager.h */; };
+		32F88A6921009B0A00EB01F7 /* InWalkMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F88A6721009B0A00EB01F7 /* InWalkMapManager.m */; };
+		32F88A6C2101B85F00EB01F7 /* MathUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 32F88A6B2101B85F00EB01F7 /* MathUtil.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		03C6C5F022C1D08000657845 /* libBrightSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBrightSDK.a; sourceTree = "<group>"; };
+		03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeaconDefinitions.h; sourceTree = "<group>"; };
+		03C6C5F322C1D08000657845 /* BRTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeacon.h; sourceTree = "<group>"; };
+		03C6C5F422C1D08000657845 /* OpenUDIDIOS7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDIDIOS7.h; sourceTree = "<group>"; };
+		03C6C5F522C1D08000657845 /* BRTBeaconRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeaconRegion.h; sourceTree = "<group>"; };
+		03C6C5F622C1D08000657845 /* BRTBeaconSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeaconSDK.h; sourceTree = "<group>"; };
+		03C6C5F722C1D08000657845 /* BRTTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTTools.h; sourceTree = "<group>"; };
+		03C6C5F822C1D08000657845 /* BRTBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeaconManager.h; sourceTree = "<group>"; };
+		03C6C60522C1F64E00657845 /* InWalkIbeaconManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkIbeaconManager.h; sourceTree = "<group>"; };
+		03C6C60622C1F64E00657845 /* InWalkIbeaconManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkIbeaconManager.m; sourceTree = "<group>"; };
+		1230B75020A3EB12009CB95A /* InWalkWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkWebImageManager.m; sourceTree = "<group>"; };
+		1230B75120A3EB12009CB95A /* InWalkWebImageDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkWebImageDownloaderOperation.h; sourceTree = "<group>"; };
+		1230B75220A3EB12009CB95A /* InWalkImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkImageCache.h; sourceTree = "<group>"; };
+		1230B75420A3EB12009CB95A /* InWalkWebImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkWebImageDownloader.m; sourceTree = "<group>"; };
+		1230B75520A3EB12009CB95A /* InWalkWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkWebImageCompat.m; sourceTree = "<group>"; };
+		1230B75620A3EB12009CB95A /* InWalkImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkImageCache.m; sourceTree = "<group>"; };
+		1230B75720A3EB12009CB95A /* InWalkWebImageDownloaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkWebImageDownloaderOperation.m; sourceTree = "<group>"; };
+		1230B75820A3EB12009CB95A /* InWalkWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkWebImageManager.h; sourceTree = "<group>"; };
+		1230B75920A3EB12009CB95A /* InWalkWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkWebImageOperation.h; sourceTree = "<group>"; };
+		1230B75A20A3EB12009CB95A /* InWalkWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkWebImageDownloader.h; sourceTree = "<group>"; };
+		1230B75B20A3EB12009CB95A /* InWalkImageCacheConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkImageCacheConfig.m; sourceTree = "<group>"; };
+		1230B75C20A3EB12009CB95A /* InWalkWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkWebImageCompat.h; sourceTree = "<group>"; };
+		1273CABD20A321A300CC0236 /* InWalkPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkPropertyKey.h; sourceTree = "<group>"; };
+		1273CABE20A321A300CC0236 /* NSObject+InWalkClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InWalkClass.h"; sourceTree = "<group>"; };
+		1273CABF20A321A300CC0236 /* NSString+InWalkExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+InWalkExtension.h"; sourceTree = "<group>"; };
+		1273CAC020A321A300CC0236 /* InWalkPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkPropertyType.m; sourceTree = "<group>"; };
+		1273CAC120A321A300CC0236 /* NSObject+InWalkProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InWalkProperty.h"; sourceTree = "<group>"; };
+		1273CAC220A321A300CC0236 /* InWalkExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkExtensionConst.h; sourceTree = "<group>"; };
+		1273CAC320A321A300CC0236 /* NSObject+InWalkKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InWalkKeyValue.m"; sourceTree = "<group>"; };
+		1273CAC420A321A300CC0236 /* InWalkProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkProperty.m; sourceTree = "<group>"; };
+		1273CAC520A321A300CC0236 /* InWalkFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkFoundation.h; sourceTree = "<group>"; };
+		1273CAC620A321A300CC0236 /* NSObject+InWalkCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InWalkCoding.m"; sourceTree = "<group>"; };
+		1273CAC720A321A300CC0236 /* InWalkExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkExtension.h; sourceTree = "<group>"; };
+		1273CAC820A321A300CC0236 /* InWalkExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkExtensionConst.m; sourceTree = "<group>"; };
+		1273CAC920A321A300CC0236 /* NSObject+InWalkProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InWalkProperty.m"; sourceTree = "<group>"; };
+		1273CACA20A321A300CC0236 /* InWalkPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkPropertyType.h; sourceTree = "<group>"; };
+		1273CACB20A321A300CC0236 /* NSObject+InWalkClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InWalkClass.m"; sourceTree = "<group>"; };
+		1273CACC20A321A300CC0236 /* NSString+InWalkExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+InWalkExtension.m"; sourceTree = "<group>"; };
+		1273CACD20A321A300CC0236 /* InWalkPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkPropertyKey.m; sourceTree = "<group>"; };
+		1273CACE20A321A300CC0236 /* InWalkProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkProperty.h; sourceTree = "<group>"; };
+		1273CACF20A321A300CC0236 /* NSObject+InWalkKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InWalkKeyValue.h"; sourceTree = "<group>"; };
+		1273CAD020A321A300CC0236 /* NSObject+InWalkCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+InWalkCoding.h"; sourceTree = "<group>"; };
+		1273CAD220A321A300CC0236 /* InWalkFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkFoundation.m; sourceTree = "<group>"; };
+		1280F3E820A17DFA00E662E4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		1280F40220A195D000E662E4 /* InWalkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkManager.m; sourceTree = "<group>"; };
+		1280F40320A195D000E662E4 /* InWalkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkManager.h; sourceTree = "<group>"; };
+		3003AB9321AE9BB30044E14E /* InWalkPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkPath.h; sourceTree = "<group>"; };
+		3003AB9421AE9BB30044E14E /* InWalkPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkPath.m; sourceTree = "<group>"; };
+		3019F753228D17B700F47EFF /* UIImage+ColorPick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorPick.h"; sourceTree = "<group>"; };
+		3019F754228D17B700F47EFF /* UIImage+ColorPick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorPick.m"; sourceTree = "<group>"; };
+		3019F7572296802200F47EFF /* PopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopView.h; sourceTree = "<group>"; };
+		3019F7582296802200F47EFF /* PopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopView.m; sourceTree = "<group>"; };
+		3019F75E2298568C00F47EFF /* GradientLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradientLayer.h; sourceTree = "<group>"; };
+		3019F75F2298568C00F47EFF /* GradientLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientLayer.m; sourceTree = "<group>"; };
+		3038CF1F21B8B87900E82193 /* ViewUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewUtil.h; sourceTree = "<group>"; };
+		3038CF2021B8B87900E82193 /* ViewUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewUtil.m; sourceTree = "<group>"; };
+		3038CF2321B8BA3800E82193 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		3038CF2421B8BA3900E82193 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		3044D67B21E1B61C006D17EF /* ZXSSpuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSSpuTableViewCell.h; sourceTree = "<group>"; };
+		3044D67E21E1B61C006D17EF /* ZXSNuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSNuTableViewCell.m; sourceTree = "<group>"; };
+		3044D67F21E1B61D006D17EF /* ZXSSpuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSSpuTableViewCell.m; sourceTree = "<group>"; };
+		3044D68021E1B61D006D17EF /* ZXSNuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSNuTableViewCell.h; sourceTree = "<group>"; };
+		3044D68F21E1B662006D17EF /* PlateNumberUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlateNumberUI.h; sourceTree = "<group>"; };
+		3044D69021E1B662006D17EF /* PlateNumberUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlateNumberUI.m; sourceTree = "<group>"; };
+		3044D69321E1B678006D17EF /* LocateResultUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocateResultUI.m; sourceTree = "<group>"; };
+		3044D69421E1B678006D17EF /* LocateResultUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocateResultUI.h; sourceTree = "<group>"; };
+		3044D69721E1B68E006D17EF /* StartPositionUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPositionUI.m; sourceTree = "<group>"; };
+		3044D69821E1B68E006D17EF /* StartPositionUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPositionUI.h; sourceTree = "<group>"; };
+		3044D69921E1B68E006D17EF /* StartPositionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPositionModel.h; sourceTree = "<group>"; };
+		3044D69A21E1B68E006D17EF /* StartPositionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPositionModel.m; sourceTree = "<group>"; };
+		3044D69F21E1B6A4006D17EF /* NavigationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationModel.h; sourceTree = "<group>"; };
+		3044D6A021E1B6A4006D17EF /* NavigationUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationUI.m; sourceTree = "<group>"; };
+		3044D6A121E1B6A5006D17EF /* NavigationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationModel.m; sourceTree = "<group>"; };
+		3044D6A221E1B6A5006D17EF /* NavigationUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationUI.h; sourceTree = "<group>"; };
+		3044D6A721E1BB4B006D17EF /* InWalkUIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkUIManager.h; sourceTree = "<group>"; };
+		3044D6A821E1BB4B006D17EF /* InWalkUIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkUIManager.m; sourceTree = "<group>"; };
+		3044D6AE21E24A1A006D17EF /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		305B6823225DFAC700C6B460 /* RvtsUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RvtsUI.h; sourceTree = "<group>"; };
+		305B6824225DFAC700C6B460 /* RvtsUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RvtsUI.m; sourceTree = "<group>"; };
+		305B682822678C4A00C6B460 /* RZCarPlateNoTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZCarPlateNoTextField.h; sourceTree = "<group>"; };
+		305B682922678C4A00C6B460 /* RZCarPlateNoTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZCarPlateNoTextField.m; sourceTree = "<group>"; };
+		305B683322678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZCarPlateNoKeyBoardViewModel.h; sourceTree = "<group>"; };
+		305B683422678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZCarPlateNoKeyBoardViewModel.m; sourceTree = "<group>"; };
+		305B683722678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZCarPlateNoKeyBoardCellModel.h; sourceTree = "<group>"; };
+		305B683822678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZCarPlateNoKeyBoardCellModel.m; sourceTree = "<group>"; };
+		305B683B22678DE200C6B460 /* RZCarPlateNoKeyBoardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZCarPlateNoKeyBoardView.h; sourceTree = "<group>"; };
+		305B683C22678DE200C6B460 /* RZCarPlateNoKeyBoardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZCarPlateNoKeyBoardView.m; sourceTree = "<group>"; };
+		305B683F22678DED00C6B460 /* RZCarPlateNoKeyBoardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZCarPlateNoKeyBoardCell.h; sourceTree = "<group>"; };
+		305B684022678DED00C6B460 /* RZCarPlateNoKeyBoardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZCarPlateNoKeyBoardCell.m; sourceTree = "<group>"; };
+		305B684322678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZCarPlateNoKeyBoardFlagView.h; sourceTree = "<group>"; };
+		305B684422678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZCarPlateNoKeyBoardFlagView.m; sourceTree = "<group>"; };
+		305B687622708F6300C6B460 /* InWalkReverse4CarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkReverse4CarModel.h; sourceTree = "<group>"; };
+		305B687722708F6300C6B460 /* InWalkReverse4CarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkReverse4CarModel.m; sourceTree = "<group>"; };
+		305B687B22714E3800C6B460 /* RvtsResultUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RvtsResultUI.h; sourceTree = "<group>"; };
+		305B687C22714E3800C6B460 /* RvtsResultUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RvtsResultUI.m; sourceTree = "<group>"; };
+		305B688022744C3000C6B460 /* InputBgMapUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputBgMapUI.h; sourceTree = "<group>"; };
+		305B688122744C3000C6B460 /* InputBgMapUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputBgMapUI.m; sourceTree = "<group>"; };
+		305B6885227484A600C6B460 /* PhonePoseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhonePoseUI.h; sourceTree = "<group>"; };
+		305B6886227484A600C6B460 /* PhonePoseUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhonePoseUI.m; sourceTree = "<group>"; };
+		308B390922A5355200F3956E /* g_mall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = g_mall.png; sourceTree = "<group>"; };
+		308B390A22A5355200F3956E /* p_parking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_parking.png; sourceTree = "<group>"; };
+		308B390D22A64F9600F3956E /* InWalkPointDesc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkPointDesc.h; sourceTree = "<group>"; };
+		308B390E22A64F9600F3956E /* InWalkPointDesc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkPointDesc.m; sourceTree = "<group>"; };
+		308B391122A6615A00F3956E /* shop_1_yiger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_1_yiger.png; sourceTree = "<group>"; };
+		308B391322A661BA00F3956E /* shop_2_aika.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_2_aika.png; sourceTree = "<group>"; };
+		308B391422A661BA00F3956E /* shop_3_yigao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_3_yigao.png; sourceTree = "<group>"; };
+		308B391722A661C200F3956E /* gif_2_aika.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif_2_aika.gif; sourceTree = "<group>"; };
+		308B391822A661C200F3956E /* gif_1_yiger.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif_1_yiger.gif; sourceTree = "<group>"; };
+		308B391D22A67E6A00F3956E /* gif_3_yigao.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif_3_yigao.gif; sourceTree = "<group>"; };
+		308B392622A7A3A700F3956E /* gif_arrow.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif_arrow.gif; sourceTree = "<group>"; };
+		308B392A22A7A94300F3956E /* gif_arrow_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif_arrow_2.gif; sourceTree = "<group>"; };
+		308B392C22A7B84F00F3956E /* ad_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ad_video.mp4; sourceTree = "<group>"; };
+		308B393022A8FD5600F3956E /* zhuoyue_b2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhuoyue_b2.png; sourceTree = "<group>"; };
+		320A2D6520BD2E7000178F18 /* InWalkNavigationPathPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkNavigationPathPoint.h; sourceTree = "<group>"; };
+		320A2D6620BD2E7000178F18 /* InWalkNavigationPathPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkNavigationPathPoint.m; sourceTree = "<group>"; };
+		3218AA6920C7DB850027A921 /* InWalkLocationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkLocationModel.h; sourceTree = "<group>"; };
+		3218AA6A20C7DB850027A921 /* InWalkLocationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkLocationModel.m; sourceTree = "<group>"; };
+		32233CA220E63C5D00FF6BB4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		3233930E20B806F80022647E /* InWalkNavigationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkNavigationManager.h; sourceTree = "<group>"; };
+		3233930F20B806F80022647E /* InWalkNavigationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkNavigationManager.m; sourceTree = "<group>"; };
+		3233931220B809950022647E /* InWalkConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkConstant.h; sourceTree = "<group>"; };
+		3247DEF520A155DE00F6F45B /* InWalkAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InWalkAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3247DEF820A155DE00F6F45B /* InWalkAR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkAR.h; sourceTree = "<group>"; };
+		3247DEF920A155DE00F6F45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3258C71420D3BE7900565DB0 /* InWalkLocationNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkLocationNavigation.h; sourceTree = "<group>"; };
+		3258C71520D3BE7900565DB0 /* InWalkLocationNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkLocationNavigation.m; sourceTree = "<group>"; };
+		3258C71820D3C56000565DB0 /* InWalkInnerPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkInnerPoint.m; sourceTree = "<group>"; };
+		3258C71A20D3C61C00565DB0 /* InWalkPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkPoint.h; sourceTree = "<group>"; };
+		3258C71B20D3C61C00565DB0 /* InWalkPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkPoint.m; sourceTree = "<group>"; };
+		326AFDB220B5A0A100F0639A /* InWalkNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkNode.m; sourceTree = "<group>"; };
+		326AFDB320B5A0A100F0639A /* InWalkInnerPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkInnerPoint.h; sourceTree = "<group>"; };
+		326AFDB920B5A0A200F0639A /* InWalkNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkNode.h; sourceTree = "<group>"; };
+		326AFEBC20B5A35000F0639A /* InWalkDijkstra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkDijkstra.m; sourceTree = "<group>"; };
+		326AFEBD20B5A35000F0639A /* InWalkDijkstra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkDijkstra.h; sourceTree = "<group>"; };
+		326AFEBE20B5A35000F0639A /* InWalkPriorityDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkPriorityDictionary.h; sourceTree = "<group>"; };
+		326AFEBF20B5A35000F0639A /* InWalkPriorityDictionary.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InWalkPriorityDictionary.mm; sourceTree = "<group>"; };
+		3271D586210827D7003EE9CC /* InWalkMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkMap.h; sourceTree = "<group>"; };
+		3271D587210827D7003EE9CC /* InWalkMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkMap.m; sourceTree = "<group>"; };
+		32739BDB212FBA4700CF6A14 /* InWalkARAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkARAnchor.h; sourceTree = "<group>"; };
+		32739BDC212FBA4700CF6A14 /* InWalkARAnchor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkARAnchor.m; sourceTree = "<group>"; };
+		327ADB1320EA2DA30079E1DD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		329A19F120EDB63100EC608F /* InWalkARManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkARManager.h; sourceTree = "<group>"; };
+		329A19F220EDB63100EC608F /* InWalkARManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkARManager.m; sourceTree = "<group>"; };
+		329F5DD320C14476000F496D /* InWalkImageCacheConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkImageCacheConfig.h; sourceTree = "<group>"; };
+		32B12BAF20F8BA3B00E1E256 /* InWalkMapView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkMapView.h; sourceTree = "<group>"; };
+		32B12BB020F8BA3B00E1E256 /* InWalkMapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkMapView.m; sourceTree = "<group>"; };
+		32BBF9412100775300B58399 /* WFLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFLine.h; sourceTree = "<group>"; };
+		32BBF9422100775300B58399 /* WFLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFLine.m; sourceTree = "<group>"; };
+		32C7325F2101C6EB0062202E /* WFImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFImage.h; sourceTree = "<group>"; };
+		32C732602101C6EB0062202E /* WFImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFImage.m; sourceTree = "<group>"; };
+		32E2D8FF20FE07FB00268817 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		32EFB01920B815C900913425 /* InWalkItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkItem.h; sourceTree = "<group>"; };
+		32EFB01A20B815C900913425 /* InWalkItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkItem.m; sourceTree = "<group>"; };
+		32EFB01D20B81D9D00913425 /* InWalkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkModel.m; sourceTree = "<group>"; };
+		32EFB01E20B81D9D00913425 /* InWalkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkModel.h; sourceTree = "<group>"; };
+		32F88A5E21008DDF00EB01F7 /* WFCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFCircle.h; sourceTree = "<group>"; };
+		32F88A5F21008DDF00EB01F7 /* WFCircle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFCircle.m; sourceTree = "<group>"; };
+		32F88A622100975900EB01F7 /* WFShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFShape.h; sourceTree = "<group>"; };
+		32F88A632100975900EB01F7 /* WFShape.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFShape.m; sourceTree = "<group>"; };
+		32F88A6621009B0A00EB01F7 /* InWalkMapManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkMapManager.h; sourceTree = "<group>"; };
+		32F88A6721009B0A00EB01F7 /* InWalkMapManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkMapManager.m; sourceTree = "<group>"; };
+		32F88A6B2101B85F00EB01F7 /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtil.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3247DEF120A155DE00F6F45B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32E2D90020FE07FB00268817 /* CoreGraphics.framework in Frameworks */,
+				03C6C5F922C1D08000657845 /* libBrightSDK.a in Frameworks */,
+				327ADB1420EA2DA40079E1DD /* CoreLocation.framework in Frameworks */,
+				32233CA320E63C5D00FF6BB4 /* SceneKit.framework in Frameworks */,
+				1280F3E920A17DFA00E662E4 /* CoreMotion.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03C6C5ED22C1D05B00657845 /* Ibeacon */ = {
+			isa = PBXGroup;
+			children = (
+				03C6C5EE22C1D05B00657845 /* zhishiIbeacon */,
+			);
+			path = Ibeacon;
+			sourceTree = "<group>";
+		};
+		03C6C5EE22C1D05B00657845 /* zhishiIbeacon */ = {
+			isa = PBXGroup;
+			children = (
+				03C6C5EF22C1D08000657845 /* BrightSDK */,
+			);
+			path = zhishiIbeacon;
+			sourceTree = "<group>";
+		};
+		03C6C5EF22C1D08000657845 /* BrightSDK */ = {
+			isa = PBXGroup;
+			children = (
+				03C6C5F022C1D08000657845 /* libBrightSDK.a */,
+				03C6C5F122C1D08000657845 /* include */,
+			);
+			path = BrightSDK;
+			sourceTree = "<group>";
+		};
+		03C6C5F122C1D08000657845 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */,
+				03C6C5F322C1D08000657845 /* BRTBeacon.h */,
+				03C6C5F422C1D08000657845 /* OpenUDIDIOS7.h */,
+				03C6C5F522C1D08000657845 /* BRTBeaconRegion.h */,
+				03C6C5F622C1D08000657845 /* BRTBeaconSDK.h */,
+				03C6C5F722C1D08000657845 /* BRTTools.h */,
+				03C6C5F822C1D08000657845 /* BRTBeaconManager.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		1230B74F20A3EB12009CB95A /* InWalkWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				329F5DD320C14476000F496D /* InWalkImageCacheConfig.h */,
+				1230B75020A3EB12009CB95A /* InWalkWebImageManager.m */,
+				1230B75120A3EB12009CB95A /* InWalkWebImageDownloaderOperation.h */,
+				1230B75220A3EB12009CB95A /* InWalkImageCache.h */,
+				1230B75420A3EB12009CB95A /* InWalkWebImageDownloader.m */,
+				1230B75520A3EB12009CB95A /* InWalkWebImageCompat.m */,
+				1230B75620A3EB12009CB95A /* InWalkImageCache.m */,
+				1230B75720A3EB12009CB95A /* InWalkWebImageDownloaderOperation.m */,
+				1230B75820A3EB12009CB95A /* InWalkWebImageManager.h */,
+				1230B75920A3EB12009CB95A /* InWalkWebImageOperation.h */,
+				1230B75A20A3EB12009CB95A /* InWalkWebImageDownloader.h */,
+				1230B75B20A3EB12009CB95A /* InWalkImageCacheConfig.m */,
+				1230B75C20A3EB12009CB95A /* InWalkWebImageCompat.h */,
+			);
+			path = InWalkWebImage;
+			sourceTree = "<group>";
+		};
+		1273CABC20A321A300CC0236 /* InWalkExtension */ = {
+			isa = PBXGroup;
+			children = (
+				1273CABD20A321A300CC0236 /* InWalkPropertyKey.h */,
+				1273CABE20A321A300CC0236 /* NSObject+InWalkClass.h */,
+				1273CABF20A321A300CC0236 /* NSString+InWalkExtension.h */,
+				1273CAC020A321A300CC0236 /* InWalkPropertyType.m */,
+				1273CAC120A321A300CC0236 /* NSObject+InWalkProperty.h */,
+				1273CAC220A321A300CC0236 /* InWalkExtensionConst.h */,
+				1273CAC320A321A300CC0236 /* NSObject+InWalkKeyValue.m */,
+				1273CAC420A321A300CC0236 /* InWalkProperty.m */,
+				1273CAC520A321A300CC0236 /* InWalkFoundation.h */,
+				1273CAC620A321A300CC0236 /* NSObject+InWalkCoding.m */,
+				1273CAC720A321A300CC0236 /* InWalkExtension.h */,
+				1273CAC820A321A300CC0236 /* InWalkExtensionConst.m */,
+				1273CAC920A321A300CC0236 /* NSObject+InWalkProperty.m */,
+				1273CACA20A321A300CC0236 /* InWalkPropertyType.h */,
+				1273CACB20A321A300CC0236 /* NSObject+InWalkClass.m */,
+				1273CACC20A321A300CC0236 /* NSString+InWalkExtension.m */,
+				1273CACD20A321A300CC0236 /* InWalkPropertyKey.m */,
+				1273CACE20A321A300CC0236 /* InWalkProperty.h */,
+				1273CACF20A321A300CC0236 /* NSObject+InWalkKeyValue.h */,
+				1273CAD020A321A300CC0236 /* NSObject+InWalkCoding.h */,
+				1273CAD220A321A300CC0236 /* InWalkFoundation.m */,
+			);
+			path = InWalkExtension;
+			sourceTree = "<group>";
+		};
+		1280F3E720A17DFA00E662E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32E2D8FF20FE07FB00268817 /* CoreGraphics.framework */,
+				327ADB1320EA2DA30079E1DD /* CoreLocation.framework */,
+				32233CA220E63C5D00FF6BB4 /* SceneKit.framework */,
+				1280F3E820A17DFA00E662E4 /* CoreMotion.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1280F40020A195D000E662E4 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				3044D67421E1B52F006D17EF /* ui */,
+				32F88A6A2101B85F00EB01F7 /* util */,
+				323CE6C920FDEEF20090F9DE /* map */,
+				3247DF1520A174AA00F6F45B /* model */,
+				1280F40320A195D000E662E4 /* InWalkManager.h */,
+				1280F40220A195D000E662E4 /* InWalkManager.m */,
+				3044D6AE21E24A1A006D17EF /* Media.xcassets */,
+				329A19F120EDB63100EC608F /* InWalkARManager.h */,
+				329A19F220EDB63100EC608F /* InWalkARManager.m */,
+				3233930E20B806F80022647E /* InWalkNavigationManager.h */,
+				3233930F20B806F80022647E /* InWalkNavigationManager.m */,
+				3044D6A721E1BB4B006D17EF /* InWalkUIManager.h */,
+				3044D6A821E1BB4B006D17EF /* InWalkUIManager.m */,
+				32F88A6621009B0A00EB01F7 /* InWalkMapManager.h */,
+				32F88A6721009B0A00EB01F7 /* InWalkMapManager.m */,
+				03C6C60522C1F64E00657845 /* InWalkIbeaconManager.h */,
+				03C6C60622C1F64E00657845 /* InWalkIbeaconManager.m */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
+		3044D67421E1B52F006D17EF /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				305B68842274849300C6B460 /* phonePose */,
+				305B687F22744C1300C6B460 /* inputBgMap */,
+				305B682722678C0200C6B460 /* plateKeyBoard */,
+				305B6822225DFAA000C6B460 /* rvts */,
+				305B687A22714E2000C6B460 /* rvtsResult */,
+				3044D67621E1B551006D17EF /* plateNumber */,
+				3044D67721E1B569006D17EF /* locateResult */,
+				3044D67821E1B577006D17EF /* startPosition */,
+				3044D67921E1B58F006D17EF /* navigation */,
+				3044D67A21E1B5C2006D17EF /* widget */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		3044D67621E1B551006D17EF /* plateNumber */ = {
+			isa = PBXGroup;
+			children = (
+				3044D68F21E1B662006D17EF /* PlateNumberUI.h */,
+				3044D69021E1B662006D17EF /* PlateNumberUI.m */,
+			);
+			path = plateNumber;
+			sourceTree = "<group>";
+		};
+		3044D67721E1B569006D17EF /* locateResult */ = {
+			isa = PBXGroup;
+			children = (
+				3044D69421E1B678006D17EF /* LocateResultUI.h */,
+				3044D69321E1B678006D17EF /* LocateResultUI.m */,
+			);
+			path = locateResult;
+			sourceTree = "<group>";
+		};
+		3044D67821E1B577006D17EF /* startPosition */ = {
+			isa = PBXGroup;
+			children = (
+				3044D69921E1B68E006D17EF /* StartPositionModel.h */,
+				3044D69A21E1B68E006D17EF /* StartPositionModel.m */,
+				3044D69821E1B68E006D17EF /* StartPositionUI.h */,
+				3044D69721E1B68E006D17EF /* StartPositionUI.m */,
+			);
+			path = startPosition;
+			sourceTree = "<group>";
+		};
+		3044D67921E1B58F006D17EF /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				3044D69F21E1B6A4006D17EF /* NavigationModel.h */,
+				3044D6A121E1B6A5006D17EF /* NavigationModel.m */,
+				3044D6A221E1B6A5006D17EF /* NavigationUI.h */,
+				3044D6A021E1B6A4006D17EF /* NavigationUI.m */,
+			);
+			path = navigation;
+			sourceTree = "<group>";
+		};
+		3044D67A21E1B5C2006D17EF /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				3044D67B21E1B61C006D17EF /* ZXSSpuTableViewCell.h */,
+				3044D67F21E1B61D006D17EF /* ZXSSpuTableViewCell.m */,
+				3044D68021E1B61D006D17EF /* ZXSNuTableViewCell.h */,
+				3044D67E21E1B61C006D17EF /* ZXSNuTableViewCell.m */,
+				3019F7572296802200F47EFF /* PopView.h */,
+				3019F7582296802200F47EFF /* PopView.m */,
+				3019F75E2298568C00F47EFF /* GradientLayer.h */,
+				3019F75F2298568C00F47EFF /* GradientLayer.m */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
+		305B6822225DFAA000C6B460 /* rvts */ = {
+			isa = PBXGroup;
+			children = (
+				305B6823225DFAC700C6B460 /* RvtsUI.h */,
+				305B6824225DFAC700C6B460 /* RvtsUI.m */,
+			);
+			path = rvts;
+			sourceTree = "<group>";
+		};
+		305B682722678C0200C6B460 /* plateKeyBoard */ = {
+			isa = PBXGroup;
+			children = (
+				305B682E22678CBD00C6B460 /* View */,
+				305B682D22678CB500C6B460 /* ViewModel */,
+				305B682822678C4A00C6B460 /* RZCarPlateNoTextField.h */,
+				305B682922678C4A00C6B460 /* RZCarPlateNoTextField.m */,
+			);
+			path = plateKeyBoard;
+			sourceTree = "<group>";
+		};
+		305B682D22678CB500C6B460 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				305B683322678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.h */,
+				305B683422678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.m */,
+				305B683722678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.h */,
+				305B683822678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		305B682E22678CBD00C6B460 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				305B683B22678DE200C6B460 /* RZCarPlateNoKeyBoardView.h */,
+				305B683C22678DE200C6B460 /* RZCarPlateNoKeyBoardView.m */,
+				305B683F22678DED00C6B460 /* RZCarPlateNoKeyBoardCell.h */,
+				305B684022678DED00C6B460 /* RZCarPlateNoKeyBoardCell.m */,
+				305B684322678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.h */,
+				305B684422678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		305B687A22714E2000C6B460 /* rvtsResult */ = {
+			isa = PBXGroup;
+			children = (
+				305B687B22714E3800C6B460 /* RvtsResultUI.h */,
+				305B687C22714E3800C6B460 /* RvtsResultUI.m */,
+			);
+			path = rvtsResult;
+			sourceTree = "<group>";
+		};
+		305B687F22744C1300C6B460 /* inputBgMap */ = {
+			isa = PBXGroup;
+			children = (
+				305B688022744C3000C6B460 /* InputBgMapUI.h */,
+				305B688122744C3000C6B460 /* InputBgMapUI.m */,
+			);
+			path = inputBgMap;
+			sourceTree = "<group>";
+		};
+		305B68842274849300C6B460 /* phonePose */ = {
+			isa = PBXGroup;
+			children = (
+				305B6885227484A600C6B460 /* PhonePoseUI.h */,
+				305B6886227484A600C6B460 /* PhonePoseUI.m */,
+			);
+			path = phonePose;
+			sourceTree = "<group>";
+		};
+		323CE6C920FDEEF20090F9DE /* map */ = {
+			isa = PBXGroup;
+			children = (
+				323CE6CA20FDEF040090F9DE /* model */,
+				32B12BAE20F8BA2000E1E256 /* view */,
+			);
+			path = map;
+			sourceTree = "<group>";
+		};
+		323CE6CA20FDEF040090F9DE /* model */ = {
+			isa = PBXGroup;
+			children = (
+				32BBF9412100775300B58399 /* WFLine.h */,
+				32BBF9422100775300B58399 /* WFLine.m */,
+				32F88A5E21008DDF00EB01F7 /* WFCircle.h */,
+				32F88A5F21008DDF00EB01F7 /* WFCircle.m */,
+				32F88A622100975900EB01F7 /* WFShape.h */,
+				32F88A632100975900EB01F7 /* WFShape.m */,
+				32C7325F2101C6EB0062202E /* WFImage.h */,
+				32C732602101C6EB0062202E /* WFImage.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		3247DEEB20A155DD00F6F45B = {
+			isa = PBXGroup;
+			children = (
+				3247DEF720A155DE00F6F45B /* InWalkAR */,
+				3247DEF620A155DE00F6F45B /* Products */,
+				1280F3E720A17DFA00E662E4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3247DEF620A155DE00F6F45B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3247DEF520A155DE00F6F45B /* InWalkAR.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3247DEF720A155DE00F6F45B /* InWalkAR */ = {
+			isa = PBXGroup;
+			children = (
+				308B392C22A7B84F00F3956E /* ad_video.mp4 */,
+				308B392A22A7A94300F3956E /* gif_arrow_2.gif */,
+				308B392622A7A3A700F3956E /* gif_arrow.gif */,
+				308B391822A661C200F3956E /* gif_1_yiger.gif */,
+				308B391722A661C200F3956E /* gif_2_aika.gif */,
+				308B391D22A67E6A00F3956E /* gif_3_yigao.gif */,
+				308B391322A661BA00F3956E /* shop_2_aika.png */,
+				308B391422A661BA00F3956E /* shop_3_yigao.png */,
+				308B391122A6615A00F3956E /* shop_1_yiger.png */,
+				308B390922A5355200F3956E /* g_mall.png */,
+				308B390A22A5355200F3956E /* p_parking.png */,
+				308B393022A8FD5600F3956E /* zhuoyue_b2.png */,
+				3258C71120D3BBC000565DB0 /* third */,
+				1280F40020A195D000E662E4 /* manager */,
+				3247DEF820A155DE00F6F45B /* InWalkAR.h */,
+				3247DEF920A155DE00F6F45B /* Info.plist */,
+				3233931220B809950022647E /* InWalkConstant.h */,
+			);
+			path = InWalkAR;
+			sourceTree = "<group>";
+		};
+		3247DF1520A174AA00F6F45B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				32EFB01E20B81D9D00913425 /* InWalkModel.h */,
+				32EFB01D20B81D9D00913425 /* InWalkModel.m */,
+				32EFB01920B815C900913425 /* InWalkItem.h */,
+				32EFB01A20B815C900913425 /* InWalkItem.m */,
+				326AFDB320B5A0A100F0639A /* InWalkInnerPoint.h */,
+				3258C71820D3C56000565DB0 /* InWalkInnerPoint.m */,
+				326AFDB920B5A0A200F0639A /* InWalkNode.h */,
+				326AFDB220B5A0A100F0639A /* InWalkNode.m */,
+				3271D586210827D7003EE9CC /* InWalkMap.h */,
+				3271D587210827D7003EE9CC /* InWalkMap.m */,
+				3003AB9321AE9BB30044E14E /* InWalkPath.h */,
+				3003AB9421AE9BB30044E14E /* InWalkPath.m */,
+				3258C71420D3BE7900565DB0 /* InWalkLocationNavigation.h */,
+				3258C71520D3BE7900565DB0 /* InWalkLocationNavigation.m */,
+				320A2D6520BD2E7000178F18 /* InWalkNavigationPathPoint.h */,
+				320A2D6620BD2E7000178F18 /* InWalkNavigationPathPoint.m */,
+				3218AA6920C7DB850027A921 /* InWalkLocationModel.h */,
+				3218AA6A20C7DB850027A921 /* InWalkLocationModel.m */,
+				3258C71A20D3C61C00565DB0 /* InWalkPoint.h */,
+				3258C71B20D3C61C00565DB0 /* InWalkPoint.m */,
+				32739BDB212FBA4700CF6A14 /* InWalkARAnchor.h */,
+				32739BDC212FBA4700CF6A14 /* InWalkARAnchor.m */,
+				305B687622708F6300C6B460 /* InWalkReverse4CarModel.h */,
+				305B687722708F6300C6B460 /* InWalkReverse4CarModel.m */,
+				308B390D22A64F9600F3956E /* InWalkPointDesc.h */,
+				308B390E22A64F9600F3956E /* InWalkPointDesc.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		3258C71120D3BBC000565DB0 /* third */ = {
+			isa = PBXGroup;
+			children = (
+				03C6C5ED22C1D05B00657845 /* Ibeacon */,
+				326AFEB920B5A35000F0639A /* InWalkDijkstra */,
+				1230B74F20A3EB12009CB95A /* InWalkWebImage */,
+				1273CABC20A321A300CC0236 /* InWalkExtension */,
+			);
+			path = third;
+			sourceTree = "<group>";
+		};
+		326AFEB920B5A35000F0639A /* InWalkDijkstra */ = {
+			isa = PBXGroup;
+			children = (
+				326AFEBC20B5A35000F0639A /* InWalkDijkstra.m */,
+				326AFEBD20B5A35000F0639A /* InWalkDijkstra.h */,
+				326AFEBE20B5A35000F0639A /* InWalkPriorityDictionary.h */,
+				326AFEBF20B5A35000F0639A /* InWalkPriorityDictionary.mm */,
+			);
+			path = InWalkDijkstra;
+			sourceTree = "<group>";
+		};
+		32B12BAE20F8BA2000E1E256 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				32B12BAF20F8BA3B00E1E256 /* InWalkMapView.h */,
+				32B12BB020F8BA3B00E1E256 /* InWalkMapView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		32F88A6A2101B85F00EB01F7 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				3038CF2321B8BA3800E82193 /* UIView+Toast.h */,
+				3038CF2421B8BA3900E82193 /* UIView+Toast.m */,
+				32F88A6B2101B85F00EB01F7 /* MathUtil.h */,
+				3038CF1F21B8B87900E82193 /* ViewUtil.h */,
+				3038CF2021B8B87900E82193 /* ViewUtil.m */,
+				3019F753228D17B700F47EFF /* UIImage+ColorPick.h */,
+				3019F754228D17B700F47EFF /* UIImage+ColorPick.m */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3247DEF220A155DE00F6F45B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3044D69C21E1B68E006D17EF /* StartPositionUI.h in Headers */,
+				3258C71620D3BE7A00565DB0 /* InWalkLocationNavigation.h in Headers */,
+				1230B76520A3EB12009CB95A /* InWalkWebImageManager.h in Headers */,
+				3258C71C20D3C61C00565DB0 /* InWalkPoint.h in Headers */,
+				1230B76920A3EB12009CB95A /* InWalkWebImageCompat.h in Headers */,
+				305B683922678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.h in Headers */,
+				03C6C60722C1F64E00657845 /* InWalkIbeaconManager.h in Headers */,
+				1273CAD720A321A300CC0236 /* NSObject+InWalkProperty.h in Headers */,
+				326AFDBC20B5A0A200F0639A /* InWalkInnerPoint.h in Headers */,
+				32EFB02020B81D9E00913425 /* InWalkModel.h in Headers */,
+				3038CF2521B8BA3900E82193 /* UIView+Toast.h in Headers */,
+				32F88A6C2101B85F00EB01F7 /* MathUtil.h in Headers */,
+				03C6C5FD22C1D08000657845 /* BRTBeaconRegion.h in Headers */,
+				32F88A642100975900EB01F7 /* WFShape.h in Headers */,
+				03C6C5FF22C1D08000657845 /* BRTTools.h in Headers */,
+				1273CAD520A321A300CC0236 /* NSString+InWalkExtension.h in Headers */,
+				3044D69D21E1B68E006D17EF /* StartPositionModel.h in Headers */,
+				305B684522678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.h in Headers */,
+				32B12BB120F8BA3B00E1E256 /* InWalkMapView.h in Headers */,
+				305B687822708F6300C6B460 /* InWalkReverse4CarModel.h in Headers */,
+				1280F40720A195D000E662E4 /* InWalkManager.h in Headers */,
+				3044D6A921E1BB4B006D17EF /* InWalkUIManager.h in Headers */,
+				03C6C5FE22C1D08000657845 /* BRTBeaconSDK.h in Headers */,
+				305B683D22678DE200C6B460 /* RZCarPlateNoKeyBoardView.h in Headers */,
+				32C732612101C6EB0062202E /* WFImage.h in Headers */,
+				32BBF9432100775300B58399 /* WFLine.h in Headers */,
+				1273CAD320A321A300CC0236 /* InWalkPropertyKey.h in Headers */,
+				3247DEFA20A155DE00F6F45B /* InWalkAR.h in Headers */,
+				3218AA6B20C7DB850027A921 /* InWalkLocationModel.h in Headers */,
+				3044D68121E1B61D006D17EF /* ZXSSpuTableViewCell.h in Headers */,
+				1230B76720A3EB12009CB95A /* InWalkWebImageDownloader.h in Headers */,
+				1273CAE020A321A300CC0236 /* InWalkPropertyType.h in Headers */,
+				326AFEC320B5A35000F0639A /* InWalkDijkstra.h in Headers */,
+				3019F755228D17B700F47EFF /* UIImage+ColorPick.h in Headers */,
+				1273CAE520A321A300CC0236 /* NSObject+InWalkKeyValue.h in Headers */,
+				3233931020B806F80022647E /* InWalkNavigationManager.h in Headers */,
+				32EFB01B20B815C900913425 /* InWalkItem.h in Headers */,
+				329F5DD420C14476000F496D /* InWalkImageCacheConfig.h in Headers */,
+				3003AB9521AE9BB30044E14E /* InWalkPath.h in Headers */,
+				1273CAE620A321A300CC0236 /* NSObject+InWalkCoding.h in Headers */,
+				32F88A6821009B0A00EB01F7 /* InWalkMapManager.h in Headers */,
+				03C6C5FA22C1D08000657845 /* BRTBeaconDefinitions.h in Headers */,
+				03C6C5FC22C1D08000657845 /* OpenUDIDIOS7.h in Headers */,
+				3044D6A321E1B6A5006D17EF /* NavigationModel.h in Headers */,
+				326AFEC420B5A35000F0639A /* InWalkPriorityDictionary.h in Headers */,
+				305B687D22714E3800C6B460 /* RvtsResultUI.h in Headers */,
+				32F88A6021008DDF00EB01F7 /* WFCircle.h in Headers */,
+				3271D588210827D7003EE9CC /* InWalkMap.h in Headers */,
+				3044D69121E1B662006D17EF /* PlateNumberUI.h in Headers */,
+				329A19F320EDB63100EC608F /* InWalkARManager.h in Headers */,
+				305B6825225DFAC700C6B460 /* RvtsUI.h in Headers */,
+				1273CADB20A321A300CC0236 /* InWalkFoundation.h in Headers */,
+				1273CAD420A321A300CC0236 /* NSObject+InWalkClass.h in Headers */,
+				305B688222744C3000C6B460 /* InputBgMapUI.h in Headers */,
+				1230B75F20A3EB12009CB95A /* InWalkImageCache.h in Headers */,
+				1230B75E20A3EB12009CB95A /* InWalkWebImageDownloaderOperation.h in Headers */,
+				3044D68621E1B61D006D17EF /* ZXSNuTableViewCell.h in Headers */,
+				305B682A22678C4A00C6B460 /* RZCarPlateNoTextField.h in Headers */,
+				03C6C5FB22C1D08000657845 /* BRTBeacon.h in Headers */,
+				305B6887227484A600C6B460 /* PhonePoseUI.h in Headers */,
+				03C6C60022C1D08000657845 /* BRTBeaconManager.h in Headers */,
+				1273CAD820A321A300CC0236 /* InWalkExtensionConst.h in Headers */,
+				1273CAE420A321A300CC0236 /* InWalkProperty.h in Headers */,
+				3038CF2121B8B87900E82193 /* ViewUtil.h in Headers */,
+				305B684122678DED00C6B460 /* RZCarPlateNoKeyBoardCell.h in Headers */,
+				305B683522678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.h in Headers */,
+				1273CADD20A321A300CC0236 /* InWalkExtension.h in Headers */,
+				326AFDC220B5A0A200F0639A /* InWalkNode.h in Headers */,
+				1230B76620A3EB12009CB95A /* InWalkWebImageOperation.h in Headers */,
+				3044D69621E1B678006D17EF /* LocateResultUI.h in Headers */,
+				3019F7602298568D00F47EFF /* GradientLayer.h in Headers */,
+				3044D6A621E1B6A5006D17EF /* NavigationUI.h in Headers */,
+				3019F7592296802200F47EFF /* PopView.h in Headers */,
+				32739BDD212FBA4700CF6A14 /* InWalkARAnchor.h in Headers */,
+				308B390F22A64F9600F3956E /* InWalkPointDesc.h in Headers */,
+				320A2D6720BD2E7000178F18 /* InWalkNavigationPathPoint.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3247DEF420A155DE00F6F45B /* InWalkAR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3247DEFD20A155DE00F6F45B /* Build configuration list for PBXNativeTarget "InWalkAR" */;
+			buildPhases = (
+				3247DEF020A155DE00F6F45B /* Sources */,
+				3247DEF120A155DE00F6F45B /* Frameworks */,
+				3247DEF220A155DE00F6F45B /* Headers */,
+				3247DEF320A155DE00F6F45B /* Resources */,
+				32899E5D20D8B1A600B7165A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InWalkAR;
+			productName = InWalkAR;
+			productReference = 3247DEF520A155DE00F6F45B /* InWalkAR.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3247DEEC20A155DE00F6F45B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "InReal Co., Ltd.";
+				TargetAttributes = {
+					3247DEF420A155DE00F6F45B = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 3247DEEF20A155DE00F6F45B /* Build configuration list for PBXProject "InWalkAR" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3247DEEB20A155DD00F6F45B;
+			productRefGroup = 3247DEF620A155DE00F6F45B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3247DEF420A155DE00F6F45B /* InWalkAR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3247DEF320A155DE00F6F45B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				308B392B22A7A94300F3956E /* gif_arrow_2.gif in Resources */,
+				308B391B22A661C300F3956E /* gif_1_yiger.gif in Resources */,
+				308B393122A8FD5600F3956E /* zhuoyue_b2.png in Resources */,
+				308B391222A6615B00F3956E /* shop_1_yiger.png in Resources */,
+				308B391622A661BB00F3956E /* shop_3_yigao.png in Resources */,
+				308B391522A661BB00F3956E /* shop_2_aika.png in Resources */,
+				3044D6AF21E24A1A006D17EF /* Media.xcassets in Resources */,
+				308B391A22A661C300F3956E /* gif_2_aika.gif in Resources */,
+				308B390C22A5355300F3956E /* p_parking.png in Resources */,
+				308B392722A7A3A700F3956E /* gif_arrow.gif in Resources */,
+				308B391E22A67E6A00F3956E /* gif_3_yigao.gif in Resources */,
+				308B392D22A7B84F00F3956E /* ad_video.mp4 in Resources */,
+				308B390B22A5355300F3956E /* g_mall.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32899E5D20D8B1A600B7165A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${ACTION}\" = \"build\" ]\nthen\nINSTALL_DIR=${SRCROOT}/Products/${PROJECT_NAME}.framework\n\nDEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\n\nSIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework\n\n\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\nmkdir -p \"${INSTALL_DIR}\"\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n#ditto \"${DEVICE_DIR}/Headers\" \"${INSTALL_DIR}/Headers\"\n\nlipo -create \"${DEVICE_DIR}/${PROJECT_NAME}\" \"${SIMULATOR_DIR}/${PROJECT_NAME}\" -output \"${INSTALL_DIR}/${PROJECT_NAME}\"\n\n#open \"${DEVICE_DIR}\"\n#open \"${SRCROOT}/Products\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3247DEF020A155DE00F6F45B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				305B682B22678C4A00C6B460 /* RZCarPlateNoTextField.m in Sources */,
+				32C732622101C6EB0062202E /* WFImage.m in Sources */,
+				1273CAE120A321A300CC0236 /* NSObject+InWalkClass.m in Sources */,
+				3233931120B806F80022647E /* InWalkNavigationManager.m in Sources */,
+				3044D6AA21E1BB4B006D17EF /* InWalkUIManager.m in Sources */,
+				3044D6A421E1B6A5006D17EF /* NavigationUI.m in Sources */,
+				305B6826225DFAC700C6B460 /* RvtsUI.m in Sources */,
+				326AFEC520B5A35000F0639A /* InWalkPriorityDictionary.mm in Sources */,
+				1273CAD620A321A300CC0236 /* InWalkPropertyType.m in Sources */,
+				305B683E22678DE200C6B460 /* RZCarPlateNoKeyBoardView.m in Sources */,
+				1230B76320A3EB12009CB95A /* InWalkImageCache.m in Sources */,
+				3044D69E21E1B68E006D17EF /* StartPositionModel.m in Sources */,
+				32739BDE212FBA4700CF6A14 /* InWalkARAnchor.m in Sources */,
+				1230B76420A3EB12009CB95A /* InWalkWebImageDownloaderOperation.m in Sources */,
+				320A2D6820BD2E7000178F18 /* InWalkNavigationPathPoint.m in Sources */,
+				1230B76820A3EB12009CB95A /* InWalkImageCacheConfig.m in Sources */,
+				1230B76220A3EB12009CB95A /* InWalkWebImageCompat.m in Sources */,
+				3271D589210827D7003EE9CC /* InWalkMap.m in Sources */,
+				1273CAD920A321A300CC0236 /* NSObject+InWalkKeyValue.m in Sources */,
+				329A19F420EDB63100EC608F /* InWalkARManager.m in Sources */,
+				3258C71720D3BE7A00565DB0 /* InWalkLocationNavigation.m in Sources */,
+				32BBF9442100775300B58399 /* WFLine.m in Sources */,
+				1273CADF20A321A300CC0236 /* NSObject+InWalkProperty.m in Sources */,
+				03C6C60822C1F64E00657845 /* InWalkIbeaconManager.m in Sources */,
+				3038CF2621B8BA3900E82193 /* UIView+Toast.m in Sources */,
+				1273CAE320A321A300CC0236 /* InWalkPropertyKey.m in Sources */,
+				305B6888227484A600C6B460 /* PhonePoseUI.m in Sources */,
+				3019F756228D17B700F47EFF /* UIImage+ColorPick.m in Sources */,
+				326AFEC220B5A35000F0639A /* InWalkDijkstra.m in Sources */,
+				326AFDBB20B5A0A200F0639A /* InWalkNode.m in Sources */,
+				3044D69221E1B662006D17EF /* PlateNumberUI.m in Sources */,
+				305B688322744C3000C6B460 /* InputBgMapUI.m in Sources */,
+				305B687E22714E3800C6B460 /* RvtsResultUI.m in Sources */,
+				32EFB01C20B815C900913425 /* InWalkItem.m in Sources */,
+				1273CADE20A321A300CC0236 /* InWalkExtensionConst.m in Sources */,
+				3019F7612298568D00F47EFF /* GradientLayer.m in Sources */,
+				32F88A6921009B0A00EB01F7 /* InWalkMapManager.m in Sources */,
+				3044D68421E1B61D006D17EF /* ZXSNuTableViewCell.m in Sources */,
+				3038CF2221B8B87900E82193 /* ViewUtil.m in Sources */,
+				32B12BB220F8BA3B00E1E256 /* InWalkMapView.m in Sources */,
+				3044D69B21E1B68E006D17EF /* StartPositionUI.m in Sources */,
+				3044D69521E1B678006D17EF /* LocateResultUI.m in Sources */,
+				3258C71920D3C56000565DB0 /* InWalkInnerPoint.m in Sources */,
+				1273CADC20A321A300CC0236 /* NSObject+InWalkCoding.m in Sources */,
+				1280F40620A195D000E662E4 /* InWalkManager.m in Sources */,
+				305B687922708F6300C6B460 /* InWalkReverse4CarModel.m in Sources */,
+				3019F75A2296802200F47EFF /* PopView.m in Sources */,
+				1273CAE820A321A300CC0236 /* InWalkFoundation.m in Sources */,
+				1230B76120A3EB12009CB95A /* InWalkWebImageDownloader.m in Sources */,
+				3258C71D20D3C61C00565DB0 /* InWalkPoint.m in Sources */,
+				305B683A22678DD400C6B460 /* RZCarPlateNoKeyBoardCellModel.m in Sources */,
+				1230B75D20A3EB12009CB95A /* InWalkWebImageManager.m in Sources */,
+				32F88A652100975900EB01F7 /* WFShape.m in Sources */,
+				3044D6A521E1B6A5006D17EF /* NavigationModel.m in Sources */,
+				305B684222678DED00C6B460 /* RZCarPlateNoKeyBoardCell.m in Sources */,
+				3003AB9621AE9BB30044E14E /* InWalkPath.m in Sources */,
+				3218AA6C20C7DB850027A921 /* InWalkLocationModel.m in Sources */,
+				32F88A6121008DDF00EB01F7 /* WFCircle.m in Sources */,
+				3044D68521E1B61D006D17EF /* ZXSSpuTableViewCell.m in Sources */,
+				1273CADA20A321A300CC0236 /* InWalkProperty.m in Sources */,
+				308B391022A64F9700F3956E /* InWalkPointDesc.m in Sources */,
+				305B683622678DC300C6B460 /* RZCarPlateNoKeyBoardViewModel.m in Sources */,
+				1273CAE220A321A300CC0236 /* NSString+InWalkExtension.m in Sources */,
+				305B684622678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.m in Sources */,
+				32EFB01F20B81D9E00913425 /* InWalkModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3247DEFB20A155DE00F6F45B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3247DEFC20A155DE00F6F45B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3247DEFE20A155DE00F6F45B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3HN896KDRL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/InWalkAR/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InWalkAR/third/Ibeacon/zhishiIbeacon/BrightSDK",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = net.inwalk.InWalkAR;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Debug;
+		};
+		3247DEFF20A155DE00F6F45B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3HN896KDRL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/InWalkAR/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InWalkAR/third/Ibeacon/zhishiIbeacon/BrightSDK",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = net.inwalk.InWalkAR;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3247DEEF20A155DE00F6F45B /* Build configuration list for PBXProject "InWalkAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3247DEFB20A155DE00F6F45B /* Debug */,
+				3247DEFC20A155DE00F6F45B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3247DEFD20A155DE00F6F45B /* Build configuration list for PBXNativeTarget "InWalkAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3247DEFE20A155DE00F6F45B /* Debug */,
+				3247DEFF20A155DE00F6F45B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3247DEEC20A155DE00F6F45B /* Project object */;
+}

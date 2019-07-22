@@ -1,0 +1,868 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07A1F40520BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A1F40320BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.h */; };
+		07A1F40620BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A1F40420BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.m */; };
+		07A2157B20B6D0220061B2B0 /* InWalkOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A2157920B6D0220061B2B0 /* InWalkOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07A2157C20B6D0220061B2B0 /* InWalkOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A2157A20B6D0220061B2B0 /* InWalkOverlay.m */; };
+		1230B75D20A3EB12009CB95A /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75020A3EB12009CB95A /* SDWebImageManager.m */; };
+		1230B75E20A3EB12009CB95A /* SDWebImageDownloaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75120A3EB12009CB95A /* SDWebImageDownloaderOperation.h */; };
+		1230B75F20A3EB12009CB95A /* SDImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75220A3EB12009CB95A /* SDImageCache.h */; };
+		1230B76020A3EB12009CB95A /* SDImageCacheConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75320A3EB12009CB95A /* SDImageCacheConfig.h */; };
+		1230B76120A3EB12009CB95A /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75420A3EB12009CB95A /* SDWebImageDownloader.m */; };
+		1230B76220A3EB12009CB95A /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75520A3EB12009CB95A /* SDWebImageCompat.m */; };
+		1230B76320A3EB12009CB95A /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75620A3EB12009CB95A /* SDImageCache.m */; };
+		1230B76420A3EB12009CB95A /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75720A3EB12009CB95A /* SDWebImageDownloaderOperation.m */; };
+		1230B76520A3EB12009CB95A /* SDWebImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75820A3EB12009CB95A /* SDWebImageManager.h */; };
+		1230B76620A3EB12009CB95A /* SDWebImageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75920A3EB12009CB95A /* SDWebImageOperation.h */; };
+		1230B76720A3EB12009CB95A /* SDWebImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75A20A3EB12009CB95A /* SDWebImageDownloader.h */; };
+		1230B76820A3EB12009CB95A /* SDImageCacheConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B75B20A3EB12009CB95A /* SDImageCacheConfig.m */; };
+		1230B76920A3EB12009CB95A /* SDWebImageCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B75C20A3EB12009CB95A /* SDWebImageCompat.h */; };
+		1230B76C20A3EB5E009CB95A /* UIImage+MultiFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B76A20A3EB5E009CB95A /* UIImage+MultiFormat.h */; };
+		1230B76D20A3EB5E009CB95A /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B76B20A3EB5E009CB95A /* UIImage+MultiFormat.m */; };
+		1230B77020A3EB88009CB95A /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B76E20A3EB88009CB95A /* NSData+ImageContentType.m */; };
+		1230B77120A3EB88009CB95A /* NSData+ImageContentType.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B76F20A3EB88009CB95A /* NSData+ImageContentType.h */; };
+		1230B77420A3EBB2009CB95A /* NSImage+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B77220A3EBB2009CB95A /* NSImage+WebCache.h */; };
+		1230B77520A3EBB2009CB95A /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B77320A3EBB2009CB95A /* NSImage+WebCache.m */; };
+		1230B77820A3EBED009CB95A /* SDWebImageCodersManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B77620A3EBEC009CB95A /* SDWebImageCodersManager.h */; };
+		1230B77920A3EBED009CB95A /* SDWebImageCodersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B77720A3EBEC009CB95A /* SDWebImageCodersManager.m */; };
+		1230B77C20A3EC08009CB95A /* SDWebImageCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B77A20A3EC07009CB95A /* SDWebImageCoder.h */; };
+		1230B77D20A3EC08009CB95A /* SDWebImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B77B20A3EC07009CB95A /* SDWebImageCoder.m */; };
+		1230B78020A3EC30009CB95A /* SDWebImageImageIOCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B77E20A3EC30009CB95A /* SDWebImageImageIOCoder.h */; };
+		1230B78120A3EC30009CB95A /* SDWebImageImageIOCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B77F20A3EC30009CB95A /* SDWebImageImageIOCoder.m */; };
+		1230B78420A3ED4B009CB95A /* SDWebImageCoderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B78220A3ED4B009CB95A /* SDWebImageCoderHelper.m */; };
+		1230B78520A3ED4B009CB95A /* SDWebImageCoderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B78320A3ED4B009CB95A /* SDWebImageCoderHelper.h */; };
+		1230B78820A3EDEF009CB95A /* SDWebImageFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B78620A3EDEE009CB95A /* SDWebImageFrame.h */; };
+		1230B78920A3EDEF009CB95A /* SDWebImageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B78720A3EDEF009CB95A /* SDWebImageFrame.m */; };
+		1230B78C20A3EE1B009CB95A /* SDAnimatedImageRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 1230B78A20A3EE1B009CB95A /* SDAnimatedImageRep.m */; };
+		1230B78D20A3EE1B009CB95A /* SDAnimatedImageRep.h in Headers */ = {isa = PBXBuildFile; fileRef = 1230B78B20A3EE1B009CB95A /* SDAnimatedImageRep.h */; };
+		1273CAD320A321A300CC0236 /* MJPropertyKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CABD20A321A300CC0236 /* MJPropertyKey.h */; };
+		1273CAD420A321A300CC0236 /* NSObject+MJClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CABE20A321A300CC0236 /* NSObject+MJClass.h */; };
+		1273CAD520A321A300CC0236 /* NSString+MJExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CABF20A321A300CC0236 /* NSString+MJExtension.h */; };
+		1273CAD620A321A300CC0236 /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC020A321A300CC0236 /* MJPropertyType.m */; };
+		1273CAD720A321A300CC0236 /* NSObject+MJProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC120A321A300CC0236 /* NSObject+MJProperty.h */; };
+		1273CAD820A321A300CC0236 /* MJExtensionConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC220A321A300CC0236 /* MJExtensionConst.h */; };
+		1273CAD920A321A300CC0236 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC320A321A300CC0236 /* NSObject+MJKeyValue.m */; };
+		1273CADA20A321A300CC0236 /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC420A321A300CC0236 /* MJProperty.m */; };
+		1273CADB20A321A300CC0236 /* MJFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC520A321A300CC0236 /* MJFoundation.h */; };
+		1273CADC20A321A300CC0236 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC620A321A300CC0236 /* NSObject+MJCoding.m */; };
+		1273CADD20A321A300CC0236 /* MJExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAC720A321A300CC0236 /* MJExtension.h */; };
+		1273CADE20A321A300CC0236 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC820A321A300CC0236 /* MJExtensionConst.m */; };
+		1273CADF20A321A300CC0236 /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAC920A321A300CC0236 /* NSObject+MJProperty.m */; };
+		1273CAE020A321A300CC0236 /* MJPropertyType.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CACA20A321A300CC0236 /* MJPropertyType.h */; };
+		1273CAE120A321A300CC0236 /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CACB20A321A300CC0236 /* NSObject+MJClass.m */; };
+		1273CAE220A321A300CC0236 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CACC20A321A300CC0236 /* NSString+MJExtension.m */; };
+		1273CAE320A321A300CC0236 /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CACD20A321A300CC0236 /* MJPropertyKey.m */; };
+		1273CAE420A321A300CC0236 /* MJProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CACE20A321A300CC0236 /* MJProperty.h */; };
+		1273CAE520A321A300CC0236 /* NSObject+MJKeyValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CACF20A321A300CC0236 /* NSObject+MJKeyValue.h */; };
+		1273CAE620A321A300CC0236 /* NSObject+MJCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1273CAD020A321A300CC0236 /* NSObject+MJCoding.h */; };
+		1273CAE820A321A300CC0236 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAD220A321A300CC0236 /* MJFoundation.m */; };
+		1280F3E920A17DFA00E662E4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1280F3E820A17DFA00E662E4 /* CoreMotion.framework */; };
+		1280F3F220A1957500E662E4 /* InWalkInnerOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F3EA20A1957500E662E4 /* InWalkInnerOverlay.m */; };
+		1280F3F620A1957500E662E4 /* InWalkInnerOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 1280F3EE20A1957500E662E4 /* InWalkInnerOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1280F3FD20A1958700E662E4 /* UIColor+HEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F3FA20A1958700E662E4 /* UIColor+HEX.m */; };
+		1280F3FF20A1958700E662E4 /* UIColor+HEX.h in Headers */ = {isa = PBXBuildFile; fileRef = 1280F3FC20A1958700E662E4 /* UIColor+HEX.h */; };
+		1280F40520A195D000E662E4 /* InWalkInnerOverlayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1280F40120A195D000E662E4 /* InWalkInnerOverlayManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1280F40620A195D000E662E4 /* InWalkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F40220A195D000E662E4 /* InWalkManager.m */; };
+		1280F40720A195D000E662E4 /* InWalkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1280F40320A195D000E662E4 /* InWalkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+<<<<<<< Updated upstream
+		1280F40820A195D000E662E4 /* InWalkInnerOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F40420A195D000E662E4 /* InWalkInnerOverlayManager.m */; };
+		320A2D5E20BC2FF500178F18 /* InWalkOverlayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 320A2D5C20BC2FF500178F18 /* InWalkOverlayManager.h */; };
+		320A2D5F20BC2FF500178F18 /* InWalkOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 320A2D5D20BC2FF500178F18 /* InWalkOverlayManager.m */; };
+=======
+		1280F40820A195D000E662E4 /* InWalkOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F40420A195D000E662E4 /* InWalkOverlayManager.m */; };
+		320A2D5E20BC2FF500178F18 /* CustomOverlayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 320A2D5C20BC2FF500178F18 /* CustomOverlayManager.h */; };
+		320A2D5F20BC2FF500178F18 /* CustomOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 320A2D5D20BC2FF500178F18 /* CustomOverlayManager.m */; };
+		320A2D6720BD2E7000178F18 /* InWalkNavigationPathPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 320A2D6520BD2E7000178F18 /* InWalkNavigationPathPoint.h */; };
+		320A2D6820BD2E7000178F18 /* InWalkNavigationPathPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 320A2D6620BD2E7000178F18 /* InWalkNavigationPathPoint.m */; };
+>>>>>>> Stashed changes
+		3233931020B806F80022647E /* InWalkNavigationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3233930E20B806F80022647E /* InWalkNavigationManager.h */; };
+		3233931120B806F80022647E /* InWalkNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3233930F20B806F80022647E /* InWalkNavigationManager.m */; };
+		3247DEFA20A155DE00F6F45B /* InWalkVR.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DEF820A155DE00F6F45B /* InWalkVR.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3247DF1A20A174AA00F6F45B /* VRGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF0220A174AA00F6F45B /* VRGLView.h */; };
+		3247DF1B20A174AA00F6F45B /* VRGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF0320A174AA00F6F45B /* VRGLView.mm */; };
+		3247DF1C20A174AA00F6F45B /* RenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF0520A174AA00F6F45B /* RenderTarget.h */; };
+		3247DF1D20A174AA00F6F45B /* RenderTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF0620A174AA00F6F45B /* RenderTarget.mm */; };
+		3247DF1E20A174AA00F6F45B /* VREyeOverlayRender.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF0720A174AA00F6F45B /* VREyeOverlayRender.h */; };
+		3247DF1F20A174AA00F6F45B /* VREyeOverlayRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF0820A174AA00F6F45B /* VREyeOverlayRender.mm */; };
+		3247DF2020A174AA00F6F45B /* VRSphere.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF0920A174AA00F6F45B /* VRSphere.h */; };
+		3247DF2120A174AA00F6F45B /* VRSphere.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF0A20A174AA00F6F45B /* VRSphere.mm */; };
+		3247DF2220A174AA00F6F45B /* VRSphereOverlayRender.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF0B20A174AA00F6F45B /* VRSphereOverlayRender.h */; };
+		3247DF2320A174AA00F6F45B /* VRSphereOverlayRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF0C20A174AA00F6F45B /* VRSphereOverlayRender.mm */; };
+		3247DF2420A174AA00F6F45B /* ColorPickerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF0E20A174AA00F6F45B /* ColorPickerInfo.h */; };
+		3247DF2520A174AA00F6F45B /* ColorPickerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF0F20A174AA00F6F45B /* ColorPickerInfo.m */; };
+		3247DF2620A174AA00F6F45B /* MathUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF1020A174AA00F6F45B /* MathUtil.h */; };
+		3247DF2720A174AA00F6F45B /* VRHanzi2ImageUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF1120A174AA00F6F45B /* VRHanzi2ImageUtil.h */; };
+		3247DF2820A174AA00F6F45B /* VRHanzi2ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF1220A174AA00F6F45B /* VRHanzi2ImageUtil.m */; };
+		3247DF2920A174AA00F6F45B /* VRShaderUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF1320A174AA00F6F45B /* VRShaderUtil.h */; };
+		3247DF2A20A174AA00F6F45B /* VRShaderUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF1420A174AA00F6F45B /* VRShaderUtil.m */; };
+		3247DF2B20A174AA00F6F45B /* VRDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF1620A174AA00F6F45B /* VRDataSource.h */; };
+		3247DF2C20A174AA00F6F45B /* VRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF1720A174AA00F6F45B /* VRDataSource.m */; };
+		3247DF2D20A174AA00F6F45B /* VROverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF1820A174AA00F6F45B /* VROverlay.h */; };
+		3247DF2E20A174AA00F6F45B /* VROverlay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF1920A174AA00F6F45B /* VROverlay.mm */; };
+		3247DF3120A1750900F6F45B /* MatrixState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF2F20A1750900F6F45B /* MatrixState.cpp */; };
+		3247DF3220A1750900F6F45B /* Matrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF3020A1750900F6F45B /* Matrix.hpp */; };
+		3247DF3420A1753700F6F45B /* MatrixState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF3320A1753700F6F45B /* MatrixState.hpp */; };
+		3247DF3620A1756700F6F45B /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF3520A1756700F6F45B /* Utils.h */; };
+		3247DF3920A1772100F6F45B /* ObjectColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3247DF3720A1772000F6F45B /* ObjectColorPicker.h */; };
+		3247DF3A20A1772100F6F45B /* ObjectColorPicker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3247DF3820A1772100F6F45B /* ObjectColorPicker.mm */; };
+		326AFDBA20B5A0A200F0639A /* InWalkVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 326AFDB120B5A0A100F0639A /* InWalkVideo.m */; };
+		326AFDBB20B5A0A200F0639A /* InWalkNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 326AFDB220B5A0A100F0639A /* InWalkNode.m */; };
+		326AFDBC20B5A0A200F0639A /* InWalkPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFDB320B5A0A100F0639A /* InWalkPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		326AFDBF20B5A0A200F0639A /* InWalkVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFDB620B5A0A100F0639A /* InWalkVideo.h */; };
+		326AFDC020B5A0A200F0639A /* InWalkPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 326AFDB720B5A0A100F0639A /* InWalkPoint.m */; };
+		326AFDC220B5A0A200F0639A /* InWalkNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFDB920B5A0A200F0639A /* InWalkNode.h */; };
+		326AFEC020B5A35000F0639A /* MJPriorityQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFEBA20B5A35000F0639A /* MJPriorityQueue.h */; };
+		326AFEC120B5A35000F0639A /* MJPriorityQueue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 326AFEBB20B5A35000F0639A /* MJPriorityQueue.mm */; };
+		326AFEC220B5A35000F0639A /* MJDijkstra.m in Sources */ = {isa = PBXBuildFile; fileRef = 326AFEBC20B5A35000F0639A /* MJDijkstra.m */; };
+		326AFEC320B5A35000F0639A /* MJDijkstra.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFEBD20B5A35000F0639A /* MJDijkstra.h */; };
+		326AFEC420B5A35000F0639A /* MJPriorityDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 326AFEBE20B5A35000F0639A /* MJPriorityDictionary.h */; };
+		326AFEC520B5A35000F0639A /* MJPriorityDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 326AFEBF20B5A35000F0639A /* MJPriorityDictionary.mm */; };
+		32EFB01B20B815C900913425 /* InWalkItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 32EFB01920B815C900913425 /* InWalkItem.h */; };
+		32EFB01C20B815C900913425 /* InWalkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFB01A20B815C900913425 /* InWalkItem.m */; };
+		32EFB01F20B81D9E00913425 /* InWalkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EFB01D20B81D9D00913425 /* InWalkModel.m */; };
+		32EFB02020B81D9E00913425 /* InWalkModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 32EFB01E20B81D9D00913425 /* InWalkModel.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		07A1F40320BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InWalkOverlay+RelatedVROverlay.h"; sourceTree = "<group>"; };
+		07A1F40420BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "InWalkOverlay+RelatedVROverlay.m"; sourceTree = "<group>"; };
+		07A2157920B6D0220061B2B0 /* InWalkOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkOverlay.h; sourceTree = "<group>"; };
+		07A2157A20B6D0220061B2B0 /* InWalkOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkOverlay.m; sourceTree = "<group>"; };
+		1230B75020A3EB12009CB95A /* SDWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageManager.m; sourceTree = "<group>"; };
+		1230B75120A3EB12009CB95A /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
+		1230B75220A3EB12009CB95A /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
+		1230B75320A3EB12009CB95A /* SDImageCacheConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCacheConfig.h; sourceTree = "<group>"; };
+		1230B75420A3EB12009CB95A /* SDWebImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloader.m; sourceTree = "<group>"; };
+		1230B75520A3EB12009CB95A /* SDWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCompat.m; sourceTree = "<group>"; };
+		1230B75620A3EB12009CB95A /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
+		1230B75720A3EB12009CB95A /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
+		1230B75820A3EB12009CB95A /* SDWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageManager.h; sourceTree = "<group>"; };
+		1230B75920A3EB12009CB95A /* SDWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageOperation.h; sourceTree = "<group>"; };
+		1230B75A20A3EB12009CB95A /* SDWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloader.h; sourceTree = "<group>"; };
+		1230B75B20A3EB12009CB95A /* SDImageCacheConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCacheConfig.m; sourceTree = "<group>"; };
+		1230B75C20A3EB12009CB95A /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
+		1230B76A20A3EB5E009CB95A /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MultiFormat.h"; sourceTree = "<group>"; };
+		1230B76B20A3EB5E009CB95A /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MultiFormat.m"; sourceTree = "<group>"; };
+		1230B76E20A3EB88009CB95A /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
+		1230B76F20A3EB88009CB95A /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
+		1230B77220A3EBB2009CB95A /* NSImage+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+WebCache.h"; sourceTree = "<group>"; };
+		1230B77320A3EBB2009CB95A /* NSImage+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+WebCache.m"; sourceTree = "<group>"; };
+		1230B77620A3EBEC009CB95A /* SDWebImageCodersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCodersManager.h; sourceTree = "<group>"; };
+		1230B77720A3EBEC009CB95A /* SDWebImageCodersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCodersManager.m; sourceTree = "<group>"; };
+		1230B77A20A3EC07009CB95A /* SDWebImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCoder.h; sourceTree = "<group>"; };
+		1230B77B20A3EC07009CB95A /* SDWebImageCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCoder.m; sourceTree = "<group>"; };
+		1230B77E20A3EC30009CB95A /* SDWebImageImageIOCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageImageIOCoder.h; sourceTree = "<group>"; };
+		1230B77F20A3EC30009CB95A /* SDWebImageImageIOCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageImageIOCoder.m; sourceTree = "<group>"; };
+		1230B78220A3ED4B009CB95A /* SDWebImageCoderHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCoderHelper.m; sourceTree = "<group>"; };
+		1230B78320A3ED4B009CB95A /* SDWebImageCoderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCoderHelper.h; sourceTree = "<group>"; };
+		1230B78620A3EDEE009CB95A /* SDWebImageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageFrame.h; sourceTree = "<group>"; };
+		1230B78720A3EDEF009CB95A /* SDWebImageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageFrame.m; sourceTree = "<group>"; };
+		1230B78A20A3EE1B009CB95A /* SDAnimatedImageRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAnimatedImageRep.m; sourceTree = "<group>"; };
+		1230B78B20A3EE1B009CB95A /* SDAnimatedImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAnimatedImageRep.h; sourceTree = "<group>"; };
+		1273CABD20A321A300CC0236 /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
+		1273CABE20A321A300CC0236 /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
+		1273CABF20A321A300CC0236 /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
+		1273CAC020A321A300CC0236 /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
+		1273CAC120A321A300CC0236 /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		1273CAC220A321A300CC0236 /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
+		1273CAC320A321A300CC0236 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		1273CAC420A321A300CC0236 /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
+		1273CAC520A321A300CC0236 /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		1273CAC620A321A300CC0236 /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		1273CAC720A321A300CC0236 /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
+		1273CAC820A321A300CC0236 /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
+		1273CAC920A321A300CC0236 /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		1273CACA20A321A300CC0236 /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
+		1273CACB20A321A300CC0236 /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
+		1273CACC20A321A300CC0236 /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		1273CACD20A321A300CC0236 /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
+		1273CACE20A321A300CC0236 /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		1273CACF20A321A300CC0236 /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
+		1273CAD020A321A300CC0236 /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
+		1273CAD220A321A300CC0236 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
+		1280F3E820A17DFA00E662E4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		1280F3EA20A1957500E662E4 /* InWalkInnerOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkInnerOverlay.m; sourceTree = "<group>"; };
+		1280F3EE20A1957500E662E4 /* InWalkInnerOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkInnerOverlay.h; sourceTree = "<group>"; };
+		1280F3FA20A1958700E662E4 /* UIColor+HEX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HEX.m"; sourceTree = "<group>"; };
+		1280F3FC20A1958700E662E4 /* UIColor+HEX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HEX.h"; sourceTree = "<group>"; };
+		1280F40120A195D000E662E4 /* InWalkInnerOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkInnerOverlayManager.h; sourceTree = "<group>"; };
+		1280F40220A195D000E662E4 /* InWalkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkManager.m; sourceTree = "<group>"; };
+		1280F40320A195D000E662E4 /* InWalkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkManager.h; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+		1280F40420A195D000E662E4 /* InWalkInnerOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkInnerOverlayManager.m; sourceTree = "<group>"; };
+		320A2D5C20BC2FF500178F18 /* InWalkOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkOverlayManager.h; sourceTree = "<group>"; };
+		320A2D5D20BC2FF500178F18 /* InWalkOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkOverlayManager.m; sourceTree = "<group>"; };
+=======
+		1280F40420A195D000E662E4 /* InWalkOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkOverlayManager.m; sourceTree = "<group>"; };
+		320A2D5C20BC2FF500178F18 /* CustomOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomOverlayManager.h; sourceTree = "<group>"; };
+		320A2D5D20BC2FF500178F18 /* CustomOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomOverlayManager.m; sourceTree = "<group>"; };
+		320A2D6520BD2E7000178F18 /* InWalkNavigationPathPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkNavigationPathPoint.h; sourceTree = "<group>"; };
+		320A2D6620BD2E7000178F18 /* InWalkNavigationPathPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkNavigationPathPoint.m; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
+		3233930E20B806F80022647E /* InWalkNavigationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkNavigationManager.h; sourceTree = "<group>"; };
+		3233930F20B806F80022647E /* InWalkNavigationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkNavigationManager.m; sourceTree = "<group>"; };
+		3233931220B809950022647E /* InWalkConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkConstant.h; sourceTree = "<group>"; };
+		3247DEF520A155DE00F6F45B /* InWalkVR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InWalkVR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3247DEF820A155DE00F6F45B /* InWalkVR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkVR.h; sourceTree = "<group>"; };
+		3247DEF920A155DE00F6F45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3247DF0220A174AA00F6F45B /* VRGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRGLView.h; sourceTree = "<group>"; };
+		3247DF0320A174AA00F6F45B /* VRGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VRGLView.mm; sourceTree = "<group>"; };
+		3247DF0520A174AA00F6F45B /* RenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderTarget.h; sourceTree = "<group>"; };
+		3247DF0620A174AA00F6F45B /* RenderTarget.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderTarget.mm; sourceTree = "<group>"; };
+		3247DF0720A174AA00F6F45B /* VREyeOverlayRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VREyeOverlayRender.h; sourceTree = "<group>"; };
+		3247DF0820A174AA00F6F45B /* VREyeOverlayRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VREyeOverlayRender.mm; sourceTree = "<group>"; };
+		3247DF0920A174AA00F6F45B /* VRSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSphere.h; sourceTree = "<group>"; };
+		3247DF0A20A174AA00F6F45B /* VRSphere.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VRSphere.mm; sourceTree = "<group>"; };
+		3247DF0B20A174AA00F6F45B /* VRSphereOverlayRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRSphereOverlayRender.h; sourceTree = "<group>"; };
+		3247DF0C20A174AA00F6F45B /* VRSphereOverlayRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VRSphereOverlayRender.mm; sourceTree = "<group>"; };
+		3247DF0E20A174AA00F6F45B /* ColorPickerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerInfo.h; sourceTree = "<group>"; };
+		3247DF0F20A174AA00F6F45B /* ColorPickerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerInfo.m; sourceTree = "<group>"; };
+		3247DF1020A174AA00F6F45B /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtil.h; sourceTree = "<group>"; };
+		3247DF1120A174AA00F6F45B /* VRHanzi2ImageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRHanzi2ImageUtil.h; sourceTree = "<group>"; };
+		3247DF1220A174AA00F6F45B /* VRHanzi2ImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRHanzi2ImageUtil.m; sourceTree = "<group>"; };
+		3247DF1320A174AA00F6F45B /* VRShaderUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRShaderUtil.h; sourceTree = "<group>"; };
+		3247DF1420A174AA00F6F45B /* VRShaderUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRShaderUtil.m; sourceTree = "<group>"; };
+		3247DF1620A174AA00F6F45B /* VRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRDataSource.h; sourceTree = "<group>"; };
+		3247DF1720A174AA00F6F45B /* VRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRDataSource.m; sourceTree = "<group>"; };
+		3247DF1820A174AA00F6F45B /* VROverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VROverlay.h; sourceTree = "<group>"; };
+		3247DF1920A174AA00F6F45B /* VROverlay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VROverlay.mm; sourceTree = "<group>"; };
+		3247DF2F20A1750900F6F45B /* MatrixState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixState.cpp; sourceTree = "<group>"; };
+		3247DF3020A1750900F6F45B /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
+		3247DF3320A1753700F6F45B /* MatrixState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MatrixState.hpp; sourceTree = "<group>"; };
+		3247DF3520A1756700F6F45B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		3247DF3720A1772000F6F45B /* ObjectColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectColorPicker.h; sourceTree = "<group>"; };
+		3247DF3820A1772100F6F45B /* ObjectColorPicker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjectColorPicker.mm; sourceTree = "<group>"; };
+		326AFDB120B5A0A100F0639A /* InWalkVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkVideo.m; sourceTree = "<group>"; };
+		326AFDB220B5A0A100F0639A /* InWalkNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkNode.m; sourceTree = "<group>"; };
+		326AFDB320B5A0A100F0639A /* InWalkPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkPoint.h; sourceTree = "<group>"; };
+		326AFDB620B5A0A100F0639A /* InWalkVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkVideo.h; sourceTree = "<group>"; };
+		326AFDB720B5A0A100F0639A /* InWalkPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkPoint.m; sourceTree = "<group>"; };
+		326AFDB920B5A0A200F0639A /* InWalkNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkNode.h; sourceTree = "<group>"; };
+		326AFEBA20B5A35000F0639A /* MJPriorityQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPriorityQueue.h; sourceTree = "<group>"; };
+		326AFEBB20B5A35000F0639A /* MJPriorityQueue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MJPriorityQueue.mm; sourceTree = "<group>"; };
+		326AFEBC20B5A35000F0639A /* MJDijkstra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDijkstra.m; sourceTree = "<group>"; };
+		326AFEBD20B5A35000F0639A /* MJDijkstra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDijkstra.h; sourceTree = "<group>"; };
+		326AFEBE20B5A35000F0639A /* MJPriorityDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPriorityDictionary.h; sourceTree = "<group>"; };
+		326AFEBF20B5A35000F0639A /* MJPriorityDictionary.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MJPriorityDictionary.mm; sourceTree = "<group>"; };
+		32EFB01920B815C900913425 /* InWalkItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkItem.h; sourceTree = "<group>"; };
+		32EFB01A20B815C900913425 /* InWalkItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkItem.m; sourceTree = "<group>"; };
+		32EFB01D20B81D9D00913425 /* InWalkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkModel.m; sourceTree = "<group>"; };
+		32EFB01E20B81D9D00913425 /* InWalkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkModel.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3247DEF120A155DE00F6F45B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1280F3E920A17DFA00E662E4 /* CoreMotion.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1230B74F20A3EB12009CB95A /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				1230B78B20A3EE1B009CB95A /* SDAnimatedImageRep.h */,
+				1230B78A20A3EE1B009CB95A /* SDAnimatedImageRep.m */,
+				1230B78620A3EDEE009CB95A /* SDWebImageFrame.h */,
+				1230B78720A3EDEF009CB95A /* SDWebImageFrame.m */,
+				1230B78320A3ED4B009CB95A /* SDWebImageCoderHelper.h */,
+				1230B78220A3ED4B009CB95A /* SDWebImageCoderHelper.m */,
+				1230B77E20A3EC30009CB95A /* SDWebImageImageIOCoder.h */,
+				1230B77F20A3EC30009CB95A /* SDWebImageImageIOCoder.m */,
+				1230B77A20A3EC07009CB95A /* SDWebImageCoder.h */,
+				1230B77B20A3EC07009CB95A /* SDWebImageCoder.m */,
+				1230B77620A3EBEC009CB95A /* SDWebImageCodersManager.h */,
+				1230B77720A3EBEC009CB95A /* SDWebImageCodersManager.m */,
+				1230B77220A3EBB2009CB95A /* NSImage+WebCache.h */,
+				1230B77320A3EBB2009CB95A /* NSImage+WebCache.m */,
+				1230B76F20A3EB88009CB95A /* NSData+ImageContentType.h */,
+				1230B76E20A3EB88009CB95A /* NSData+ImageContentType.m */,
+				1230B76A20A3EB5E009CB95A /* UIImage+MultiFormat.h */,
+				1230B76B20A3EB5E009CB95A /* UIImage+MultiFormat.m */,
+				1230B75020A3EB12009CB95A /* SDWebImageManager.m */,
+				1230B75120A3EB12009CB95A /* SDWebImageDownloaderOperation.h */,
+				1230B75220A3EB12009CB95A /* SDImageCache.h */,
+				1230B75320A3EB12009CB95A /* SDImageCacheConfig.h */,
+				1230B75420A3EB12009CB95A /* SDWebImageDownloader.m */,
+				1230B75520A3EB12009CB95A /* SDWebImageCompat.m */,
+				1230B75620A3EB12009CB95A /* SDImageCache.m */,
+				1230B75720A3EB12009CB95A /* SDWebImageDownloaderOperation.m */,
+				1230B75820A3EB12009CB95A /* SDWebImageManager.h */,
+				1230B75920A3EB12009CB95A /* SDWebImageOperation.h */,
+				1230B75A20A3EB12009CB95A /* SDWebImageDownloader.h */,
+				1230B75B20A3EB12009CB95A /* SDImageCacheConfig.m */,
+				1230B75C20A3EB12009CB95A /* SDWebImageCompat.h */,
+			);
+			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		1273CABC20A321A300CC0236 /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				1273CABD20A321A300CC0236 /* MJPropertyKey.h */,
+				1273CABE20A321A300CC0236 /* NSObject+MJClass.h */,
+				1273CABF20A321A300CC0236 /* NSString+MJExtension.h */,
+				1273CAC020A321A300CC0236 /* MJPropertyType.m */,
+				1273CAC120A321A300CC0236 /* NSObject+MJProperty.h */,
+				1273CAC220A321A300CC0236 /* MJExtensionConst.h */,
+				1273CAC320A321A300CC0236 /* NSObject+MJKeyValue.m */,
+				1273CAC420A321A300CC0236 /* MJProperty.m */,
+				1273CAC520A321A300CC0236 /* MJFoundation.h */,
+				1273CAC620A321A300CC0236 /* NSObject+MJCoding.m */,
+				1273CAC720A321A300CC0236 /* MJExtension.h */,
+				1273CAC820A321A300CC0236 /* MJExtensionConst.m */,
+				1273CAC920A321A300CC0236 /* NSObject+MJProperty.m */,
+				1273CACA20A321A300CC0236 /* MJPropertyType.h */,
+				1273CACB20A321A300CC0236 /* NSObject+MJClass.m */,
+				1273CACC20A321A300CC0236 /* NSString+MJExtension.m */,
+				1273CACD20A321A300CC0236 /* MJPropertyKey.m */,
+				1273CACE20A321A300CC0236 /* MJProperty.h */,
+				1273CACF20A321A300CC0236 /* NSObject+MJKeyValue.h */,
+				1273CAD020A321A300CC0236 /* NSObject+MJCoding.h */,
+				1273CAD220A321A300CC0236 /* MJFoundation.m */,
+			);
+			path = MJExtension;
+			sourceTree = "<group>";
+		};
+		1280F3E720A17DFA00E662E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1280F3E820A17DFA00E662E4 /* CoreMotion.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1280F40020A195D000E662E4 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				320A2D5C20BC2FF500178F18 /* InWalkOverlayManager.h */,
+				320A2D5D20BC2FF500178F18 /* InWalkOverlayManager.m */,
+				1280F40320A195D000E662E4 /* InWalkManager.h */,
+				1280F40220A195D000E662E4 /* InWalkManager.m */,
+				1280F40120A195D000E662E4 /* InWalkInnerOverlayManager.h */,
+				1280F40420A195D000E662E4 /* InWalkInnerOverlayManager.m */,
+				3233930E20B806F80022647E /* InWalkNavigationManager.h */,
+				3233930F20B806F80022647E /* InWalkNavigationManager.m */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
+		3247DEEB20A155DD00F6F45B = {
+			isa = PBXGroup;
+			children = (
+				3247DEF720A155DE00F6F45B /* InWalkVR */,
+				3247DEF620A155DE00F6F45B /* Products */,
+				1280F3E720A17DFA00E662E4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3247DEF620A155DE00F6F45B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3247DEF520A155DE00F6F45B /* InWalkVR.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3247DEF720A155DE00F6F45B /* InWalkVR */ = {
+			isa = PBXGroup;
+			children = (
+				326AFEB920B5A35000F0639A /* MJDijkstra */,
+				1230B74F20A3EB12009CB95A /* SDWebImage */,
+				1273CABC20A321A300CC0236 /* MJExtension */,
+				1280F40020A195D000E662E4 /* manager */,
+				1280F3FC20A1958700E662E4 /* UIColor+HEX.h */,
+				1280F3FA20A1958700E662E4 /* UIColor+HEX.m */,
+				3247DF1520A174AA00F6F45B /* model */,
+				3247DF0420A174AA00F6F45B /* render */,
+				3247DF0D20A174AA00F6F45B /* util */,
+				3247DF0220A174AA00F6F45B /* VRGLView.h */,
+				3247DF0320A174AA00F6F45B /* VRGLView.mm */,
+				3247DEF820A155DE00F6F45B /* InWalkVR.h */,
+				3247DEF920A155DE00F6F45B /* Info.plist */,
+				3233931220B809950022647E /* InWalkConstant.h */,
+			);
+			path = InWalkVR;
+			sourceTree = "<group>";
+		};
+		3247DF0420A174AA00F6F45B /* render */ = {
+			isa = PBXGroup;
+			children = (
+				3247DF0520A174AA00F6F45B /* RenderTarget.h */,
+				3247DF0620A174AA00F6F45B /* RenderTarget.mm */,
+				3247DF0720A174AA00F6F45B /* VREyeOverlayRender.h */,
+				3247DF0820A174AA00F6F45B /* VREyeOverlayRender.mm */,
+				3247DF0920A174AA00F6F45B /* VRSphere.h */,
+				3247DF0A20A174AA00F6F45B /* VRSphere.mm */,
+				3247DF0B20A174AA00F6F45B /* VRSphereOverlayRender.h */,
+				3247DF0C20A174AA00F6F45B /* VRSphereOverlayRender.mm */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		3247DF0D20A174AA00F6F45B /* util */ = {
+			isa = PBXGroup;
+			children = (
+				3247DF3020A1750900F6F45B /* Matrix.hpp */,
+				3247DF3720A1772000F6F45B /* ObjectColorPicker.h */,
+				3247DF3820A1772100F6F45B /* ObjectColorPicker.mm */,
+				3247DF3520A1756700F6F45B /* Utils.h */,
+				3247DF3320A1753700F6F45B /* MatrixState.hpp */,
+				3247DF2F20A1750900F6F45B /* MatrixState.cpp */,
+				3247DF0E20A174AA00F6F45B /* ColorPickerInfo.h */,
+				3247DF0F20A174AA00F6F45B /* ColorPickerInfo.m */,
+				3247DF1020A174AA00F6F45B /* MathUtil.h */,
+				3247DF1120A174AA00F6F45B /* VRHanzi2ImageUtil.h */,
+				3247DF1220A174AA00F6F45B /* VRHanzi2ImageUtil.m */,
+				3247DF1320A174AA00F6F45B /* VRShaderUtil.h */,
+				3247DF1420A174AA00F6F45B /* VRShaderUtil.m */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		3247DF1520A174AA00F6F45B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				32EFB01E20B81D9D00913425 /* InWalkModel.h */,
+				32EFB01D20B81D9D00913425 /* InWalkModel.m */,
+				326AFDB320B5A0A100F0639A /* InWalkPoint.h */,
+				326AFDB720B5A0A100F0639A /* InWalkPoint.m */,
+				326AFDB920B5A0A200F0639A /* InWalkNode.h */,
+				326AFDB220B5A0A100F0639A /* InWalkNode.m */,
+				326AFDB620B5A0A100F0639A /* InWalkVideo.h */,
+				326AFDB120B5A0A100F0639A /* InWalkVideo.m */,
+				1280F3EE20A1957500E662E4 /* InWalkInnerOverlay.h */,
+				1280F3EA20A1957500E662E4 /* InWalkInnerOverlay.m */,
+				3247DF1620A174AA00F6F45B /* VRDataSource.h */,
+				3247DF1720A174AA00F6F45B /* VRDataSource.m */,
+				3247DF1820A174AA00F6F45B /* VROverlay.h */,
+				3247DF1920A174AA00F6F45B /* VROverlay.mm */,
+				07A2157920B6D0220061B2B0 /* InWalkOverlay.h */,
+				07A2157A20B6D0220061B2B0 /* InWalkOverlay.m */,
+				32EFB01920B815C900913425 /* InWalkItem.h */,
+				32EFB01A20B815C900913425 /* InWalkItem.m */,
+<<<<<<< Updated upstream
+				07A1F40320BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.h */,
+				07A1F40420BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.m */,
+=======
+				320A2D6520BD2E7000178F18 /* InWalkNavigationPathPoint.h */,
+				320A2D6620BD2E7000178F18 /* InWalkNavigationPathPoint.m */,
+>>>>>>> Stashed changes
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		326AFEB920B5A35000F0639A /* MJDijkstra */ = {
+			isa = PBXGroup;
+			children = (
+				326AFEBA20B5A35000F0639A /* MJPriorityQueue.h */,
+				326AFEBB20B5A35000F0639A /* MJPriorityQueue.mm */,
+				326AFEBC20B5A35000F0639A /* MJDijkstra.m */,
+				326AFEBD20B5A35000F0639A /* MJDijkstra.h */,
+				326AFEBE20B5A35000F0639A /* MJPriorityDictionary.h */,
+				326AFEBF20B5A35000F0639A /* MJPriorityDictionary.mm */,
+			);
+			path = MJDijkstra;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3247DEF220A155DE00F6F45B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1230B76520A3EB12009CB95A /* SDWebImageManager.h in Headers */,
+				3247DF2720A174AA00F6F45B /* VRHanzi2ImageUtil.h in Headers */,
+				1230B78020A3EC30009CB95A /* SDWebImageImageIOCoder.h in Headers */,
+				326AFDBC20B5A0A200F0639A /* InWalkPoint.h in Headers */,
+				1230B76920A3EB12009CB95A /* SDWebImageCompat.h in Headers */,
+				1273CAD720A321A300CC0236 /* NSObject+MJProperty.h in Headers */,
+				07A2157B20B6D0220061B2B0 /* InWalkOverlay.h in Headers */,
+				32EFB02020B81D9E00913425 /* InWalkModel.h in Headers */,
+				1273CAD520A321A300CC0236 /* NSString+MJExtension.h in Headers */,
+				1230B78D20A3EE1B009CB95A /* SDAnimatedImageRep.h in Headers */,
+				1230B76C20A3EB5E009CB95A /* UIImage+MultiFormat.h in Headers */,
+				1280F40520A195D000E662E4 /* InWalkInnerOverlayManager.h in Headers */,
+				1280F40720A195D000E662E4 /* InWalkManager.h in Headers */,
+				1280F3F620A1957500E662E4 /* InWalkInnerOverlay.h in Headers */,
+				3247DF2620A174AA00F6F45B /* MathUtil.h in Headers */,
+				3247DF2420A174AA00F6F45B /* ColorPickerInfo.h in Headers */,
+				1230B76020A3EB12009CB95A /* SDImageCacheConfig.h in Headers */,
+				326AFDBF20B5A0A200F0639A /* InWalkVideo.h in Headers */,
+				3247DF3620A1756700F6F45B /* Utils.h in Headers */,
+				1273CAD320A321A300CC0236 /* MJPropertyKey.h in Headers */,
+				1230B77420A3EBB2009CB95A /* NSImage+WebCache.h in Headers */,
+				3247DF2D20A174AA00F6F45B /* VROverlay.h in Headers */,
+				3247DF1A20A174AA00F6F45B /* VRGLView.h in Headers */,
+				3247DEFA20A155DE00F6F45B /* InWalkVR.h in Headers */,
+				3247DF2B20A174AA00F6F45B /* VRDataSource.h in Headers */,
+				1230B76720A3EB12009CB95A /* SDWebImageDownloader.h in Headers */,
+				3247DF2920A174AA00F6F45B /* VRShaderUtil.h in Headers */,
+				1273CAE020A321A300CC0236 /* MJPropertyType.h in Headers */,
+				3247DF1C20A174AA00F6F45B /* RenderTarget.h in Headers */,
+				07A1F40520BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.h in Headers */,
+				3247DF3420A1753700F6F45B /* MatrixState.hpp in Headers */,
+				3247DF1E20A174AA00F6F45B /* VREyeOverlayRender.h in Headers */,
+				326AFEC320B5A35000F0639A /* MJDijkstra.h in Headers */,
+				1273CAE520A321A300CC0236 /* NSObject+MJKeyValue.h in Headers */,
+				3233931020B806F80022647E /* InWalkNavigationManager.h in Headers */,
+				32EFB01B20B815C900913425 /* InWalkItem.h in Headers */,
+				1273CAE620A321A300CC0236 /* NSObject+MJCoding.h in Headers */,
+				320A2D5E20BC2FF500178F18 /* InWalkOverlayManager.h in Headers */,
+				3247DF2220A174AA00F6F45B /* VRSphereOverlayRender.h in Headers */,
+				326AFEC420B5A35000F0639A /* MJPriorityDictionary.h in Headers */,
+				1280F3FF20A1958700E662E4 /* UIColor+HEX.h in Headers */,
+				3247DF3920A1772100F6F45B /* ObjectColorPicker.h in Headers */,
+				1230B78520A3ED4B009CB95A /* SDWebImageCoderHelper.h in Headers */,
+				3247DF2020A174AA00F6F45B /* VRSphere.h in Headers */,
+				1273CADB20A321A300CC0236 /* MJFoundation.h in Headers */,
+				1273CAD420A321A300CC0236 /* NSObject+MJClass.h in Headers */,
+				1230B77820A3EBED009CB95A /* SDWebImageCodersManager.h in Headers */,
+				326AFEC020B5A35000F0639A /* MJPriorityQueue.h in Headers */,
+				1230B75F20A3EB12009CB95A /* SDImageCache.h in Headers */,
+				1230B77C20A3EC08009CB95A /* SDWebImageCoder.h in Headers */,
+				3247DF3220A1750900F6F45B /* Matrix.hpp in Headers */,
+				1230B75E20A3EB12009CB95A /* SDWebImageDownloaderOperation.h in Headers */,
+				1273CAD820A321A300CC0236 /* MJExtensionConst.h in Headers */,
+				1273CAE420A321A300CC0236 /* MJProperty.h in Headers */,
+				1230B77120A3EB88009CB95A /* NSData+ImageContentType.h in Headers */,
+				1230B78820A3EDEF009CB95A /* SDWebImageFrame.h in Headers */,
+				1273CADD20A321A300CC0236 /* MJExtension.h in Headers */,
+				326AFDC220B5A0A200F0639A /* InWalkNode.h in Headers */,
+				1230B76620A3EB12009CB95A /* SDWebImageOperation.h in Headers */,
+				320A2D6720BD2E7000178F18 /* InWalkNavigationPathPoint.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3247DEF420A155DE00F6F45B /* InWalkVR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3247DEFD20A155DE00F6F45B /* Build configuration list for PBXNativeTarget "InWalkVR" */;
+			buildPhases = (
+				3247DEF020A155DE00F6F45B /* Sources */,
+				3247DEF120A155DE00F6F45B /* Frameworks */,
+				3247DEF220A155DE00F6F45B /* Headers */,
+				3247DEF320A155DE00F6F45B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InWalkVR;
+			productName = InWalkVR;
+			productReference = 3247DEF520A155DE00F6F45B /* InWalkVR.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3247DEEC20A155DE00F6F45B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "InReal Co., Ltd.";
+				TargetAttributes = {
+					3247DEF420A155DE00F6F45B = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 3247DEEF20A155DE00F6F45B /* Build configuration list for PBXProject "InWalkVR" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3247DEEB20A155DD00F6F45B;
+			productRefGroup = 3247DEF620A155DE00F6F45B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3247DEF420A155DE00F6F45B /* InWalkVR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3247DEF320A155DE00F6F45B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3247DEF020A155DE00F6F45B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3247DF1D20A174AA00F6F45B /* RenderTarget.mm in Sources */,
+				1230B77D20A3EC08009CB95A /* SDWebImageCoder.m in Sources */,
+				1273CAE120A321A300CC0236 /* NSObject+MJClass.m in Sources */,
+				3233931120B806F80022647E /* InWalkNavigationManager.m in Sources */,
+				3247DF2C20A174AA00F6F45B /* VRDataSource.m in Sources */,
+				3247DF2E20A174AA00F6F45B /* VROverlay.mm in Sources */,
+				326AFEC520B5A35000F0639A /* MJPriorityDictionary.mm in Sources */,
+				3247DF1F20A174AA00F6F45B /* VREyeOverlayRender.mm in Sources */,
+				1273CAD620A321A300CC0236 /* MJPropertyType.m in Sources */,
+				1230B76320A3EB12009CB95A /* SDImageCache.m in Sources */,
+				1230B76420A3EB12009CB95A /* SDWebImageDownloaderOperation.m in Sources */,
+				320A2D6820BD2E7000178F18 /* InWalkNavigationPathPoint.m in Sources */,
+				1230B77920A3EBED009CB95A /* SDWebImageCodersManager.m in Sources */,
+				1280F40820A195D000E662E4 /* InWalkInnerOverlayManager.m in Sources */,
+				1230B76820A3EB12009CB95A /* SDImageCacheConfig.m in Sources */,
+				1230B78420A3ED4B009CB95A /* SDWebImageCoderHelper.m in Sources */,
+				326AFEC120B5A35000F0639A /* MJPriorityQueue.mm in Sources */,
+				1230B78C20A3EE1B009CB95A /* SDAnimatedImageRep.m in Sources */,
+				1230B77520A3EBB2009CB95A /* NSImage+WebCache.m in Sources */,
+				1230B76220A3EB12009CB95A /* SDWebImageCompat.m in Sources */,
+				3247DF2120A174AA00F6F45B /* VRSphere.mm in Sources */,
+				3247DF2320A174AA00F6F45B /* VRSphereOverlayRender.mm in Sources */,
+				1273CAD920A321A300CC0236 /* NSObject+MJKeyValue.m in Sources */,
+				07A2157C20B6D0220061B2B0 /* InWalkOverlay.m in Sources */,
+				326AFDC020B5A0A200F0639A /* InWalkPoint.m in Sources */,
+				1230B76D20A3EB5E009CB95A /* UIImage+MultiFormat.m in Sources */,
+				1273CADF20A321A300CC0236 /* NSObject+MJProperty.m in Sources */,
+				3247DF2820A174AA00F6F45B /* VRHanzi2ImageUtil.m in Sources */,
+				1273CAE320A321A300CC0236 /* MJPropertyKey.m in Sources */,
+				07A1F40620BD29A0007626CA /* InWalkOverlay+RelatedVROverlay.m in Sources */,
+				326AFDBA20B5A0A200F0639A /* InWalkVideo.m in Sources */,
+				320A2D5F20BC2FF500178F18 /* InWalkOverlayManager.m in Sources */,
+				326AFEC220B5A35000F0639A /* MJDijkstra.m in Sources */,
+				3247DF1B20A174AA00F6F45B /* VRGLView.mm in Sources */,
+				326AFDBB20B5A0A200F0639A /* InWalkNode.m in Sources */,
+				32EFB01C20B815C900913425 /* InWalkItem.m in Sources */,
+				1280F3FD20A1958700E662E4 /* UIColor+HEX.m in Sources */,
+				3247DF3A20A1772100F6F45B /* ObjectColorPicker.mm in Sources */,
+				1273CADE20A321A300CC0236 /* MJExtensionConst.m in Sources */,
+				1280F3F220A1957500E662E4 /* InWalkInnerOverlay.m in Sources */,
+				1230B78920A3EDEF009CB95A /* SDWebImageFrame.m in Sources */,
+				3247DF2A20A174AA00F6F45B /* VRShaderUtil.m in Sources */,
+				1230B78120A3EC30009CB95A /* SDWebImageImageIOCoder.m in Sources */,
+				1273CADC20A321A300CC0236 /* NSObject+MJCoding.m in Sources */,
+				1280F40620A195D000E662E4 /* InWalkManager.m in Sources */,
+				3247DF3120A1750900F6F45B /* MatrixState.cpp in Sources */,
+				1273CAE820A321A300CC0236 /* MJFoundation.m in Sources */,
+				1230B76120A3EB12009CB95A /* SDWebImageDownloader.m in Sources */,
+				3247DF2520A174AA00F6F45B /* ColorPickerInfo.m in Sources */,
+				1230B77020A3EB88009CB95A /* NSData+ImageContentType.m in Sources */,
+				1230B75D20A3EB12009CB95A /* SDWebImageManager.m in Sources */,
+				1273CADA20A321A300CC0236 /* MJProperty.m in Sources */,
+				1273CAE220A321A300CC0236 /* NSString+MJExtension.m in Sources */,
+				32EFB01F20B81D9E00913425 /* InWalkModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3247DEFB20A155DE00F6F45B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3247DEFC20A155DE00F6F45B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3247DEFE20A155DE00F6F45B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5W9H4X287W;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = InWalkVR/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = net.inwalk.InWalkVR;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3247DEFF20A155DE00F6F45B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5W9H4X287W;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = InWalkVR/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = net.inwalk.InWalkVR;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3247DEEF20A155DE00F6F45B /* Build configuration list for PBXProject "InWalkVR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3247DEFB20A155DE00F6F45B /* Debug */,
+				3247DEFC20A155DE00F6F45B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3247DEFD20A155DE00F6F45B /* Build configuration list for PBXNativeTarget "InWalkVR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3247DEFE20A155DE00F6F45B /* Debug */,
+				3247DEFF20A155DE00F6F45B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3247DEEC20A155DE00F6F45B /* Project object */;
+}

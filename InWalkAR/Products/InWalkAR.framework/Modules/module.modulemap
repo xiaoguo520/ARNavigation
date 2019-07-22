@@ -1,0 +1,6 @@
+framework module InWalkAR {
+  umbrella header "InWalkAR.h"
+
+  export *
+  module * { export * }
+}
