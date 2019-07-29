@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0314AA3222E469F300B39712 /* InWalkAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; };
-		0314AA3322E469F300B39712 /* InWalkAR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		03913E8722EE8C6200F0F3DA /* InWalkAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; };
+		03913E8822EE8C6200F0F3DA /* InWalkAR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1280F46520A1A42700E662E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F46420A1A42700E662E4 /* AppDelegate.m */; };
 		1280F46B20A1A42700E662E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46920A1A42700E662E4 /* Main.storyboard */; };
 		1280F46D20A1A42800E662E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46C20A1A42800E662E4 /* Assets.xcassets */; };
@@ -51,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0314AA3422E469F300B39712 /* Embed Frameworks */ = {
+		03913E8922EE8C6200F0F3DA /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0314AA3322E469F300B39712 /* InWalkAR.framework in Embed Frameworks */,
+				03913E8822EE8C6200F0F3DA /* InWalkAR.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,7 +65,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0314AA0A22DF4D6800B39712 /* InWalkAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = InWalkAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1280F46020A1A42700E662E4 /* InWalkDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InWalkDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1280F46320A1A42700E662E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1280F46420A1A42700E662E4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,7 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D549DEDA23AB15906B5356B0 /* Pods_InWalkDemo.framework in Frameworks */,
-				0314AA3222E469F300B39712 /* InWalkAR.framework in Frameworks */,
+				03913E8722EE8C6200F0F3DA /* InWalkAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +139,6 @@
 		1280F45720A1A42700E662E4 = {
 			isa = PBXGroup;
 			children = (
-				0314AA0A22DF4D6800B39712 /* InWalkAR.framework */,
 				308B38F722A5051A00F3956E /* gz_mall.json */,
 				308B38F622A5051A00F3956E /* gz_parking.json */,
 				306849DF21E4A0C500BB6026 /* songriparking3.json */,
@@ -262,7 +260,7 @@
 				1280F45D20A1A42700E662E4 /* Frameworks */,
 				1280F45E20A1A42700E662E4 /* Resources */,
 				0FC4206240728E052C19E109 /* [CP] Embed Pods Frameworks */,
-				0314AA3422E469F300B39712 /* Embed Frameworks */,
+				03913E8922EE8C6200F0F3DA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

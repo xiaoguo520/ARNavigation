@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0377974922E988D900F7DDBC /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0377974822E988D900F7DDBC /* art.scnassets */; };
 		03C6C5F922C1D08000657845 /* libBrightSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C6C5F022C1D08000657845 /* libBrightSDK.a */; };
 		03C6C5FA22C1D08000657845 /* BRTBeaconDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */; };
 		03C6C5FB22C1D08000657845 /* BRTBeacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F322C1D08000657845 /* BRTBeacon.h */; };
@@ -169,6 +170,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0377974822E988D900F7DDBC /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		03C6C5F022C1D08000657845 /* libBrightSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBrightSDK.a; sourceTree = "<group>"; };
 		03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeaconDefinitions.h; sourceTree = "<group>"; };
 		03C6C5F322C1D08000657845 /* BRTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeacon.h; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 		3247DEF720A155DE00F6F45B /* InWalkAR */ = {
 			isa = PBXGroup;
 			children = (
+				0377974822E988D900F7DDBC /* art.scnassets */,
 				308B392C22A7B84F00F3956E /* ad_video.mp4 */,
 				308B392A22A7A94300F3956E /* gif_arrow_2.gif */,
 				308B392622A7A3A700F3956E /* gif_arrow.gif */,
@@ -903,6 +906,7 @@
 			files = (
 				308B392B22A7A94300F3956E /* gif_arrow_2.gif in Resources */,
 				308B391B22A661C300F3956E /* gif_1_yiger.gif in Resources */,
+				0377974922E988D900F7DDBC /* art.scnassets in Resources */,
 				308B393122A8FD5600F3956E /* zhuoyue_b2.png in Resources */,
 				308B391222A6615B00F3956E /* shop_1_yiger.png in Resources */,
 				308B391622A661BB00F3956E /* shop_3_yigao.png in Resources */,

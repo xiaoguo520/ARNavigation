@@ -1026,7 +1026,8 @@
     NSMutableDictionary<NSString *, InWalkPath *> *paths = [[NSMutableDictionary alloc] init];
     NSMutableDictionary<NSString *, InWalkInnerPoint *> *points = [[NSMutableDictionary alloc] init];
     for (InWalkItem *singleFloorData in self.walkModel.meta) {
-        float scale = [singleFloorData.drawer.plotScale floatValue];
+        //修改为double 提升精度
+        double scale = [singleFloorData.drawer.plotScale doubleValue];
         for (InWalkPath *pi in singleFloorData.pathes) {
             if (pi.weight == nil) {
                 pi.weight = [NSNumber numberWithFloat:1000000];
