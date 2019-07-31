@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0314AA3222E469F300B39712 /* InWalkAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; };
-		0314AA3322E469F300B39712 /* InWalkAR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		032F691522F132C800CF03FA /* InWalkAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; };
+		032F691622F132C800CF03FA /* InWalkAR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1280F46520A1A42700E662E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F46420A1A42700E662E4 /* AppDelegate.m */; };
 		1280F46B20A1A42700E662E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46920A1A42700E662E4 /* Main.storyboard */; };
 		1280F46D20A1A42800E662E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46C20A1A42800E662E4 /* Assets.xcassets */; };
@@ -51,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0314AA3422E469F300B39712 /* Embed Frameworks */ = {
+		032F691722F132C900CF03FA /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0314AA3322E469F300B39712 /* InWalkAR.framework in Embed Frameworks */,
+				032F691622F132C800CF03FA /* InWalkAR.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,7 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D549DEDA23AB15906B5356B0 /* Pods_InWalkDemo.framework in Frameworks */,
-				0314AA3222E469F300B39712 /* InWalkAR.framework in Frameworks */,
+				032F691522F132C800CF03FA /* InWalkAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +262,7 @@
 				1280F45D20A1A42700E662E4 /* Frameworks */,
 				1280F45E20A1A42700E662E4 /* Resources */,
 				0FC4206240728E052C19E109 /* [CP] Embed Pods Frameworks */,
-				0314AA3422E469F300B39712 /* Embed Frameworks */,
+				032F691722F132C900CF03FA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
