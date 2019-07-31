@@ -112,11 +112,20 @@
 @property(nonatomic) simd_float4 distancePrePos;
 
 //区间纠偏的参数
+
+/**
+ 是否进行开始区间纠偏
+ */
+@property (nonatomic,assign) BOOL isSectionRectify;
 @property(nonatomic) float sectionWalkDistance;
 @property(nonatomic) simd_float4 sectionPrePos;
 @property(nonatomic) NSTimeInterval sectionLastFrameUpdateTime;
 @property (nonatomic,strong) InWalkInnerPoint * lastSectionPoint;
 @property (nonatomic,strong) ARFrame * lastARSectionPoint;
+
+//增加位移纠偏相关参数
+
+
 @end
 
 @implementation InWalkARManager
@@ -248,7 +257,15 @@
         return;
     }
     
-    
+    if (_isIBeaconRectify) {
+        //开始三米纠偏
+        [self subRectifyAtTenMeters:frame];
+    }else{
+        //区间纠偏参数置空
+        _sectionWalkDistance = 0;
+        _sectionPrePos = simd_make_float4(0, 0, 0, 0);
+        _sectionLastFrameUpdateTime = 0;
+    }
     
     
     // 0.1秒刷新一次当前位置及朝向
@@ -605,11 +622,11 @@
             //开始搜索ibeacon
             __weak typeof(self) weakSelf = self;
             
-//            [[InWalkIbeaconManager manager] startSearchIbeaconWithUUIDS:self.UUIDS iBeaconResultBlcok:^(BRTBeacon * _Nonnull beacon) {
-//                [weakSelf rectifyAtBeaconsWithBeacon:beacon];
-//            }];
+            [[InWalkIbeaconManager manager] startSearchIbeaconWithUUIDS:self.UUIDS iBeaconResultBlcok:^(BRTBeacon * _Nonnull beacon) {
+                [weakSelf rectifyAtBeaconsWithBeacon:beacon];
+            }];
             
-            //            [self.container makeToast:@"已经行走10m了，纠偏完成"];
+//            [self.container makeToast:@"已经行走10m了，纠偏完成"];
             return YES; // 已进行纠偏
         }
         _lastFrameUpdateTime = frame.timestamp;
@@ -736,6 +753,10 @@
     for (int i = 1; i <= na; i++) {
         pt = _arPath[_currentIndex + i];
 
+        //稀疏点位,三个点位去除一个
+        if (pt.turnFlag == 0 && i % 3 == 0) {
+            continue;
+        }
         // 先旋转，再平移
 //        SCNMatrix4 matrix = SCNMatrix4MakeRotation(M_PI/2, 0, 0, 1);
 //        matrix = SCNMatrix4Rotate(matrix, -M_PI/2, 1, 0, 0);
@@ -914,7 +935,7 @@
         case 0:
         default:
             // 起点/直行
-            imgName = @"art.scnassets/ship.scn";
+            imgName = @"art.scnassets/箭头改版(1).dae";
             w = 1;
             break;
     }
@@ -1158,6 +1179,15 @@
         _currentIndex = minIndex - 1;
     } else {
         _currentIndex = minIndex;
+    }
+    
+    //判断当前位置是否在拐点
+    
+    InWalkNavigationPathPoint * point = _arPath[_currentIndex];
+    
+    if (point.turnFlag == 1 || point.turnFlag == 2) {
+        //在拐点，则开始计算当前位置与路线点位置的距离。然后做位移操作
+        NSLog(@"当前进入拐点");
     }
 }
 
@@ -1883,76 +1913,47 @@
         }
     }
     
-//    if (self.rectifyBeacons > 0) {
-        NSArray * tempArray = [self.navigationManager.beaconNavigationPath copy];
-        for (InWalkInnerPoint * point in tempArray) {
-            //在设备内，将当前的定位点设置为起始点，重新生成AR路线
-            if ([point.hid.uppercaseString isEqualToString:beacon.proximityUUID.UUIDString]) {
-                if (self.rectifyBeacons.count == 0) {
-                    NSLog(@"检测到第一个点,第一个点的uuid为%@",point.hid);
-//                    [self reloadMapNavPathWithPoint:point];
-                    
-                    //记录当前位置的AR坐标系
-                    _lastARIbeaconPoint = self.arscnView.session.currentFrame;
-                    _lastSectionPoint = point;
-                    _lastARSectionPoint = self.arscnView.session.currentFrame;
+    NSArray * tempArray = [self.navigationManager.beaconNavigationPath copy];
+    for (InWalkInnerPoint * point in tempArray) {
+        //在设备内，将当前的定位点设置为起始点，重新生成AR路线
+        if ([point.hid.uppercaseString isEqualToString:beacon.proximityUUID.UUIDString]) {
+            if (self.rectifyBeacons.count == 0) {
+                NSLog(@"检测到第一个点,第一个点的uuid为%@",point.hid);
+                //                    [self reloadMapNavPathWithPoint:point];
+                //记录当前位置的AR坐标系
+                _lastARIbeaconPoint = self.arscnView.session.currentFrame;
+                _lastSectionPoint = point;
+                _lastARSectionPoint = self.arscnView.session.currentFrame;
+                _isSectionRectify = YES;
+                [self.rectifyBeacons addObject:point];
+            }else{
+                
+                InWalkInnerPoint * lastPoint = [self.rectifyBeacons lastObject];
+                
+                if (lastPoint.pointIndex < point.pointIndex) {
+                    //进行纠偏
+                    NSLog(@"检测到第二点,第二个点的uuid为%@",point.hid);
+                    _lastIbeaconPoint = lastPoint;
+                    _currentIbeaconPoint = point;
+                    _isIBeaconRectify = YES;
+                    _isSectionRectify = NO;
                     [self.rectifyBeacons addObject:point];
+                    //                        [self newRectifyAtWithLastPoint:lastPoint CurrentPoint:point];
                 }else{
-                    
-                    InWalkInnerPoint * lastPoint = [self.rectifyBeacons lastObject];
-                    
-                    if (lastPoint.pointIndex < point.pointIndex) {
-                        //进行纠偏
-                        NSLog(@"检测到第二点,第二个点的uuid为%@",point.hid);
-                        _lastIbeaconPoint = lastPoint;
-                        _currentIbeaconPoint = point;
-                        _isIBeaconRectify = YES;
-                        [self.rectifyBeacons addObject:point];
-//                        [self newRectifyAtWithLastPoint:lastPoint CurrentPoint:point];
-                    }else{
-                        //提示路径线路错误
-                        NSLog(@"路径线路错误。请重试");
-                    }
-                    
+                    //提示路径线路错误
+                    NSLog(@"路径线路错误。请重试");
                 }
                 
-//                //更新当前位置，重新生成AR线路
-//                [self updateCurrentPoint:point.hid];
-//                //清除之前所有纠偏设备
-//                [self.rectifyBeacons removeAllObjects];
-//                //清除这个点之前所有的位置点
-//
-//                //加入当前位置点，作为起点
-//                [self.rectifyBeacons addObject:point];
-                return;
-            }else{
-                //不在预设线路序列内，提示用户行走线路错误
-#warning 提示用户行走线路错误
             }
-//        NSInteger currentIndex = self.rectifyBeacons.count - 1;
-//        NSInteger nextIndex = currentIndex + 1;
-////        for (<#initialization#>; <#condition#>; <#increment#>) {
-////            <#statements#>
-////        }
-//        if (currentIndex < self.rectifyBeacons.count) {
-//            InWalkInnerPoint * nextPoint = self.navigationManager.beaconNavigationPath[nextIndex];
-//            //判断当前设备点是否为安装顺序的设备点，是进行纠偏操作，否则判断是否为线路序列内的点
-//            if ([nextPoint.hid.uppercaseString isEqualToString:beacon.proximityUUID.UUIDString]) {
-//                //进行纠偏
-//                [self rectifyAtWithLastPoint:self.navigationManager.beaconNavigationPath[currentIndex] CurrentPoint:self.navigationManager.beaconNavigationPath[nextIndex]];
-//                //并加入到数组内
-//                [self.rectifyBeacons addObject:nextPoint];
-//
-//            }else{
-//
-////                NSInteger i = 0;
-//////                判断当前设备点是否在预设线路序列内
-//
-////                    i++;
-////                }
-//            }
-//        }
+            return;
+        }else{
+            //不在预设线路序列内，提示用户行走线路错误
+#warning 提示用户行走线路错误
+            
+        }
+        
     }
+    
 }
 
 
@@ -2233,6 +2234,7 @@
         
         //当前行走距离到三米的时候纠偏一次
         if (_sectionWalkDistance >= 3) {
+            
             // 找到原始数据中距离起点10m的point，对比{起点AR坐标->Cam的AR坐标}与{起点AR坐标->原始数据距离起点5m的点对应的AR坐标}的角度
             float x0 = self.navigationManager.completeNavigationPath[0].pathPosition[0];
             float y0 = self.navigationManager.completeNavigationPath[0].pathPosition[1];
@@ -2362,6 +2364,9 @@
     }
     return NO; // 未纠偏
 }
+
+
+//新增位移纠偏相关逻辑
 
 
 @end
