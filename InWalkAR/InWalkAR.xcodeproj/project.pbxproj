@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032F691122F12FD900CF03FA /* InWalkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 032F691022F12FD900CF03FA /* InWalkManager.h */; };
 		0377974922E988D900F7DDBC /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0377974822E988D900F7DDBC /* art.scnassets */; };
 		03C6C5F922C1D08000657845 /* libBrightSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C6C5F022C1D08000657845 /* libBrightSDK.a */; };
 		03C6C5FA22C1D08000657845 /* BRTBeaconDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */; };
@@ -53,7 +54,6 @@
 		1273CAE820A321A300CC0236 /* InWalkFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1273CAD220A321A300CC0236 /* InWalkFoundation.m */; };
 		1280F3E920A17DFA00E662E4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1280F3E820A17DFA00E662E4 /* CoreMotion.framework */; };
 		1280F40620A195D000E662E4 /* InWalkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F40220A195D000E662E4 /* InWalkManager.m */; };
-		1280F40720A195D000E662E4 /* InWalkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1280F40320A195D000E662E4 /* InWalkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3003AB9521AE9BB30044E14E /* InWalkPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 3003AB9321AE9BB30044E14E /* InWalkPath.h */; };
 		3003AB9621AE9BB30044E14E /* InWalkPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3003AB9421AE9BB30044E14E /* InWalkPath.m */; };
 		3019F755228D17B700F47EFF /* UIImage+ColorPick.h in Headers */ = {isa = PBXBuildFile; fileRef = 3019F753228D17B700F47EFF /* UIImage+ColorPick.h */; };
@@ -170,6 +170,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		032F691022F12FD900CF03FA /* InWalkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkManager.h; sourceTree = "<group>"; };
 		0377974822E988D900F7DDBC /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		03C6C5F022C1D08000657845 /* libBrightSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBrightSDK.a; sourceTree = "<group>"; };
 		03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeaconDefinitions.h; sourceTree = "<group>"; };
@@ -216,7 +217,6 @@
 		1273CAD220A321A300CC0236 /* InWalkFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkFoundation.m; sourceTree = "<group>"; };
 		1280F3E820A17DFA00E662E4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1280F40220A195D000E662E4 /* InWalkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InWalkManager.m; sourceTree = "<group>"; };
-		1280F40320A195D000E662E4 /* InWalkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkManager.h; sourceTree = "<group>"; };
 		3003AB9321AE9BB30044E14E /* InWalkPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InWalkPath.h; sourceTree = "<group>"; };
 		3003AB9421AE9BB30044E14E /* InWalkPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InWalkPath.m; sourceTree = "<group>"; };
 		3019F753228D17B700F47EFF /* UIImage+ColorPick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorPick.h"; sourceTree = "<group>"; };
@@ -456,9 +456,10 @@
 				32F88A6A2101B85F00EB01F7 /* util */,
 				323CE6C920FDEEF20090F9DE /* map */,
 				3247DF1520A174AA00F6F45B /* model */,
-				1280F40320A195D000E662E4 /* InWalkManager.h */,
-				1280F40220A195D000E662E4 /* InWalkManager.m */,
 				3044D6AE21E24A1A006D17EF /* Media.xcassets */,
+				0377974822E988D900F7DDBC /* art.scnassets */,
+				032F691022F12FD900CF03FA /* InWalkManager.h */,
+				1280F40220A195D000E662E4 /* InWalkManager.m */,
 				329A19F120EDB63100EC608F /* InWalkARManager.h */,
 				329A19F220EDB63100EC608F /* InWalkARManager.m */,
 				3233930E20B806F80022647E /* InWalkNavigationManager.h */,
@@ -660,7 +661,6 @@
 		3247DEF720A155DE00F6F45B /* InWalkAR */ = {
 			isa = PBXGroup;
 			children = (
-				0377974822E988D900F7DDBC /* art.scnassets */,
 				308B392C22A7B84F00F3956E /* ad_video.mp4 */,
 				308B392A22A7A94300F3956E /* gif_arrow_2.gif */,
 				308B392622A7A3A700F3956E /* gif_arrow.gif */,
@@ -787,7 +787,6 @@
 				305B684522678DF800C6B460 /* RZCarPlateNoKeyBoardFlagView.h in Headers */,
 				32B12BB120F8BA3B00E1E256 /* InWalkMapView.h in Headers */,
 				305B687822708F6300C6B460 /* InWalkReverse4CarModel.h in Headers */,
-				1280F40720A195D000E662E4 /* InWalkManager.h in Headers */,
 				3044D6A921E1BB4B006D17EF /* InWalkUIManager.h in Headers */,
 				03C6C5FE22C1D08000657845 /* BRTBeaconSDK.h in Headers */,
 				305B683D22678DE200C6B460 /* RZCarPlateNoKeyBoardView.h in Headers */,
@@ -810,6 +809,7 @@
 				32F88A6821009B0A00EB01F7 /* InWalkMapManager.h in Headers */,
 				03C6C5FA22C1D08000657845 /* BRTBeaconDefinitions.h in Headers */,
 				03C6C5FC22C1D08000657845 /* OpenUDIDIOS7.h in Headers */,
+				032F691122F12FD900CF03FA /* InWalkManager.h in Headers */,
 				3044D6A321E1B6A5006D17EF /* NavigationModel.h in Headers */,
 				326AFEC420B5A35000F0639A /* InWalkPriorityDictionary.h in Headers */,
 				305B687D22714E3800C6B460 /* RvtsResultUI.h in Headers */,
