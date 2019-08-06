@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032F691222F12FFF00CF03FA /* InWalkAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; };
-		032F691322F12FFF00CF03FA /* InWalkAR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		032F69A522F8327F00CF03FA /* InWalkAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; };
+		032F69A622F8327F00CF03FA /* InWalkAR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3098068821EC748800C0E0F9 /* InWalkAR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1280F46520A1A42700E662E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F46420A1A42700E662E4 /* AppDelegate.m */; };
 		1280F46B20A1A42700E662E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46920A1A42700E662E4 /* Main.storyboard */; };
 		1280F46D20A1A42800E662E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46C20A1A42800E662E4 /* Assets.xcassets */; };
@@ -51,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		032F691422F12FFF00CF03FA /* Embed Frameworks */ = {
+		032F69A722F8328000CF03FA /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				032F691322F12FFF00CF03FA /* InWalkAR.framework in Embed Frameworks */,
+				032F69A622F8327F00CF03FA /* InWalkAR.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,7 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D549DEDA23AB15906B5356B0 /* Pods_InWalkDemo.framework in Frameworks */,
-				032F691222F12FFF00CF03FA /* InWalkAR.framework in Frameworks */,
+				032F69A522F8327F00CF03FA /* InWalkAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +260,7 @@
 				1280F45D20A1A42700E662E4 /* Frameworks */,
 				1280F45E20A1A42700E662E4 /* Resources */,
 				0FC4206240728E052C19E109 /* [CP] Embed Pods Frameworks */,
-				032F691422F12FFF00CF03FA /* Embed Frameworks */,
+				032F69A722F8328000CF03FA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -619,7 +619,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.inwalk.arparkingnav4gz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwalk.arparkingnav4gz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -642,7 +642,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.inwalk.arparkingnav4gz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwalk.arparkingnav4gz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

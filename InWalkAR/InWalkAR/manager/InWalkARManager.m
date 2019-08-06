@@ -125,10 +125,23 @@
 
 //增加位移纠偏相关参数
 
+/**
+ 是否开始位移统计
+ */
+@property (nonatomic,assign) BOOL isOffsetRectifyl;
+@property (nonatomic,strong) NSMutableArray * offsetRectifylArray;
 
 @end
 
 @implementation InWalkARManager
+
+
+-(NSMutableArray *)offsetRectifylArray{
+    if (!_offsetRectifylArray) {
+        _offsetRectifylArray = [NSMutableArray array];
+    }
+    return _offsetRectifylArray;
+}
 
 -(instancetype)initWithCountainer:(UIView *)container
                         productId:(NSString *) productId
@@ -268,6 +281,8 @@
     }
     
     
+    
+    
     // 0.1秒刷新一次当前位置及朝向
     if(_located && frame.timestamp - _lastUpdateDirectionTime > 0.1){
         _lastUpdateDirectionTime = frame.timestamp;
@@ -324,6 +339,13 @@
             _distancePrePos[2] = camPos[2];
         }
 //        NSLog(@" ** Ar walkDistance: %f", _distance);
+    }
+    
+    //开始位移纠偏
+    if (_isOffsetRectifyl) {
+        //开始位移纠偏
+        [self offsetRectifyAtTenMeters:frame];
+//        []
     }
 }
 
@@ -622,10 +644,10 @@
             //开始搜索ibeacon
             __weak typeof(self) weakSelf = self;
             
-            [[InWalkIbeaconManager manager] startSearchIbeaconWithUUIDS:self.UUIDS iBeaconResultBlcok:^(BRTBeacon * _Nonnull beacon) {
-                [weakSelf rectifyAtBeaconsWithBeacon:beacon];
-            }];
-            
+//            [[InWalkIbeaconManager manager] startSearchIbeaconWithUUIDS:self.UUIDS iBeaconResultBlcok:^(BRTBeacon * _Nonnull beacon) {
+//                [weakSelf rectifyAtBeaconsWithBeacon:beacon];
+//            }];
+//            
 //            [self.container makeToast:@"已经行走10m了，纠偏完成"];
             return YES; // 已进行纠偏
         }
@@ -927,7 +949,7 @@
     switch (arAnchor.flag) {
         case 3:
             // 终点
-            imgName = @"art.scnassets/终点dae模型";
+            imgName = @"终点dae模型";
             w = 2;
             break;
         case 1:
@@ -935,7 +957,7 @@
         case 0:
         default:
             // 起点/直行
-            imgName = @"art.scnassets/箭头改版(1).dae";
+            imgName = @"SceneKit Asset Catalog.scnassets/orangeAnimateArrow.scn";
             w = 1;
             break;
     }
@@ -1087,13 +1109,43 @@
     }
     // 7. 获取花瓶节点
     // 一个场景有多个节点，所有场景有且只有一个根节点，其它所有节点都是根节点的子节点
-    SCNNode *vaseNode = scene.rootNode.childNodes.firstObject;
+    SCNNode *vaseNode = scene.rootNode;
     // 8. 设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置也就是相机位置
     vaseNode.position = SCNVector3Make(0, 0, 0);
     // 9. 将花瓶节点添加到屏幕中
     // !!!!FBI WARNING: 花瓶节点是添加到代理捕捉到的节点中，而不是AR视图的根接节点。
     // 因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
+    vaseNode.scale = SCNVector3Make(9, 9, 9);
+    
     [planeNode addChildNode:vaseNode];
+    
+    
+    
+    // blue light
+    SCNNode * blueLightNode = [[SCNNode alloc] init];
+    blueLightNode.light = [[SCNLight alloc] init];
+    blueLightNode.light.type = SCNLightTypeOmni;
+    blueLightNode.light.color = [UIColor whiteColor];
+    blueLightNode.position = SCNVector3Make(0, -6, 0);
+    [planeNode addChildNode:blueLightNode];
+    
+    // blue light
+    SCNNode * greenLightNode = [[SCNNode alloc] init];
+    greenLightNode.light = [[SCNLight alloc] init];
+    greenLightNode.light.type = SCNLightTypeOmni;
+    greenLightNode.light.color = [UIColor whiteColor];
+    greenLightNode.position = SCNVector3Make(-6, 6, 0);
+    [planeNode addChildNode:greenLightNode];
+    
+    // blue light
+    SCNNode * redLightNode = [[SCNNode alloc] init];
+    redLightNode.light = [[SCNLight alloc] init];
+    redLightNode.light.type = SCNLightTypeOmni;
+    redLightNode.light.color = [UIColor whiteColor];
+    redLightNode.position = SCNVector3Make(6, 6, 0);
+    [planeNode addChildNode:redLightNode];
+    
+    
     planeNode.name = @"normal_node";
     
     return planeNode;
@@ -1185,9 +1237,10 @@
     
     InWalkNavigationPathPoint * point = _arPath[_currentIndex];
     
-    if (point.turnFlag == 1 || point.turnFlag == 2) {
+    if ((point.turnFlag == 1 || point.turnFlag == 2 ) && !_isOffsetRectifyl) {
         //在拐点，则开始计算当前位置与路线点位置的距离。然后做位移操作
         NSLog(@"当前进入拐点");
+        _isOffsetRectifyl = YES;
     }
 }
 
@@ -2368,5 +2421,115 @@
 
 //新增位移纠偏相关逻辑
 
+#pragma mark - 纠偏尝试：位移纠偏
+-(void)offsetRectifyAtTenMeters:(ARFrame *)frame{
+    //转换当前的AR点位
+    simd_float4 camARPos = simd_make_float4(0,0,0,1);
+    camARPos = simd_mul(frame.camera.transform, camARPos);
+    //获取当前点位的的映射点
+    InWalkNavigationPathPoint * point = _arPath[_currentIndex];
+    //转换成AR点位
+    simd_float4 arPoint = simd_make_float4(point.x.floatValue,point.y.floatValue,0,1);
+    //    simd_float4 last = simd_make_float4(self.navigationManager.completeNavigationPath[0].pathPosition[0],self.navigationManager.completeNavigationPath[0].pathPosition[1],0,1);
+    arPoint = simd_mul(_tranformMatix, arPoint);
+    
+    //计算两点之间的距离 0.5秒计算一次
+    if (frame.timestamp - _lastFrameTime > 0.3) {
+        float dx = camARPos[0]-_sectionPrePos[0];
+        float dz = camARPos[2]-_sectionPrePos[2];
+        float distance = sqrtf((dx*dx + dz*dz));
+        //存进一个数组内
+        [_offsetRectifylArray addObject:[NSNumber numberWithFloat:distance]];
+        //含有十条数据时，开始比对
+        
+        if (_offsetRectifylArray.count == 10) {
+            float rangN = 0.0;
+            BOOL isOffest = YES;
+            for (NSNumber * distance in _offsetRectifylArray) {
+                //计算总值
+                rangN = rangN + [distance floatValue];
+            }
+            //取平均值
+           float rangNRes = rangN / _offsetRectifylArray.count;
+            //和基础序列对比
+            NSInteger i = 0;
+            for (NSNumber * distance in _offsetRectifylArray) {
+                //与2的倍数进行对比
+                if (i % 2 == 0) {
+                    //取绝对值，偏差大于0.5米则不进行纠偏操作
+                    if (fabsf(rangNRes - [distance floatValue]) > 0.5) {
+                        isOffest = NO;
+                        break;
+                    }
+                }
+            }
+            
+            if (isOffest == YES) {
+                //进行位置纠偏，这里需要取两个点位，获取x轴，y轴的绝对偏移值，这里可以跟原点X轴对比。Y轴绝对值对比
+                //取起点
+                InWalkNavigationPathPoint * originPoint = [_arPath firstObject];
+                //取X轴的无限延伸点
+                float max = 65535;
+                CGPoint xPoint = CGPointMake(originPoint.pathPosition[0] + max, originPoint.pathPosition[1]);
+                CGPoint realxPoint = CGPointMake(originPoint.pathPosition[0], originPoint.pathPosition[1]);
+                //计算两点之前的X轴偏移距离
+                CGFloat xDistan = [self pedalPoint1:realxPoint p2:xPoint x0:CGPointMake(camARPos[0], camARPos[2])] - [self pedalPoint1:realxPoint p2:xPoint x0:CGPointMake(point.realX.floatValue, point.realY.floatValue)];
+                
+                CGPoint yPoint = CGPointMake(originPoint.pathPosition[0], originPoint.pathPosition[1] + max);
+                CGPoint realyPoint = CGPointMake(originPoint.pathPosition[0], originPoint.pathPosition[1]);
+                //计算两点之前的Y轴偏移距离
+                CGFloat yDistan = [self pedalPoint1:realyPoint p2:yPoint x0:CGPointMake(camARPos[0], camARPos[2])] - [self pedalPoint1:realyPoint p2:yPoint x0:CGPointMake(point.realX.floatValue, point.realY.floatValue)];
+                
+                //进行位移纠偏操作
+                NSMutableArray<InWalkNavigationPathPoint *> *tmpPath = [[NSMutableArray alloc] initWithCapacity:self.navigationManager.navigationPath.count];
+                int count = 0;
+                for (InWalkNavigationPathPoint *pathPoint in self.navigationManager.navigationPath) {
+                    InWalkNavigationPathPoint *tmpArPoint = [InWalkNavigationPathPoint new];
+                    
+                    InWalkPath *path = [self getPathById: pathPoint.pathID];
+                    pathPoint.floor = path.floor.intValue;
+                    
+                    float height = -1.3;
+                    if (count == _s2) {
+                        height = 0.2; // 摆放视频(竖立图标)时用到
+                    }
+                    count++;
+                    
+                    NSArray<NSNumber *> *position = @[[NSNumber numberWithFloat:pathPoint.pathPosition[0]], // tango.x
+                                                      [NSNumber numberWithFloat:pathPoint.pathPosition[1]], // tango.y
+                                                      [NSNumber numberWithFloat:height]];
+                    //此处为转换为AR坐标加上对应的位置偏移量
+                    simd_float4 simd_position = simd_make_float4(position[0].floatValue + xDistan,position[1].floatValue + yDistan,position[2].floatValue,1);
+                    simd_float4 result = simd_mul(_tranformMatix, simd_position);
+                    
+                    tmpArPoint.pathPosition = simd_make_float3(result.x,result.z,result.y); // swap(y,z)
+                    tmpArPoint.angleToNext = pathPoint.angleToNext;
+                    tmpArPoint.turnFlag = pathPoint.turnFlag;
+                    [tmpPath addObject:tmpArPoint];
+                }
+                _arPath = tmpPath;
+                //
+                //    //step5 更新路径点
+                [self updateNavigationGuide];
+
+            }
+        }
+    }
+    _lastFrameTime = frame.timestamp;
+    
+}
+
+//垂足交点
+-(CGFloat)pedalPoint1:(CGPoint)p1 p2:(CGPoint )p2 x0:(CGPoint)x0{
+    
+    float A=p2.y-p1.y;
+    float B=p1.x-p2.x;
+    float C=p2.x*p1.y-p1.x*p2.y;
+
+    
+    //点到直线距离
+    float d=(A*x0.x+B*x0.y+C)/sqrt(A*A+B*B);
+    return d;
+}
 
 @end

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032F691122F12FD900CF03FA /* InWalkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 032F691022F12FD900CF03FA /* InWalkManager.h */; };
-		0377974922E988D900F7DDBC /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0377974822E988D900F7DDBC /* art.scnassets */; };
+		032F691D22F1357400CF03FA /* InWalkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 032F691C22F1357400CF03FA /* InWalkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		032F698022F2C9F800CF03FA /* SceneKit Asset Catalog.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 032F697F22F2C9F800CF03FA /* SceneKit Asset Catalog.scnassets */; };
 		03C6C5F922C1D08000657845 /* libBrightSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C6C5F022C1D08000657845 /* libBrightSDK.a */; };
 		03C6C5FA22C1D08000657845 /* BRTBeaconDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */; };
 		03C6C5FB22C1D08000657845 /* BRTBeacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C6C5F322C1D08000657845 /* BRTBeacon.h */; };
@@ -170,8 +170,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		032F691022F12FD900CF03FA /* InWalkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkManager.h; sourceTree = "<group>"; };
-		0377974822E988D900F7DDBC /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		032F691C22F1357400CF03FA /* InWalkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InWalkManager.h; sourceTree = "<group>"; };
+		032F697F22F2C9F800CF03FA /* SceneKit Asset Catalog.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = "SceneKit Asset Catalog.scnassets"; sourceTree = "<group>"; };
 		03C6C5F022C1D08000657845 /* libBrightSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBrightSDK.a; sourceTree = "<group>"; };
 		03C6C5F222C1D08000657845 /* BRTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeaconDefinitions.h; sourceTree = "<group>"; };
 		03C6C5F322C1D08000657845 /* BRTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRTBeacon.h; sourceTree = "<group>"; };
@@ -457,11 +457,10 @@
 				323CE6C920FDEEF20090F9DE /* map */,
 				3247DF1520A174AA00F6F45B /* model */,
 				3044D6AE21E24A1A006D17EF /* Media.xcassets */,
-				0377974822E988D900F7DDBC /* art.scnassets */,
-				032F691022F12FD900CF03FA /* InWalkManager.h */,
-				1280F40220A195D000E662E4 /* InWalkManager.m */,
 				329A19F120EDB63100EC608F /* InWalkARManager.h */,
 				329A19F220EDB63100EC608F /* InWalkARManager.m */,
+				032F691C22F1357400CF03FA /* InWalkManager.h */,
+				1280F40220A195D000E662E4 /* InWalkManager.m */,
 				3233930E20B806F80022647E /* InWalkNavigationManager.h */,
 				3233930F20B806F80022647E /* InWalkNavigationManager.m */,
 				3044D6A721E1BB4B006D17EF /* InWalkUIManager.h */,
@@ -470,6 +469,7 @@
 				32F88A6721009B0A00EB01F7 /* InWalkMapManager.m */,
 				03C6C60522C1F64E00657845 /* InWalkIbeaconManager.h */,
 				03C6C60622C1F64E00657845 /* InWalkIbeaconManager.m */,
+				032F697F22F2C9F800CF03FA /* SceneKit Asset Catalog.scnassets */,
 			);
 			path = manager;
 			sourceTree = "<group>";
@@ -768,6 +768,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3044D69C21E1B68E006D17EF /* StartPositionUI.h in Headers */,
+				032F691D22F1357400CF03FA /* InWalkManager.h in Headers */,
 				3258C71620D3BE7A00565DB0 /* InWalkLocationNavigation.h in Headers */,
 				1230B76520A3EB12009CB95A /* InWalkWebImageManager.h in Headers */,
 				3258C71C20D3C61C00565DB0 /* InWalkPoint.h in Headers */,
@@ -809,7 +810,6 @@
 				32F88A6821009B0A00EB01F7 /* InWalkMapManager.h in Headers */,
 				03C6C5FA22C1D08000657845 /* BRTBeaconDefinitions.h in Headers */,
 				03C6C5FC22C1D08000657845 /* OpenUDIDIOS7.h in Headers */,
-				032F691122F12FD900CF03FA /* InWalkManager.h in Headers */,
 				3044D6A321E1B6A5006D17EF /* NavigationModel.h in Headers */,
 				326AFEC420B5A35000F0639A /* InWalkPriorityDictionary.h in Headers */,
 				305B687D22714E3800C6B460 /* RvtsResultUI.h in Headers */,
@@ -906,7 +906,7 @@
 			files = (
 				308B392B22A7A94300F3956E /* gif_arrow_2.gif in Resources */,
 				308B391B22A661C300F3956E /* gif_1_yiger.gif in Resources */,
-				0377974922E988D900F7DDBC /* art.scnassets in Resources */,
+				032F698022F2C9F800CF03FA /* SceneKit Asset Catalog.scnassets in Resources */,
 				308B393122A8FD5600F3956E /* zhuoyue_b2.png in Resources */,
 				308B391222A6615B00F3956E /* shop_1_yiger.png in Resources */,
 				308B391622A661BB00F3956E /* shop_3_yigao.png in Resources */,
