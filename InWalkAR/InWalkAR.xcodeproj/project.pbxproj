@@ -679,7 +679,8 @@
 				3247DEF920A155DE00F6F45B /* Info.plist */,
 				3233931220B809950022647E /* InWalkConstant.h */,
 			);
-			path = InWalkAR;
+			name = InWalkAR;
+			path = ../InWalkDemo/InWalkDemo/InWalkAR;
 			sourceTree = "<group>";
 		};
 		3247DF1520A174AA00F6F45B /* model */ = {

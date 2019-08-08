@@ -7,7 +7,7 @@
 //
 
 #import "ARNavigationViewController.h"
-#import <InWalkAR/InWalkAR.h>
+#import "InWalkManager.h"
 #import "Global.h"
 
 @interface ARNavigationViewController ()<InWalkManagerDelegate>
