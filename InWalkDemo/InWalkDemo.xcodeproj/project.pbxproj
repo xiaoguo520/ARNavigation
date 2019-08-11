@@ -87,6 +87,7 @@
 		0358F2B222F9B8CA008D05B0 /* zhuoyue_b2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0358F26222F9B8CA008D05B0 /* zhuoyue_b2.png */; };
 		0358F2B322F9B8CA008D05B0 /* gif_2_aika.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0358F26322F9B8CA008D05B0 /* gif_2_aika.gif */; };
 		0358F2B422F9B8CA008D05B0 /* ad_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0358F26422F9B8CA008D05B0 /* ad_video.mp4 */; };
+		03BC9CE922FE62A000AE02A5 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BC9CE822FE62A000AE02A5 /* UIColor+Hex.m */; };
 		1280F46520A1A42700E662E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280F46420A1A42700E662E4 /* AppDelegate.m */; };
 		1280F46B20A1A42700E662E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46920A1A42700E662E4 /* Main.storyboard */; };
 		1280F46D20A1A42800E662E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1280F46C20A1A42800E662E4 /* Assets.xcassets */; };
@@ -283,6 +284,8 @@
 		0358F26222F9B8CA008D05B0 /* zhuoyue_b2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhuoyue_b2.png; sourceTree = "<group>"; };
 		0358F26322F9B8CA008D05B0 /* gif_2_aika.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif_2_aika.gif; sourceTree = "<group>"; };
 		0358F26422F9B8CA008D05B0 /* ad_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ad_video.mp4; sourceTree = "<group>"; };
+		03BC9CE722FE62A000AE02A5 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		03BC9CE822FE62A000AE02A5 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		1280F46020A1A42700E662E4 /* InWalkDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InWalkDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1280F46320A1A42700E662E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1280F46420A1A42700E662E4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -484,24 +487,24 @@
 		0358F1E922F9B8C9008D05B0 /* manager */ = {
 			isa = PBXGroup;
 			children = (
-				0358F1EA22F9B8C9008D05B0 /* SceneKit Asset Catalog.scnassets */,
-				0358F1EB22F9B8C9008D05B0 /* ui */,
-				0358F22022F9B8CA008D05B0 /* Media.xcassets */,
-				0358F22122F9B8CA008D05B0 /* InWalkNavigationManager.m */,
-				0358F22222F9B8CA008D05B0 /* InWalkManager.m */,
+				0358F23E22F9B8CA008D05B0 /* model */,
 				0358F22322F9B8CA008D05B0 /* util */,
-				0358F22B22F9B8CA008D05B0 /* InWalkARManager.h */,
+				0358F1EB22F9B8C9008D05B0 /* ui */,
+				0358F23022F9B8CA008D05B0 /* map */,
+				0358F1EA22F9B8C9008D05B0 /* SceneKit Asset Catalog.scnassets */,
+				0358F22022F9B8CA008D05B0 /* Media.xcassets */,
 				0358F22C22F9B8CA008D05B0 /* InWalkMapManager.h */,
+				0358F25A22F9B8CA008D05B0 /* InWalkMapManager.m */,
+				0358F25922F9B8CA008D05B0 /* InWalkIbeaconManager.h */,
 				0358F22D22F9B8CA008D05B0 /* InWalkIbeaconManager.m */,
+				0358F25C22F9B8CA008D05B0 /* InWalkUIManager.h */,
 				0358F22E22F9B8CA008D05B0 /* InWalkUIManager.m */,
 				0358F22F22F9B8CA008D05B0 /* InWalkNavigationManager.h */,
-				0358F23022F9B8CA008D05B0 /* map */,
+				0358F22122F9B8CA008D05B0 /* InWalkNavigationManager.m */,
 				0358F23D22F9B8CA008D05B0 /* InWalkManager.h */,
-				0358F23E22F9B8CA008D05B0 /* model */,
-				0358F25922F9B8CA008D05B0 /* InWalkIbeaconManager.h */,
-				0358F25A22F9B8CA008D05B0 /* InWalkMapManager.m */,
+				0358F22222F9B8CA008D05B0 /* InWalkManager.m */,
+				0358F22B22F9B8CA008D05B0 /* InWalkARManager.h */,
 				0358F25B22F9B8CA008D05B0 /* InWalkARManager.m */,
-				0358F25C22F9B8CA008D05B0 /* InWalkUIManager.h */,
 			);
 			path = manager;
 			sourceTree = "<group>";
@@ -652,6 +655,8 @@
 		0358F22322F9B8CA008D05B0 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				03BC9CE722FE62A000AE02A5 /* UIColor+Hex.h */,
+				03BC9CE822FE62A000AE02A5 /* UIColor+Hex.m */,
 				0358F22422F9B8CA008D05B0 /* UIImage+ColorPick.h */,
 				0358F22522F9B8CA008D05B0 /* ViewUtil.m */,
 				0358F22622F9B8CA008D05B0 /* UIView+Toast.h */,
@@ -1032,6 +1037,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0358F2AB22F9B8CA008D05B0 /* InWalkMapManager.m in Sources */,
+				03BC9CE922FE62A000AE02A5 /* UIColor+Hex.m in Sources */,
 				0358F2A122F9B8CA008D05B0 /* InWalkItem.m in Sources */,
 				0358F28E22F9B8CA008D05B0 /* LocateResultUI.m in Sources */,
 				0358F27A22F9B8CA008D05B0 /* NSObject+InWalkProperty.m in Sources */,
@@ -1279,7 +1285,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3HN896KDRL;
 				INFOPLIST_FILE = InWalkDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1306,7 +1312,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3HN896KDRL;
 				INFOPLIST_FILE = InWalkDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -360,6 +360,7 @@
 // 该方法仅稍作了解就好，没有大的用处
 - (void)startGyro {
     CMMotionManager *manager = [[CMMotionManager alloc] init];
+    
     self.motionManager = manager;
     if([manager isDeviceMotionAvailable]){
         NSOperationQueue *queue = [[NSOperationQueue alloc]init];

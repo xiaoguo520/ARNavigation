@@ -27,6 +27,7 @@
 #import "InWalkPointDesc.h"
 #import "InWalkIbeaconManager.h"
 #import "UIView+Toast.h"
+#import "UIColor+Hex.h"
 
 @interface InWalkARManager()<ARSessionDelegate,ARSCNViewDelegate,InWalkMapDelegate,CLLocationManagerDelegate>
 
@@ -34,6 +35,7 @@
 @property(nonatomic,strong) InWalkMapManager *mapManager;
 @property(nonatomic,strong) InWalkNavigationManager *navigationManager;
 @property(nonatomic ,strong) CLLocationManager *mgr;
+@property(nonatomic,strong) dispatch_source_t timer;
 
 @property(nonatomic,strong) NSString *productId;
 @property(nonatomic) NSArray<InWalkNavigationPathPoint *> *arPath; // ARKit中展示的导航路径(ARKit坐标系中的坐标)
@@ -45,6 +47,7 @@
 @property(nonatomic) simd_float4 corTransformV;  //坐标转换平移向量
 @property(nonatomic) simd_float4x4 tranformMatix; //坐标转换矩阵 从tango坐标系转arkit
 @property(nonatomic) simd_float4x4 inverseMatix; //坐标转换矩阵  从arkit坐标系转tango
+@property(nonatomic) simd_float4x4 tempInverseMatix; //坐标转换矩阵  从arkit坐标系转tango
 @property(nonatomic,strong) ARSCNView *arscnView;  //ar渲染view
 @property(nonatomic,strong) UILabel *tipTextView;   //显示图片定位结果
 @property(nonatomic) NSTimeInterval lastFrameTime;  //ARFrame 刷新时间，用于固定时间检测当前导航位置
@@ -111,7 +114,8 @@
 @property (nonatomic,assign) int rectifyCount;
 @property (nonatomic,assign) float distance;
 @property(nonatomic) simd_float4 distancePrePos;
-
+//用户当前的朝北角
+@property (nonatomic,assign) CGFloat userNorthAngle;
 //区间纠偏的参数
 
 /**
@@ -131,6 +135,9 @@
  */
 @property (nonatomic,assign) BOOL isOffsetRectifyl;
 @property (nonatomic,strong) NSMutableArray * offsetRectifylArray;
+
+
+@property (nonatomic,strong) NSArray<InWalkNavigationPathPoint *>  * tempArPaths;
 
 @end
 
@@ -182,7 +189,7 @@
         [self.container addSubview:self.mapManager.mapView];
         
         _walkDistance = -1; 
-        _rectifyDistance = 0.1;//0.1;//10; // 10米处纠偏
+        _rectifyDistance =5;//0.1;//10; // 10米处纠偏
         //_rectifyDistance = 0.1;
         _rectifyCount = 0;
         _distance = 0;
@@ -248,7 +255,13 @@
         self.isNavigationGuideEnabled = YES;
         
         [self updateNavigation:-1];
-        
+//        3s刷新一次位置信息
+        _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+        dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, (int64_t)3 * NSEC_PER_SEC, 0.0 * NSEC_PER_SEC);
+        dispatch_source_set_event_handler(_timer, ^{
+            [self subRectifyAtTenMeters:self.arscnView.session.currentFrame];
+        });
+        dispatch_resume(_timer);// 启动任务
         // 小地图缩小
         [self.mapManager showMap:NO];
         [self.mapManager setTouchEnabled:YES];
@@ -280,7 +293,7 @@
 //        _sectionPrePos = simd_make_float4(0, 0, 0, 0);
 //        _sectionLastFrameUpdateTime = 0;
 //    }
-    
+//
     
     
     
@@ -343,11 +356,11 @@
     }
     
     //开始位移纠偏
-    if (_isOffsetRectifyl) {
-        //开始位移纠偏
-        [self offsetRectifyAtTenMeters:frame];
-//        []
-    }
+//    if (_isOffsetRectifyl) {
+//        //开始位移纠偏
+//        [self offsetRectifyAtTenMeters:frame];
+////        []
+//    }
 }
 
 
@@ -521,12 +534,21 @@
     
 }
 
+#warning 添加uuid数组
 -(NSArray *)UUIDS{
     if (!_UUIDS) {
         NSMutableArray * tempArray = [NSMutableArray array];
-        for (InWalkInnerPoint * p in self.navigationManager.beaconNavigationPath) {
-            
-            [tempArray addObject:p.hid];
+        {
+            NSString * uuid = @"c577af80-8766-11e9-b3de-e783454c0316";
+            [tempArray addObject:uuid];
+        }
+        {
+            NSString * uuid = @"7e03ef50-8802-11e9-8e47-ed56814a3780";
+            [tempArray addObject:uuid];
+        }
+        {
+            NSString * uuid = @"6b6abc20-8802-11e9-8e47-ed56814a3780";
+            [tempArray addObject:uuid];
         }
         _UUIDS = [tempArray copy];
     }
@@ -607,6 +629,16 @@
             _tranformMatix =  SCNMatrix4ToMat4(tranformMatix);
             _inverseMatix = simd_inverse(_tranformMatix);
             
+            SCNMatrix4 tempTranformMatix = SCNMatrix4Identity;
+            tempTranformMatix = SCNMatrix4Translate(tempTranformMatix, -_mapPoint[0].floatValue, -_mapPoint[1].floatValue,-_mapPoint[2].floatValue);
+            // 第二次坐标变换：将新坐标系旋转，使其+Y轴与ARKit坐标系的-Z轴方向一致
+            tempTranformMatix = SCNMatrix4Rotate(tempTranformMatix, -rotateAngle, 0, 0, 1);
+            // 第三次坐标变换：将新坐标系平移，使其与ARKit坐标系完全重合
+            tempTranformMatix = SCNMatrix4Translate(tempTranformMatix, _corTransformV.x,_corTransformV.y,_corTransformV.z);
+            simd_float4x4 temptranformMatix4 = SCNMatrix4ToMat4(tempTranformMatix);
+            _tempInverseMatix = simd_inverse(temptranformMatix4);
+            
+            
             NSMutableArray<InWalkNavigationPathPoint *> *tmpPath = [[NSMutableArray alloc] initWithCapacity:self.navigationManager.navigationPath.count];
             int count = 0;
             for (InWalkNavigationPathPoint *pathPoint in self.navigationManager.navigationPath) {
@@ -634,12 +666,14 @@
                 [tmpPath addObject:tmpArPoint];
             }
             _arPath = tmpPath;
-            
+            _tempArPaths = [tmpPath copy];
             // step4, update navigation guide.
             [self updateNavigationGuide];
             
             _walkDistance = -1;
             _lastFrameUpdateTime = frame.timestamp;
+            
+            _isSectionRectify = YES;
             
             //十米纠偏完成，进行纠偏 避免冲突
             //开始搜索ibeacon
@@ -648,6 +682,8 @@
             [[InWalkIbeaconManager manager] startSearchIbeaconWithUUIDS:self.UUIDS iBeaconResultBlcok:^(BRTBeacon * _Nonnull beacon) {
                 [weakSelf rectifyAtBeaconsWithBeacon:beacon];
             }];
+            
+//
             
 //            [self.container makeToast:@"已经行走10m了，纠偏完成"];
             return YES; // 已进行纠偏
@@ -665,7 +701,7 @@
         [self updateNavigationGuide];
         return;
     }
-    
+//    NSLog(@"剩余距离为%lf",distanceToNext);
     if (_currentIndex == 0 || _navDetails == nil) {
         _navDetails = [self.navigationManager getNavDetails];//:_arPath];
         [_delegate updateNavigationDetails:_navDetails];
@@ -725,18 +761,18 @@
     if (!self.isNavigationGuideEnabled) {
         return;
     }
-    
+
     [self clearNavigationGuide];
     //if(_arPath != nil && _arPath[_currentIndex].isStair) //[self showStairButton];
-    
+
     InWalkARAnchor *previousAnchor = nil;
     InWalkNavigationPathPoint *pt;
     float theta = 90 - _mapData.northOffset.floatValue; // 路径图标的角度计算方法
-    
+
     // 更新第一个点（当前位置）
     if(_currentIndex < _arPath.count && !_videoAnchor){
         pt = _arPath[_currentIndex];
-        
+
         // 先旋转，再平移
         SCNMatrix4 matrix;
         if (_currentIndex + 1 == _arPath.count) {
@@ -750,7 +786,7 @@
             matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
         }
         simd_float4x4 preTransform = SCNMatrix4ToMat4(matrix);
-        
+
         _preAnchor = [[InWalkARAnchor alloc] initWithTransform:preTransform];
         _preAnchor.title = @"navigationGuide";
         _preAnchor.flag = 1;
@@ -761,7 +797,7 @@
         previousAnchor = _preAnchor;
         [_arscnView.session addAnchor:_preAnchor];
     }
-    
+
     NSMutableArray<SCNNode *> *tmpNxNodes = [[NSMutableArray alloc] init];
 //    // 更新第二个点～第四个点(na小于等于4)
 //    int na = (int)_arPath.count - _currentIndex - 1;
@@ -772,14 +808,14 @@
 //    }
     // 更新第二个点～倒数第二个点(na值为arPath.count-currentIndex-2)
     int na = (int)_arPath.count - _currentIndex - 2;
-    
+
     for (int i = 1; i <= na; i++) {
         pt = _arPath[_currentIndex + i];
 
-        //稀疏点位,三个点位去除一个
-        if (pt.turnFlag == 0 && i % 2 == 0) {
-            continue;
-        }
+//        //稀疏点位,2个点位去除一个
+//        if (pt.turnFlag == 0 && i % 2 == 0) {
+//            continue;
+//        }
         // 先旋转，再平移
 //        SCNMatrix4 matrix = SCNMatrix4MakeRotation(M_PI/2, 0, 0, 1);
 //        matrix = SCNMatrix4Rotate(matrix, -M_PI/2, 1, 0, 0);
@@ -790,10 +826,10 @@
             //matrix = SCNMatrix4MakeRotation(((theta + pt.angleToNext + 90) / 180 * M_PI), 0, 1, 0);
             matrix = SCNMatrix4MakeTranslation(2, 0, 0);
             matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext + 90) / 180 * M_PI), 0, 1, 0);
-                                      
+
             matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
             simd_float4x4 curTransform = SCNMatrix4ToMat4(matrix);
-            
+
             if (!_videoAnchor) {
                 _videoAnchor = [[InWalkARAnchor alloc] initWithTransform:curTransform];
                 _videoAnchor.title = @"navigationGuide";
@@ -801,7 +837,7 @@
                 _videoAnchor.turnFlag = pt.turnFlag;
                 _videoAnchor.hid = pt.hid;
                 _videoAnchor.tag = _s2;
-                
+
                 if (previousAnchor) {
                     SCNBillboardConstraint *constraint = [SCNBillboardConstraint billboardConstraint];
                     constraint.freeAxes = SCNBillboardAxisY;
@@ -816,7 +852,7 @@
             matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext) / 180 * M_PI), 0, 1, 0);
             matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
             simd_float4x4 curTransform = SCNMatrix4ToMat4(matrix);
-            
+
             //        _curAnchor = [[InWalkARAnchor alloc] initWithTransform:curTransform];
             //        _curAnchor.title = @"navigationGuide";
             //        _curAnchor.flag = 2;
@@ -824,7 +860,7 @@
             //        //    _curAnchor.title = @"navigationEnd";
             //        //}
             //        [_arscnView.session addAnchor:_curAnchor];
-            
+
             InWalkARAnchor *n1 = [[InWalkARAnchor alloc] initWithTransform:curTransform];
             n1.title = @"navigationGuide";
             n1.flag = 2;
@@ -842,7 +878,7 @@
         }
     }
     _nxNodes = tmpNxNodes;
-    
+
     // 更新第五个点/最后一个点
     na++;
     if(_currentIndex + na < _arPath.count){
@@ -852,15 +888,20 @@
         SCNMatrix4 matrix;
         if (_currentIndex + na + 1 == _arPath.count) {
             matrix = SCNMatrix4MakeTranslation(pt.pathPosition[0], 1.3, pt.pathPosition[2]);
-            
-            if (_currentIndex + na > 1) {
-                InWalkNavigationPathPoint *prePt = _arPath[_currentIndex + na - 1];
-                matrix = SCNMatrix4MakeRotation(((theta + prePt.angleToNext + 90) / 180 * M_PI), 0, 1, 0);
-                matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], 1.3, pt.pathPosition[2]);
-            } else {
-                matrix = SCNMatrix4MakeTranslation(pt.pathPosition[0], 1.3, pt.pathPosition[2]);
-            }
-            
+
+//            if (_currentIndex + na > 1) {
+//                InWalkNavigationPathPoint *prePt = _arPath[_currentIndex + na - 1];
+//                matrix = SCNMatrix4MakeRotation(((theta + prePt.angleToNext + 90) / 180 * M_PI), 0, 1, 0);
+//                matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], 1.3, pt.pathPosition[2]);
+//            } else {
+//                matrix = SCNMatrix4MakeTranslation(pt.pathPosition[0], 1.3, pt.pathPosition[2]);
+//            }
+            matrix = SCNMatrix4MakeRotation(M_PI*2, 0, 0, 1); // 使用GIF图
+            matrix = SCNMatrix4Rotate(matrix, 0, -M_PI/2, 0, 1); // 水平铺设时用到
+            matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext) / 180 * M_PI), 0, 1, 0);
+            matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
+
+
         } else {
 //            matrix = SCNMatrix4MakeRotation(M_PI/2, 0, 0, 1);
             matrix = SCNMatrix4MakeRotation(M_PI*2, 0, 0, 1); // 使用GIF图
@@ -869,7 +910,7 @@
             matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
         }
         simd_float4x4 nextTransform = SCNMatrix4ToMat4(matrix);
-        
+
         _nextAnchor = [[InWalkARAnchor alloc] initWithTransform:nextTransform];
         if (_currentIndex + na + 1 == _arPath.count) {
             _nextAnchor.title = @"navigationEnd";
@@ -891,6 +932,515 @@
         [_arscnView.session addAnchor:_nextAnchor];
     }
 }
+//
+//// 清除所有导航指引贴图
+//- (void)clearNavigationGuide {
+//    if(_preAnchor){
+//        [_arscnView.session removeAnchor:_preAnchor];
+//        _preAnchor = nil ;
+//    }
+//    if(_curAnchor){
+//        [_arscnView.session removeAnchor:_curAnchor];
+//        _curAnchor = nil;
+//    }
+//    if(_nxNodes && _nxNodes.count > 0) {
+//        for (InWalkARAnchor *node in _nxNodes) {
+//            [_arscnView.session removeAnchor:node];
+//        }
+//        _nxNodes = nil;
+//    }
+//    if(_nextAnchor){
+//        [_arscnView.session removeAnchor:_nextAnchor];
+//        _nextAnchor = nil;
+//    }
+//    if(_tipAnchor){
+//        [_arscnView.session removeAnchor:_tipAnchor];
+//        _tipAnchor = nil;
+//    }
+//    if(_referNode){
+//        _referNode = nil;
+//    }
+//    if (_videoAnchor && _arPath.count > _s2) {
+//        // Video所在的AR坐标
+//        float x = _arPath[_videoAnchor.tag].pathPosition[0];
+//        float y = _arPath[_videoAnchor.tag].pathPosition[2]; // 注意：Tango数据通过转换矩阵转为ARKit坐标后，y值是实际对应ARKit坐标系中Z轴的值
+//        // 当前所在的AR坐标
+//        simd_float4 camPos = simd_make_float4(0,0,0,1);
+//        camPos = simd_mul(_arscnView.session.currentFrame.camera.transform, camPos);
+//        // 累加行走距离
+//        float dx = camPos[0]-x;
+//        float dy = camPos[2]-y;
+//        float distance = sqrtf((dx*dx + dy*dy));
+//        if (distance > 5.0) {
+//            [_arscnView.session removeAnchor:_videoAnchor];
+//            _videoAnchor = nil;
+//        }
+//    }
+//}
+//
+//// 返回每个ARAnchor对应的SCNNode
+//- (SCNNode *)renderer:(id<SCNSceneRenderer>)renderer nodeForAnchor:(ARAnchor *)anchor {
+//    if(![anchor isKindOfClass:InWalkARAnchor.class]){
+//        return nil;
+//    }
+//
+//    InWalkARAnchor *arAnchor = (InWalkARAnchor *)anchor;
+//    NSString *imgName;
+//    int w;
+//
+//    switch (arAnchor.flag) {
+//        case 3:
+//            // 终点
+//            imgName = @"SceneKit Asset Catalog.scnassets/destination.dae";
+//            w = 2;
+//            break;
+//        case 1:
+//        case 2:
+//        case 0:
+//        default:
+//            // 起点/直行
+//            imgName = @"SceneKit Asset Catalog.scnassets/arrowfirst.dae";
+//            w = 1;
+//            break;
+//    }
+//
+//    NSString * path = [[NSBundle bundleForClass:[self class]] pathForResource:imgName ofType:nil];
+////    NSString * path = [NSBundle bu]
+//    // 终点Node对应的SCNNode
+//    if (arAnchor.flag == 3) {
+////        SCNBox *box = [SCNBox boxWithWidth:2 height:2 length:0.01 chamferRadius:0.01];
+////        SCNMaterial *firstMaterial = SCNMaterial.material;
+////        UIImage *img = [UIImage imageNamed:imgName
+////                                  inBundle:[NSBundle bundleForClass:[self class]]
+////             compatibleWithTraitCollection:nil];
+////        firstMaterial.diffuse.contents = img;
+////        SCNMaterial *otherMaterial = SCNMaterial.material;
+////        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+////        // @[front,right,back,left,top,bottom];
+////        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
+////
+////        SCNNode *node = [SCNNode nodeWithGeometry:box];
+////        // 为SCNNode添加旋转动画
+////        [node runAction: [SCNAction repeatActionForever: [SCNAction rotateByX:0 y:2*M_PI z:0 duration:3]]];
+////
+////        return node;
+//
+//        _isDestViewExpand = NO;
+////        UIView *view = [self destView001ById:arAnchor.hid];
+////        UIImage *img = [self imageFromView:view];
+//
+//        InWalkPointDesc *ap = [_destArPoints objectForKey:_destPointId];
+//        //
+////        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:ap.imgSmall ofType:nil];
+////        UIImage *img = [UIImage imageWithContentsOfFile:path];
+//        //
+////        float height = _postWidth * ap.scaleSmall;
+//        // 其他Node对应的SCNNode(展示为箭头图标)
+//        // 其他Node对应的SCNNode(展示为箭头图标)
+//        // 其他Node对应的SCNNode(展示为箭头图标)
+//        SCNBox *box = [SCNBox boxWithWidth:_postWidth height:1 length:0.01 chamferRadius:0.01];
+//
+//        //        SCNMaterial *firstMaterial = SCNMaterial.material;
+//        //        firstMaterial.diffuse.contents = img;
+//        //        SCNMaterial *otherMaterial = SCNMaterial.material;
+//        //        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+//        //        // @[front,right,back,left,top,bottom];
+//        //        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
+//        //        SCNNode *node = [SCNNode nodeWithGeometry:box];
+//        box.firstMaterial.diffuse.contents = [UIColor clearColor];
+//        // 4. 创建一个基于3D物体模型的节点
+//        SCNNode *planeNode = [SCNNode nodeWithGeometry:box];
+//        // 5. 设置节点的位置为捕捉到的平地的锚点的中心位置
+//        // SceneKit中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
+//        //    planeNode.position = SCNVector3Make(arAnchor.center.x, 0, arAnchor.center.z);
+//
+//        NSError * error;
+//        SCNScene *scene;
+//        if (path.length != 0) {
+//            scene =[SCNScene sceneWithURL:[NSURL fileURLWithPath:path] options:nil error:&error];
+//        }else{
+//            scene = [SCNScene sceneNamed:imgName];
+//        }
+//        // 7. 获取花瓶节点
+//        // 一个场景有多个节点，所有场景有且只有一个根节点，其它所有节点都是根节点的子节点
+//        SCNNode *vaseNode = scene.rootNode.childNodes.firstObject;
+//        //    SCNNode *pathNode = [scene.rootNode childNodeWithName:@"mesh_546483871" recursively:YES];
+//
+//        // 8. 设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置也就是相机位置
+//        //    pathNode.position = SCNVector3Make(1, 0, 0);
+//        // 9. 将花瓶节点添加到屏幕中
+//        // !!!!FBI WARNING: 花瓶节点是添加到代理捕捉到的节点中，而不是AR视图的根接节点。
+//        // 因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
+//        vaseNode.scale = SCNVector3Make(0.2, 0.2, 0.2);
+//        //    pathNode.scale = SCNVector3Make(15, 15,15);
+//
+//        //添加动作
+//        // 添加动作
+//        SCNAction * moveAction = [SCNAction moveTo:SCNVector3Make(0, 1.5, 0) duration:0.5];
+//        SCNAction * movebackAction = [SCNAction moveTo:SCNVector3Make(0, 1, 0) duration:0.5];
+//        // 添加旋转
+//        SCNAction * rotation = [SCNAction rotateByX:0 y:10 z:0 duration:2];
+//
+//        // 弓箭箭头专属旋转方法
+//        //        let arrowRotateAngle = SCNAction.rotateTo(x: 0, y: 90, z: 0, duration: 0)
+//        //        modelNode.runAction(arrowRotateAngle)s
+//        // 合成动作组
+//        SCNAction * moveGroup = [SCNAction sequence:@[moveAction,rotation,movebackAction]];
+//        SCNAction * repeatMove = [SCNAction repeatActionForever:moveGroup];
+//        SCNAction * repeatRotate = [SCNAction repeatActionForever:rotation];
+//        [vaseNode runAction:repeatMove];
+//
+//        [planeNode addChildNode:vaseNode];
+//        //    [planeNode addChildNode:pathNode];
+//
+//
+//
+//        // blue light
+//        SCNNode * blueLightNode = [[SCNNode alloc] init];
+//        blueLightNode.light = [[SCNLight alloc] init];
+//        blueLightNode.light.type = SCNLightTypeOmni;
+//        blueLightNode.light.color = [UIColor whiteColor];
+//        blueLightNode.position = SCNVector3Make(0, -6, 0);
+//        [planeNode addChildNode:blueLightNode];
+//
+//        // blue light
+//        SCNNode * greenLightNode = [[SCNNode alloc] init];
+//        greenLightNode.light = [[SCNLight alloc] init];
+//        greenLightNode.light.type = SCNLightTypeOmni;
+//        greenLightNode.light.color = [UIColor whiteColor];
+//        greenLightNode.position = SCNVector3Make(-6, 6, 0);
+//        [planeNode addChildNode:greenLightNode];
+//
+//        // blue light
+//        SCNNode * redLightNode = [[SCNNode alloc] init];
+//        redLightNode.light = [[SCNLight alloc] init];
+//        redLightNode.light.type = SCNLightTypeOmni;
+//        redLightNode.light.color = [UIColor whiteColor];
+//        redLightNode.position = SCNVector3Make(6, 6, 0);
+//        [planeNode addChildNode:redLightNode];
+//
+//
+//
+//
+//        planeNode.name = @"dest_node";
+//
+//        return planeNode;
+//    }
+//
+//    if (arAnchor.flag == 2 && arAnchor.tag == _s2) {
+//        // video
+//        //NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"douyin_ad_video.mp4" ofType:nil]; //@"gif"
+//        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"ad_video.mp4" ofType:nil]; //@"gif"
+//        AVPlayer *player = [[AVPlayer alloc] initWithURL:[NSURL fileURLWithPath:path]];
+//
+//        SKScene *skScene = [[SKScene alloc] init];
+//        [skScene setSize:CGSizeMake(1000, 1000)];
+//
+//        SKVideoNode *vNode = [[SKVideoNode alloc] initWithAVPlayer:player];
+//        vNode.position = CGPointMake(skScene.size.width / 2, skScene.size.height / 2);
+//        [vNode setSize: skScene.size];
+//        [vNode setYScale: -1.0];
+//        [vNode play];
+//
+//        [skScene addChild:vNode];
+//
+//        float scale = 0.5625; // 高/宽
+//        float width = 3;//_postWidth;
+//        float height = width * scale;
+//        SCNNode *node = [[SCNNode alloc] init];
+//        SCNBox *box = [SCNBox boxWithWidth:width height:height length:0.01 chamferRadius:0.01];
+//        node.geometry = box;
+//        SCNMaterial *mat = [[SCNMaterial alloc] init];
+//        [mat.diffuse setContents: skScene];
+//        node.geometry.materials = @[mat];
+//        node.name = @"normal_node";
+//        //node.scale = SCNVector3Make(1.7, 1, 1);
+//        return node;
+//    }
+//
+////    // 使用GIF图
+////    if (arAnchor.tag % 1 == 0) {
+////        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"gif_arrow_2.gif" ofType:nil]; //@"gif"
+////        NSURL *url = [NSURL fileURLWithPath:path];
+////        CFURLRef urlRef = (__bridge CFURLRef)url;
+////        //
+////        CALayer* subLayer = [CALayer layer];
+////        subLayer.bounds = CGRectMake(0, 0, 900, 900);
+////        subLayer.anchorPoint = CGPoint[gMake(0, 1);
+////        CAKeyframeAnimation *animation = [self createGIFAnimation: urlRef];
+////        [subLayer addAnimation:animation forKey:@"contents"];
+////        //
+////        //firstMaterial.diffuse.contents = subLayer;
+////        SCNPlane *tvPlane = [[SCNPlane alloc] init];
+////        [tvPlane setWidth: 1.7];
+////        [tvPlane setHeight:0.64];
+////        [tvPlane.firstMaterial.diffuse setContents: subLayer];
+////        [tvPlane.firstMaterial setDoubleSided:YES];
+////        //
+////        SCNNode *node = [SCNNode nodeWithGeometry:tvPlane];
+////        node.name = @"normal_node";
+////
+////        return node;
+////    }
+//
+//
+//    // 其他Node对应的SCNNode(展示为箭头图标)
+//    SCNBox *box = [SCNBox boxWithWidth:_postWidth height:1 length:0.01 chamferRadius:0.01];
+//
+//    //        SCNMaterial *firstMaterial = SCNMaterial.material;
+//    //        firstMaterial.diffuse.contents = img;
+//    //        SCNMaterial *otherMaterial = SCNMaterial.material;
+//    //        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+//    //        // @[front,right,back,left,top,bottom];
+//    //        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
+//    //        SCNNode *node = [SCNNode nodeWithGeometry:box];
+//    box.firstMaterial.diffuse.contents = [UIColor clearColor];
+//    // 4. 创建一个基于3D物体模型的节点
+//    SCNNode *planeNode = [SCNNode nodeWithGeometry:box];
+//    // 5. 设置节点的位置为捕捉到的平地的锚点的中心位置
+//    // SceneKit中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
+////    planeNode.position = SCNVector3Make(arAnchor.center.x, 0, arAnchor.center.z);
+//
+//    NSError * error;
+//    SCNScene *scene;
+//    if (path.length != 0) {
+//       scene =[SCNScene sceneWithURL:[NSURL fileURLWithPath:path] options:nil error:&error];
+//    }else{
+//        scene = [SCNScene sceneNamed:imgName];
+//    }
+//    // 7. 获取花瓶节点
+//    // 一个场景有多个节点，所有场景有且只有一个根节点，其它所有节点都是根节点的子节点
+//    SCNNode *vaseNode = scene.rootNode.childNodes.firstObject;
+////    SCNNode *pathNode = [scene.rootNode childNodeWithName:@"mesh_546483871" recursively:YES];
+//
+//    // 8. 设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置也就是相机位置
+////    pathNode.position = SCNVector3Make(1, 0, 0);
+//    // 9. 将花瓶节点添加到屏幕中
+//    // !!!!FBI WARNING: 花瓶节点是添加到代理捕捉到的节点中，而不是AR视图的根接节点。
+//    // 因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
+//    vaseNode.scale = SCNVector3Make(0.3, 0.3, 0.3);
+////    pathNode.scale = SCNVector3Make(15, 15,15);
+//
+//    //添加动作
+//    // 添加动作
+//    SCNAction * moveAction = [SCNAction moveTo:SCNVector3Make(0.5, 0, 0) duration:0.5];
+//    SCNAction * movebackAction = [SCNAction moveTo:SCNVector3Make(0, 0, 0) duration:0.5];
+//    // 添加旋转
+//    SCNAction * rotation = [SCNAction rotateByX:1 y:0 z:0 duration:2];
+//
+//    // 弓箭箭头专属旋转方法
+//    //        let arrowRotateAngle = SCNAction.rotateTo(x: 0, y: 90, z: 0, duration: 0)
+//    //        modelNode.runAction(arrowRotateAngle)s
+//    // 合成动作组
+//    SCNAction * moveGroup = [SCNAction sequence:@[moveAction,movebackAction]];
+//    SCNAction * repeatMove = [SCNAction repeatActionForever:moveGroup];
+//    SCNAction * repeatRotate = [SCNAction repeatActionForever:rotation];
+//    [vaseNode runAction:repeatMove];
+//
+//    [planeNode addChildNode:vaseNode];
+////    [planeNode addChildNode:pathNode];
+//
+//
+//
+//    // blue light
+//    SCNNode * blueLightNode = [[SCNNode alloc] init];
+//    blueLightNode.light = [[SCNLight alloc] init];
+//    blueLightNode.light.type = SCNLightTypeOmni;
+//    blueLightNode.light.color = [UIColor whiteColor];
+//    blueLightNode.position = SCNVector3Make(0, -6, 0);
+//    [planeNode addChildNode:blueLightNode];
+//
+//    // blue light
+//    SCNNode * greenLightNode = [[SCNNode alloc] init];
+//    greenLightNode.light = [[SCNLight alloc] init];
+//    greenLightNode.light.type = SCNLightTypeOmni;
+//    greenLightNode.light.color = [UIColor whiteColor];
+//    greenLightNode.position = SCNVector3Make(-6, 6, 0);
+//    [planeNode addChildNode:greenLightNode];
+//
+//    // blue light
+//    SCNNode * redLightNode = [[SCNNode alloc] init];
+//    redLightNode.light = [[SCNLight alloc] init];
+//    redLightNode.light.type = SCNLightTypeOmni;
+//    redLightNode.light.color = [UIColor whiteColor];
+//    redLightNode.position = SCNVector3Make(6, 6, 0);
+//    [planeNode addChildNode:redLightNode];
+//
+//
+//
+//    planeNode.name = @"normal_node";
+//
+//    return planeNode;
+//}
+//
+
+//// 更新导航指引贴图
+//- (void)updateNavigationGuide {
+//    if (!self.isNavigationGuideEnabled) {
+//        return;
+//    }
+//
+//    [self clearNavigationGuide];
+//    //if(_arPath != nil && _arPath[_currentIndex].isStair) //[self showStairButton];
+//
+//    InWalkARAnchor *previousAnchor = nil;
+//    InWalkNavigationPathPoint *pt;
+//    float theta = 90 - _mapData.northOffset.floatValue; // 路径图标的角度计算方法
+//
+//    // 更新第一个点（当前位置）
+//    if(_currentIndex < _arPath.count && !_videoAnchor){
+//        pt = _arPath[_currentIndex];
+//
+//        // 先旋转，再平移
+//        SCNMatrix4 matrix;
+//        if (_currentIndex + 1 == _arPath.count) {
+//            matrix = SCNMatrix4MakeTranslation(pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
+//        } else {
+//            // 图片默认是竖直展示的，需要经过几次旋转后才能正确的水平展示
+//            matrix = SCNMatrix4MakeRotation(M_PI/2, 0, 0, 1);
+//            //matrix = SCNMatrix4MakeRotation(M_PI*2, 0, 0, 1); // 使用GIF图
+//            matrix = SCNMatrix4Rotate(matrix, -M_PI/2, 1, 0, 0); // 水平铺设时用到
+//            matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext) / 180 * M_PI), 0, 1, 0);
+//            matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
+//        }
+//        simd_float4x4 preTransform = SCNMatrix4ToMat4(matrix);
+//
+//        _preAnchor = [[InWalkARAnchor alloc] initWithTransform:preTransform];
+//        _preAnchor.title = @"navigationGuide";
+//        _preAnchor.flag = 1;
+//        _preAnchor.turnFlag = pt.turnFlag;
+//        _preAnchor.hid = pt.hid;
+//        _preAnchor.tag = _currentIndex;
+//        //if( _arPath[_currentIndex].isStair) _preAnchor.title = @"navigationEnd";
+//        previousAnchor = _preAnchor;
+//        [_arscnView.session addAnchor:_preAnchor];
+//    }
+//
+//    NSMutableArray<SCNNode *> *tmpNxNodes = [[NSMutableArray alloc] init];
+//    //    // 更新第二个点～第四个点(na小于等于4)
+//    //    int na = (int)_arPath.count - _currentIndex - 1;
+//    //    if (na > 4) {
+//    //        na = 4;
+//    //    } else {
+//    //        na--;
+//    //    }
+//    // 更新第二个点～倒数第二个点(na值为arPath.count-currentIndex-2)
+//    int na = (int)_arPath.count - _currentIndex - 2;
+//
+//    for (int i = 1; i <= na; i++) {
+//        pt = _arPath[_currentIndex + i];
+//
+//        // 先旋转，再平移
+//        //        SCNMatrix4 matrix = SCNMatrix4MakeRotation(M_PI/2, 0, 0, 1);
+//        //        matrix = SCNMatrix4Rotate(matrix, -M_PI/2, 1, 0, 0);
+//        //        matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext) / 180 * M_PI), 0, 1, 0);
+//        //        matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
+//        SCNMatrix4 matrix;
+//        if (_currentIndex + i == _s2) {
+//            //matrix = SCNMatrix4MakeRotation(((theta + pt.angleToNext + 90) / 180 * M_PI), 0, 1, 0);
+//            matrix = SCNMatrix4MakeTranslation(2, 0, 0);
+//            matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext + 90) / 180 * M_PI), 0, 1, 0);
+//
+//            matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
+//            simd_float4x4 curTransform = SCNMatrix4ToMat4(matrix);
+//
+//            if (!_videoAnchor) {
+//                _videoAnchor = [[InWalkARAnchor alloc] initWithTransform:curTransform];
+//                _videoAnchor.title = @"navigationGuide";
+//                _videoAnchor.flag = 2;
+//                _videoAnchor.turnFlag = pt.turnFlag;
+//                _videoAnchor.hid = pt.hid;
+//                _videoAnchor.tag = _s2;
+//
+//                if (previousAnchor) {
+//                    SCNBillboardConstraint *constraint = [SCNBillboardConstraint billboardConstraint];
+//                    constraint.freeAxes = SCNBillboardAxisY;
+//                    previousAnchor.constraints = @[constraint];
+//                }
+//                [_arscnView.session addAnchor:_videoAnchor];
+//            }
+//        } else {
+//            matrix = SCNMatrix4MakeRotation(M_PI/2, 0, 0, 1);
+//            //matrix = SCNMatrix4MakeRotation(M_PI*2, 0, 0, 1); // 使用GIF图
+//            matrix = SCNMatrix4Rotate(matrix, -M_PI/2, 1, 0, 0); // 水平铺设时用到
+//            matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext) / 180 * M_PI), 0, 1, 0);
+//            matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
+//            simd_float4x4 curTransform = SCNMatrix4ToMat4(matrix);
+//
+//            //        _curAnchor = [[InWalkARAnchor alloc] initWithTransform:curTransform];
+//            //        _curAnchor.title = @"navigationGuide";
+//            //        _curAnchor.flag = 2;
+//            //        //if(_arPath[_currentIndex + 1].isStair){
+//            //        //    _curAnchor.title = @"navigationEnd";
+//            //        //}
+//            //        [_arscnView.session addAnchor:_curAnchor];
+//
+//            InWalkARAnchor *n1 = [[InWalkARAnchor alloc] initWithTransform:curTransform];
+//            n1.title = @"navigationGuide";
+//            n1.flag = 2;
+//            n1.turnFlag = pt.turnFlag;
+//            n1.hid = pt.hid;
+//            n1.tag = _currentIndex + i;
+//            [tmpNxNodes addObject:(SCNNode *)n1];
+//            if (previousAnchor) {
+//                SCNBillboardConstraint *constraint = [SCNBillboardConstraint billboardConstraint];
+//                constraint.freeAxes = SCNBillboardAxisY;
+//                previousAnchor.constraints = @[constraint];
+//                previousAnchor = n1;
+//            }
+//            [_arscnView.session addAnchor:n1];
+//        }
+//    }
+//    _nxNodes = tmpNxNodes;
+//
+//    // 更新第五个点/最后一个点
+//    na++;
+//    if(_currentIndex + na < _arPath.count){
+//        pt = _arPath[_currentIndex + na];
+//
+//        // 先旋转，再平移
+//        SCNMatrix4 matrix;
+//        if (_currentIndex + na + 1 == _arPath.count) {
+//            matrix = SCNMatrix4MakeTranslation(pt.pathPosition[0], 1.3, pt.pathPosition[2]);
+//
+//            if (_currentIndex + na > 1) {
+//                InWalkNavigationPathPoint *prePt = _arPath[_currentIndex + na - 1];
+//                matrix = SCNMatrix4MakeRotation(((theta + prePt.angleToNext + 90) / 180 * M_PI), 0, 1, 0);
+//                matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], 1.3, pt.pathPosition[2]);
+//            } else {
+//                matrix = SCNMatrix4MakeTranslation(pt.pathPosition[0], 1.3, pt.pathPosition[2]);
+//            }
+//
+//        } else {
+//            matrix = SCNMatrix4MakeRotation(M_PI/2, 0, 0, 1);
+//            //matrix = SCNMatrix4MakeRotation(M_PI*2, 0, 0, 1); // 使用GIF图
+//            matrix = SCNMatrix4Rotate(matrix, -M_PI/2, 1, 0, 0); // 水平铺设时用到
+//            matrix = SCNMatrix4Rotate(matrix, ((theta + pt.angleToNext) / 180 * M_PI), 0, 1, 0);
+//            matrix = SCNMatrix4Translate(matrix, pt.pathPosition[0], pt.pathPosition[1], pt.pathPosition[2]);
+//        }
+//        simd_float4x4 nextTransform = SCNMatrix4ToMat4(matrix);
+//
+//        _nextAnchor = [[InWalkARAnchor alloc] initWithTransform:nextTransform];
+//        if (_currentIndex + na + 1 == _arPath.count) {
+//            _nextAnchor.title = @"navigationEnd";
+//        } else {
+//            _nextAnchor.title = @"navigationGuide";
+//            if (previousAnchor) {
+//                SCNBillboardConstraint *constraint = [SCNBillboardConstraint billboardConstraint];
+//                constraint.freeAxes = SCNBillboardAxisY;
+//                previousAnchor.constraints = @[constraint];
+//                previousAnchor = _nextAnchor;
+//                previousAnchor = nil;
+//            }
+//            _nextAnchor.constraints = nil;
+//        }
+//        _nextAnchor.flag = 3;
+//        _nextAnchor.turnFlag = pt.turnFlag;
+//        _nextAnchor.tag = _currentIndex + na;
+//        _nextAnchor.hid = pt.hid;
+//        [_arscnView.session addAnchor:_nextAnchor];
+//    }
+//}
 
 // 清除所有导航指引贴图
 - (void)clearNavigationGuide {
@@ -945,12 +1495,14 @@
     
     InWalkARAnchor *arAnchor = (InWalkARAnchor *)anchor;
     NSString *imgName;
+    NSString * modelName;
     int w;
     
     switch (arAnchor.flag) {
         case 3:
             // 终点
-            imgName = @"SceneKit Asset Catalog.scnassets/destination.dae";
+            imgName = @"a1_dest.png";
+            modelName = @"SceneKit Asset Catalog.scnassets/destination.dae";
             w = 2;
             break;
         case 1:
@@ -958,132 +1510,169 @@
         case 0:
         default:
             // 起点/直行
-            imgName = @"SceneKit Asset Catalog.scnassets/arrowfirst.dae";
+            imgName = @"SceneKit Asset Catalog.scnassets/whiteOnlineArrow.dae";
+            modelName = @"SceneKit Asset Catalog.scnassets/arrowfirst.dae";
             w = 1;
             break;
     }
-    
-    NSString * path = [[NSBundle bundleForClass:[self class]] pathForResource:imgName ofType:nil];
-//    NSString * path = [NSBundle bu]
+    NSString * arPath = [[NSBundle bundleForClass:[self class]] pathForResource:modelName ofType:nil];
+    NSString * imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:imgName ofType:nil];
     // 终点Node对应的SCNNode
     if (arAnchor.flag == 3) {
-//        SCNBox *box = [SCNBox boxWithWidth:2 height:2 length:0.01 chamferRadius:0.01];
-//        SCNMaterial *firstMaterial = SCNMaterial.material;
-//        UIImage *img = [UIImage imageNamed:imgName
-//                                  inBundle:[NSBundle bundleForClass:[self class]]
-//             compatibleWithTraitCollection:nil];
-//        firstMaterial.diffuse.contents = img;
-//        SCNMaterial *otherMaterial = SCNMaterial.material;
-//        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-//        // @[front,right,back,left,top,bottom];
-//        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
-//
-//        SCNNode *node = [SCNNode nodeWithGeometry:box];
-//        // 为SCNNode添加旋转动画
-//        [node runAction: [SCNAction repeatActionForever: [SCNAction rotateByX:0 y:2*M_PI z:0 duration:3]]];
-//
-//        return node;
-        
-        _isDestViewExpand = NO;
-//        UIView *view = [self destView001ById:arAnchor.hid];
-//        UIImage *img = [self imageFromView:view];
-        
-        InWalkPointDesc *ap = [_destArPoints objectForKey:_destPointId];
-        //
-//        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:ap.imgSmall ofType:nil];
-//        UIImage *img = [UIImage imageWithContentsOfFile:path];
-        //
-//        float height = _postWidth * ap.scaleSmall;
-        // 其他Node对应的SCNNode(展示为箭头图标)
-        // 其他Node对应的SCNNode(展示为箭头图标)
-        // 其他Node对应的SCNNode(展示为箭头图标)
-        SCNBox *box = [SCNBox boxWithWidth:_postWidth height:1 length:0.01 chamferRadius:0.01];
-        
+        //        SCNBox *box = [SCNBox boxWithWidth:2 height:2 length:0.01 chamferRadius:0.01];
         //        SCNMaterial *firstMaterial = SCNMaterial.material;
+        //        UIImage *img = [UIImage imageNamed:imgName
+        //                                  inBundle:[NSBundle bundleForClass:[self class]]
+        //             compatibleWithTraitCollection:nil];
         //        firstMaterial.diffuse.contents = img;
         //        SCNMaterial *otherMaterial = SCNMaterial.material;
         //        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
         //        // @[front,right,back,left,top,bottom];
         //        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
+        //
         //        SCNNode *node = [SCNNode nodeWithGeometry:box];
-        box.firstMaterial.diffuse.contents = [UIColor clearColor];
-        // 4. 创建一个基于3D物体模型的节点
-        SCNNode *planeNode = [SCNNode nodeWithGeometry:box];
-        // 5. 设置节点的位置为捕捉到的平地的锚点的中心位置
-        // SceneKit中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
-        //    planeNode.position = SCNVector3Make(arAnchor.center.x, 0, arAnchor.center.z);
+        //        // 为SCNNode添加旋转动画
+        //        [node runAction: [SCNAction repeatActionForever: [SCNAction rotateByX:0 y:2*M_PI z:0 duration:3]]];
+        //
+        //        return node;
         
-        NSError * error;
-        SCNScene *scene;
-        if (path.length != 0) {
-            scene =[SCNScene sceneWithURL:[NSURL fileURLWithPath:path] options:nil error:&error];
-        }else{
-            scene = [SCNScene sceneNamed:imgName];
-        }
-        // 7. 获取花瓶节点
-        // 一个场景有多个节点，所有场景有且只有一个根节点，其它所有节点都是根节点的子节点
-        SCNNode *vaseNode = scene.rootNode.childNodes.firstObject;
-        //    SCNNode *pathNode = [scene.rootNode childNodeWithName:@"mesh_546483871" recursively:YES];
+        _isDestViewExpand = NO;
+        //        UIView *view = [self destView001ById:arAnchor.hid];
+        //        UIImage *img = [self imageFromView:view];
         
-        // 8. 设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置也就是相机位置
-        //    pathNode.position = SCNVector3Make(1, 0, 0);
-        // 9. 将花瓶节点添加到屏幕中
-        // !!!!FBI WARNING: 花瓶节点是添加到代理捕捉到的节点中，而不是AR视图的根接节点。
-        // 因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
-        vaseNode.scale = SCNVector3Make(0.2, 0.2, 0.2);
-        //    pathNode.scale = SCNVector3Make(15, 15,15);
+        InWalkPointDesc *ap = [_destArPoints objectForKey:_destPointId];
+        //
+        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:ap.imgSmall ofType:nil];
+        UIImage *img = [UIImage imageWithContentsOfFile:path];
+        //
+        float height = _postWidth * ap.scaleSmall;
+        SCNBox *box = [SCNBox boxWithWidth:_postWidth height:height length:0.01 chamferRadius:0.01];
         
-        //添加动作
-        // 添加动作
-        SCNAction * moveAction = [SCNAction moveTo:SCNVector3Make(0, 1.5, 0) duration:0.5];
-        SCNAction * movebackAction = [SCNAction moveTo:SCNVector3Make(0, 1, 0) duration:0.5];
-        // 添加旋转
-        SCNAction * rotation = [SCNAction rotateByX:0 y:10 z:0 duration:2];
+        SCNMaterial *firstMaterial = SCNMaterial.material;
+        firstMaterial.diffuse.contents = img;
+        SCNMaterial *otherMaterial = SCNMaterial.material;
+        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
         
-        // 弓箭箭头专属旋转方法
-        //        let arrowRotateAngle = SCNAction.rotateTo(x: 0, y: 90, z: 0, duration: 0)
-        //        modelNode.runAction(arrowRotateAngle)s
-        // 合成动作组
-        SCNAction * moveGroup = [SCNAction sequence:@[moveAction,rotation,movebackAction]];
-        SCNAction * repeatMove = [SCNAction repeatActionForever:moveGroup];
-        SCNAction * repeatRotate = [SCNAction repeatActionForever:rotation];
-        [vaseNode runAction:repeatMove];
+        // @[front,right,back,left,top,bottom];
+        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
+        SCNNode *node = [SCNNode nodeWithGeometry:box];
         
-        [planeNode addChildNode:vaseNode];
-        //    [planeNode addChildNode:pathNode];
+        //        SCNBox *box = [SCNBox boxWithWidth:2 height:2 length:0.01 chamferRadius:0.01];
+        //        SCNMaterial *firstMaterial = SCNMaterial.material;
+        //        UIImage *img = [UIImage imageNamed:imgName
+        //                                  inBundle:[NSBundle bundleForClass:[self class]]
+        //             compatibleWithTraitCollection:nil];
+        //        firstMaterial.diffuse.contents = img;
+        //        SCNMaterial *otherMaterial = SCNMaterial.material;
+        //        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        //        // @[front,right,back,left,top,bottom];
+        //        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
+        //
+        //        SCNNode *node = [SCNNode nodeWithGeometry:box];
+        //        // 为SCNNode添加旋转动画
+        //        [node runAction: [SCNAction repeatActionForever: [SCNAction rotateByX:0 y:2*M_PI z:0 duration:3]]];
+        //
+        //        return node;
+        
+//                _isDestViewExpand = NO;
+        //        UIView *view = [self destView001ById:arAnchor.hid];
+        //        UIImage *img = [self imageFromView:view];
+        
+//                InWalkPointDesc *ap = [_destArPoints objectForKey:_destPointId];
+                //
+        //        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:ap.imgSmall ofType:nil];
+        //        UIImage *img = [UIImage imageWithContentsOfFile:path];
+                //
+        //        float height = _postWidth * ap.scaleSmall;
+                // 其他Node对应的SCNNode(展示为箭头图标)
+                // 其他Node对应的SCNNode(展示为箭头图标)
+                // 其他Node对应的SCNNode(展示为箭头图标)
+//                SCNBox *box = [SCNBox boxWithWidth:_postWidth height:1 length:0.01 chamferRadius:0.01];
+        
+                //        SCNMaterial *firstMaterial = SCNMaterial.material;
+                //        firstMaterial.diffuse.contents = img;
+                //        SCNMaterial *otherMaterial = SCNMaterial.material;
+                //        otherMaterial.diffuse.contents = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+                //        // @[front,right,back,left,top,bottom];
+                //        box.materials = @[firstMaterial,otherMaterial,firstMaterial,otherMaterial,otherMaterial,otherMaterial];
+                //        SCNNode *node = [SCNNode nodeWithGeometry:box];
+//                box.firstMaterial.diffuse.contents = [UIColor clearColor];
+//                // 4. 创建一个基于3D物体模型的节点
+//                SCNNode *planeNode = [SCNNode nodeWithGeometry:box];
+                // 5. 设置节点的位置为捕捉到的平地的锚点的中心位置
+                // SceneKit中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
+                //    planeNode.position = SCNVector3Make(arAnchor.center.x, 0, arAnchor.center.z);
+        
+                NSError * error;
+                SCNScene *scene;
+                if (path.length != 0) {
+                    scene =[SCNScene sceneWithURL:[NSURL fileURLWithPath:arPath] options:nil error:&error];
+                }else{
+                    scene = [SCNScene sceneNamed:modelName];
+                }
+                // 7. 获取花瓶节点
+                // 一个场景有多个节点，所有场景有且只有一个根节点，其它所有节点都是根节点的子节点
+                SCNNode *vaseNode = scene.rootNode.childNodes.firstObject;
+                //    SCNNode *pathNode = [scene.rootNode childNodeWithName:@"mesh_546483871" recursively:YES];
+        
+                // 8. 设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置也就是相机位置
+                //    pathNode.position = SCNVector3Make(1, 0, 0);
+                // 9. 将花瓶节点添加到屏幕中
+                // !!!!FBI WARNING: 花瓶节点是添加到代理捕捉到的节点中，而不是AR视图的根接节点。
+                // 因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
+                vaseNode.scale = SCNVector3Make(0.2, 0.2, 0.2);
+                //    pathNode.scale = SCNVector3Make(15, 15,15);
+        
+                //添加动作
+                // 添加动作
+                SCNAction * moveAction = [SCNAction moveTo:SCNVector3Make(0, 1.5, 0) duration:0.5];
+                SCNAction * movebackAction = [SCNAction moveTo:SCNVector3Make(0, 1, 0) duration:0.5];
+                // 添加旋转
+                SCNAction * rotation = [SCNAction rotateByX:0 y:10 z:0 duration:2];
+        
+                // 弓箭箭头专属旋转方法
+                //        let arrowRotateAngle = SCNAction.rotateTo(x: 0, y: 90, z: 0, duration: 0)
+                //        modelNode.runAction(arrowRotateAngle)s
+                // 合成动作组
+                SCNAction * moveGroup = [SCNAction sequence:@[moveAction,rotation,movebackAction]];
+                SCNAction * repeatMove = [SCNAction repeatActionForever:moveGroup];
+                SCNAction * repeatRotate = [SCNAction repeatActionForever:rotation];
+                [vaseNode runAction:repeatMove];
+        
+                [node addChildNode:vaseNode];
+                //    [planeNode addChildNode:pathNode];
         
         
         
-        // blue light
-        SCNNode * blueLightNode = [[SCNNode alloc] init];
-        blueLightNode.light = [[SCNLight alloc] init];
-        blueLightNode.light.type = SCNLightTypeOmni;
-        blueLightNode.light.color = [UIColor whiteColor];
-        blueLightNode.position = SCNVector3Make(0, -6, 0);
-        [planeNode addChildNode:blueLightNode];
+                // blue light
+                SCNNode * blueLightNode = [[SCNNode alloc] init];
+                blueLightNode.light = [[SCNLight alloc] init];
+                blueLightNode.light.type = SCNLightTypeOmni;
+                blueLightNode.light.color = [UIColor whiteColor];
+                blueLightNode.position = SCNVector3Make(0, -6, 0);
+                [node addChildNode:blueLightNode];
         
-        // blue light
-        SCNNode * greenLightNode = [[SCNNode alloc] init];
-        greenLightNode.light = [[SCNLight alloc] init];
-        greenLightNode.light.type = SCNLightTypeOmni;
-        greenLightNode.light.color = [UIColor whiteColor];
-        greenLightNode.position = SCNVector3Make(-6, 6, 0);
-        [planeNode addChildNode:greenLightNode];
+                // blue light
+                SCNNode * greenLightNode = [[SCNNode alloc] init];
+                greenLightNode.light = [[SCNLight alloc] init];
+                greenLightNode.light.type = SCNLightTypeOmni;
+                greenLightNode.light.color = [UIColor whiteColor];
+                greenLightNode.position = SCNVector3Make(-6, 6, 0);
+                [node addChildNode:greenLightNode];
         
-        // blue light
-        SCNNode * redLightNode = [[SCNNode alloc] init];
-        redLightNode.light = [[SCNLight alloc] init];
-        redLightNode.light.type = SCNLightTypeOmni;
-        redLightNode.light.color = [UIColor whiteColor];
-        redLightNode.position = SCNVector3Make(6, 6, 0);
-        [planeNode addChildNode:redLightNode];
+                // blue light
+                SCNNode * redLightNode = [[SCNNode alloc] init];
+                redLightNode.light = [[SCNLight alloc] init];
+                redLightNode.light.type = SCNLightTypeOmni;
+                redLightNode.light.color = [UIColor grayColor];
+                redLightNode.position = SCNVector3Make(6, 6, 0);
+                [node addChildNode:redLightNode];
         
         
-
         
-        planeNode.name = @"dest_node";
+        node.name = @"dest_node";
         
-        return planeNode;
+        return node;
     }
     
     if (arAnchor.flag == 2 && arAnchor.tag == _s2) {
@@ -1117,31 +1706,30 @@
         return node;
     }
     
-//    // 使用GIF图
-//    if (arAnchor.tag % 1 == 0) {
-//        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"gif_arrow_2.gif" ofType:nil]; //@"gif"
-//        NSURL *url = [NSURL fileURLWithPath:path];
-//        CFURLRef urlRef = (__bridge CFURLRef)url;
-//        //
-//        CALayer* subLayer = [CALayer layer];
-//        subLayer.bounds = CGRectMake(0, 0, 900, 900);
-//        subLayer.anchorPoint = CGPoint[gMake(0, 1);
-//        CAKeyframeAnimation *animation = [self createGIFAnimation: urlRef];
-//        [subLayer addAnimation:animation forKey:@"contents"];
-//        //
-//        //firstMaterial.diffuse.contents = subLayer;
-//        SCNPlane *tvPlane = [[SCNPlane alloc] init];
-//        [tvPlane setWidth: 1.7];
-//        [tvPlane setHeight:0.64];
-//        [tvPlane.firstMaterial.diffuse setContents: subLayer];
-//        [tvPlane.firstMaterial setDoubleSided:YES];
-//        //
-//        SCNNode *node = [SCNNode nodeWithGeometry:tvPlane];
-//        node.name = @"normal_node";
-//
-//        return node;
-//    }
-    
+    //    // 使用GIF图
+    //    if (arAnchor.tag % 1 == 0) {
+    //        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"gif_arrow_2.gif" ofType:nil]; //@"gif"
+    //        NSURL *url = [NSURL fileURLWithPath:path];
+    //        CFURLRef urlRef = (__bridge CFURLRef)url;
+    //        //
+    //        CALayer* subLayer = [CALayer layer];
+    //        subLayer.bounds = CGRectMake(0, 0, 900, 900);
+    //        subLayer.anchorPoint = CGPointMake(0, 1);
+    //        CAKeyframeAnimation *animation = [self createGIFAnimation: urlRef];
+    //        [subLayer addAnimation:animation forKey:@"contents"];
+    //        //
+    //        //firstMaterial.diffuse.contents = subLayer;
+    //        SCNPlane *tvPlane = [[SCNPlane alloc] init];
+    //        [tvPlane setWidth: 1.7];
+    //        [tvPlane setHeight:0.64];
+    //        [tvPlane.firstMaterial.diffuse setContents: subLayer];
+    //        [tvPlane.firstMaterial setDoubleSided:YES];
+    //        //
+    //        SCNNode *node = [SCNNode nodeWithGeometry:tvPlane];
+    //        node.name = @"normal_node";
+    //
+    //        return node;
+    //    }
     
     // 其他Node对应的SCNNode(展示为箭头图标)
     SCNBox *box = [SCNBox boxWithWidth:_postWidth height:1 length:0.01 chamferRadius:0.01];
@@ -1156,59 +1744,38 @@
     box.firstMaterial.diffuse.contents = [UIColor clearColor];
     // 4. 创建一个基于3D物体模型的节点
     SCNNode *planeNode = [SCNNode nodeWithGeometry:box];
-    // 5. 设置节点的位置为捕捉到的平地的锚点的中心位置
-    // SceneKit中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
-//    planeNode.position = SCNVector3Make(arAnchor.center.x, 0, arAnchor.center.z);
     
-    NSError * error;
-    SCNScene *scene;
-    if (path.length != 0) {
-       scene =[SCNScene sceneWithURL:[NSURL fileURLWithPath:path] options:nil error:&error];
+    // 其他Node对应的SCNNode(展示为箭头图标)
+    SCNScene *accScene;
+    if (arPath.length != 0) {
+        accScene =[SCNScene sceneWithURL:[NSURL fileURLWithPath:imagePath] options:nil error:nil];
     }else{
-        scene = [SCNScene sceneNamed:imgName];
+        accScene = [SCNScene sceneNamed:imgName];
     }
     // 7. 获取花瓶节点
     // 一个场景有多个节点，所有场景有且只有一个根节点，其它所有节点都是根节点的子节点
-    SCNNode *vaseNode = scene.rootNode.childNodes.firstObject;
-//    SCNNode *pathNode = [scene.rootNode childNodeWithName:@"mesh_546483871" recursively:YES];
+    SCNNode *accVaseNode = accScene.rootNode.childNodes.firstObject;
+    //    SCNNode *pathNode = [scene.rootNode childNodeWithName:@"mesh_546483871" recursively:YES];
     
     // 8. 设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置也就是相机位置
-//    pathNode.position = SCNVector3Make(1, 0, 0);
+    //    pathNode.position = SCNVector3Make(1, 0, 0);
     // 9. 将花瓶节点添加到屏幕中
     // !!!!FBI WARNING: 花瓶节点是添加到代理捕捉到的节点中，而不是AR视图的根接节点。
     // 因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
-    vaseNode.scale = SCNVector3Make(0.3, 0.3, 0.3);
-//    pathNode.scale = SCNVector3Make(15, 15,15);
+    accVaseNode.scale = SCNVector3Make(0.4, 0.4, 0.4);
+    accVaseNode.position = SCNVector3Make(0, -1, 0);
     
-    //添加动作
-    // 添加动作
-    SCNAction * moveAction = [SCNAction moveTo:SCNVector3Make(0.5, 0, 0) duration:0.5];
-    SCNAction * movebackAction = [SCNAction moveTo:SCNVector3Make(0, 0, 0) duration:0.5];
-    // 添加旋转
-    SCNAction * rotation = [SCNAction rotateByX:1 y:0 z:0 duration:2];
-
-    // 弓箭箭头专属旋转方法
-    //        let arrowRotateAngle = SCNAction.rotateTo(x: 0, y: 90, z: 0, duration: 0)
-    //        modelNode.runAction(arrowRotateAngle)s
-    // 合成动作组
-    SCNAction * moveGroup = [SCNAction sequence:@[moveAction,movebackAction]];
-    SCNAction * repeatMove = [SCNAction repeatActionForever:moveGroup];
-    SCNAction * repeatRotate = [SCNAction repeatActionForever:rotation];
-    [vaseNode runAction:repeatMove];
-    
-    [planeNode addChildNode:vaseNode];
-//    [planeNode addChildNode:pathNode];
-    
+    [planeNode addChildNode:accVaseNode];
     
     
     // blue light
     SCNNode * blueLightNode = [[SCNNode alloc] init];
     blueLightNode.light = [[SCNLight alloc] init];
     blueLightNode.light.type = SCNLightTypeOmni;
-    blueLightNode.light.color = [UIColor whiteColor];
+    blueLightNode.light.color = [UIColor whiteColor];;
     blueLightNode.position = SCNVector3Make(0, -6, 0);
     [planeNode addChildNode:blueLightNode];
-
+    
     // blue light
     SCNNode * greenLightNode = [[SCNNode alloc] init];
     greenLightNode.light = [[SCNLight alloc] init];
@@ -1216,7 +1783,7 @@
     greenLightNode.light.color = [UIColor whiteColor];
     greenLightNode.position = SCNVector3Make(-6, 6, 0);
     [planeNode addChildNode:greenLightNode];
-
+    
     // blue light
     SCNNode * redLightNode = [[SCNNode alloc] init];
     redLightNode.light = [[SCNLight alloc] init];
@@ -1225,12 +1792,59 @@
     redLightNode.position = SCNVector3Make(6, 6, 0);
     [planeNode addChildNode:redLightNode];
     
+        // 5. 设置节点的位置为捕捉到的平地的锚点的中心位置
+        // SceneKit中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
+    //    planeNode.position = SCNVector3Make(arAnchor.center.x, 0, arAnchor.center.z);
+    
+    if (arAnchor.turnFlag == 0 && arAnchor.tag % 2 == 0) {
+        return planeNode;
+    }
+        NSError * error;
+        SCNScene *scene;
+        if (arPath.length != 0) {
+           scene =[SCNScene sceneWithURL:[NSURL fileURLWithPath:arPath] options:nil error:&error];
+        }else{
+            scene = [SCNScene sceneNamed:modelName];
+        }
+        // 7. 获取花瓶节点
+        // 一个场景有多个节点，所有场景有且只有一个根节点，其它所有节点都是根节点的子节点
+        SCNNode *vaseNode = scene.rootNode.childNodes.firstObject;
+    //    SCNNode *pathNode = [scene.rootNode childNodeWithName:@"mesh_546483871" recursively:YES];
+    
+        // 8. 设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置也就是相机位置
+    //    pathNode.position = SCNVector3Make(1, 0, 0);
+        // 9. 将花瓶节点添加到屏幕中
+        // !!!!FBI WARNING: 花瓶节点是添加到代理捕捉到的节点中，而不是AR视图的根接节点。
+        // 因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
+        vaseNode.scale = SCNVector3Make(0.3, 0.3, 0.3);
+    //    pathNode.scale = SCNVector3Make(15, 15,15);
+    
+        //添加动作
+        // 添加动作
+        SCNAction * moveAction = [SCNAction moveTo:SCNVector3Make(0.5, 0, 0) duration:0.5];
+        SCNAction * movebackAction = [SCNAction moveTo:SCNVector3Make(0, 0, 0) duration:0.5];
+        // 添加旋转
+        SCNAction * rotation = [SCNAction rotateByX:1 y:0 z:0 duration:2];
+    
+        // 弓箭箭头专属旋转方法
+        //        let arrowRotateAngle = SCNAction.rotateTo(x: 0, y: 90, z: 0, duration: 0)
+        //        modelNode.runAction(arrowRotateAngle)s
+        // 合成动作组
+        SCNAction * moveGroup = [SCNAction sequence:@[moveAction,movebackAction]];
+        SCNAction * repeatMove = [SCNAction repeatActionForever:moveGroup];
+        SCNAction * repeatRotate = [SCNAction repeatActionForever:rotation];
+        [vaseNode runAction:repeatMove];
+    
+        [planeNode addChildNode:vaseNode];
+    //    [planeNode addChildNode:pathNode];
+    
     
     
     planeNode.name = @"normal_node";
     
     return planeNode;
 }
+
 
 // 更新当前在导航路径中的位置
 - (void)updateCurrentNavigatingIndex:(ARFrame *)frame {
@@ -1257,7 +1871,14 @@
         float t2 = position[0]/position[3];
         float resultX = (k*t1 + t2) / (k*k +1);
         float resultY = k*resultX+b;
+//        NSLog(@"更新路径的实际AR点为%@",NSStringFromCGPoint(CGPointMake(position[0], position[2])));
+//        NSLog(@"更新路径的AR映射点为%@",NSStringFromCGPoint(CGPointMake(resultX, resultY)));
+//
+        float dx = position[0] - resultX;
+        float dz = position[2] - resultY;
+        float distance = sqrtf((dx*dx + dz*dz));
         
+//        NSLog(@"更新路径的距离为%lf",distance);
         // 点(resultX,resultY)到点(x1,y1)的距离
         float length = sqrtf((x1 - resultX) * (x1 - resultX) + (y1 - resultY) * (y1 - resultY));
         //        _testLabel.text = [NSString stringWithFormat:@"length:%f",length];
@@ -1338,9 +1959,27 @@
     //    //NSLog(@"********************%f", newHeading.magneticHeading);
     self.magNorthValue = newHeading.magneticHeading;
     self.magFrameTransform = self.arscnView.session.currentFrame.camera.transform;
-    //[self calcAngleDiff];
+    [self calcAngleDiff];
 }
 
+//计算角度差
+-(void)calcAngleDiff{
+    //
+    if (self.userNorthAngle != 0) {
+        CGFloat diffAngle = fabs(self.userNorthAngle - self.magNorthValue);
+        if (diffAngle > 180) {
+            diffAngle = 360 - diffAngle;
+        }
+        
+        if (diffAngle > 90) {
+            NSLog(@"进入转角");
+        }
+    }
+    //加一个定时器两秒赋值一次
+    //5s刷新一次位置信息
+    
+    
+}
 
 #pragma mark - 辅助方法
 // X0Y坐标系中：计算从 起始向量 到 目标向量 的夹角(顺时针)
@@ -1445,6 +2084,10 @@
 
     if (_directionTip) {
         [_directionTip removeFromSuperview];
+    }
+    if (self.timer) {
+        dispatch_source_cancel(self.timer);
+        _timer = nil;
     }
 }
 
@@ -2058,7 +2701,9 @@
                 _lastARIbeaconPoint = self.arscnView.session.currentFrame;
                 _lastSectionPoint = point;
                 _lastARSectionPoint = self.arscnView.session.currentFrame;
-                _isSectionRectify = YES;
+//                _isIBeaconRectify = YES;
+                //设置为起点
+//                _lastIbeaconPoint = [self.navigationManager.completeNavigationPath firstObject];
                 [self.rectifyBeacons addObject:point];
                 
                 [self.container makeToast:@"检测到第一个设备点"];
@@ -2072,7 +2717,6 @@
                     _lastIbeaconPoint = lastPoint;
                     _currentIbeaconPoint = point;
                     _isIBeaconRectify = YES;
-                    _isSectionRectify = NO;
                     [self.rectifyBeacons addObject:point];
                     [self.container makeToast:@"检测到第二个设备点"];
                     //                        [self newRectifyAtWithLastPoint:lastPoint CurrentPoint:point];
@@ -2152,19 +2796,18 @@
 
 
 //设备纠偏暂时沿用以前的十米纠偏流程，暂时还未测试
-- (void)rectifyAtWithLastPoint:(InWalkInnerPoint *)lastPoint CurrentPoint:(InWalkInnerPoint *)currentPoint withCurrectArFrame:(ARFrame *)currentFrame{
+- (void)rectifyAtWithLastPoint:(InWalkInnerPoint *)lastPoint CurrentPoint:(InWalkInnerPoint *)currentPoint withCurrectArFrame:(ARFrame *)currentFrame API_AVAILABLE(ios(11.0)){
 
-    //起点的角度
+    //当前点的位置
     simd_float4 camARPos = simd_make_float4(0,0,0,1);
     camARPos = simd_mul(currentFrame.camera.transform, camARPos);
     
     // 转换上一点位cam的AR位置
-
-    simd_float4 lastCamPos = simd_make_float4(0,0,0,1);
-    lastCamPos = simd_mul(_lastARIbeaconPoint.camera.transform, lastCamPos);
-    
+//    simd_float4 lastCamPos = [self getLastARPointWihtCurrentArPoint:camARPos];
+    simd_float4 lastArCamPos = simd_make_float4(0,0,0,1);
+    lastArCamPos = simd_mul(_lastARIbeaconPoint.camera.transform, lastArCamPos);
     // 起点AR坐标
-    simd_float4 last = simd_make_float4(lastPoint.x.floatValue,lastPoint.y.floatValue,0,1);
+    simd_float4 last = simd_make_float4(_lastIbeaconPoint.x.floatValue,_lastIbeaconPoint.y.floatValue,0,1);
 //    simd_float4 last = simd_make_float4(self.navigationManager.completeNavigationPath[0].pathPosition[0],self.navigationManager.completeNavigationPath[0].pathPosition[1],0,1);
     last = simd_mul(_tranformMatix, last); // 注意：Tango数据通过转换矩阵转为ARKit坐标后，y值是实际对应ARKit坐标系中Z轴的值
     //当前点对应的AR坐标
@@ -2174,7 +2817,7 @@
 //    _currentPoistion = CGPointMake(cs///////                                                                                                                                                                                                                              urrent[0], current[1]);
 //    [_mapManager updateCurrentForwardPosition:_currentPoistion];
     // 角度1:向量{起上一点位AR坐标->Cam的AR坐标}到向量{上一点位转换后AR坐标->当前点对应转换后的AR坐标}的顺时针夹角
-    simd_float4 t1 = simd_make_float4(camARPos[0]-lastCamPos[0],0,camARPos[2]-lastCamPos[2],1);
+    simd_float4 t1 = simd_make_float4(camARPos[0]-lastArCamPos[0],0,camARPos[2]-lastArCamPos[2],1);
     simd_float4 t2 = simd_make_float4(current[0]-last[0],0,current[1]-last[1],1);
     
     float anglet = [self calcVectorAngleFrom:t1 to:t2];
@@ -2188,12 +2831,6 @@
      angle3 = angle3 + 360 - anglet;
     //NSLog(@" ** wa angle4: %f", angle3);_
     _mapData.northOffset = [NSNumber numberWithFloat:angle3];
-    
-//    if(_rectifyCount == 0){
-//        _mapData.northOffset = [NSNumber numberWithFloat:angle3 - 5];
-//    }else{
-//        _mapData.northOffset = [NSNumber numberWithFloat:angle3];
-//    }
     
     // step2, update 小地图.
     [_mapManager updateMap:_mapData];
@@ -2240,6 +2877,7 @@
         [tmpPath addObject:tmpArPoint];
     }
     _arPath = tmpPath;
+    _tempArPaths = tmpPath;
 //
 //    //step5 更新路径点
     [self updateNavigationGuide];
@@ -2254,7 +2892,7 @@
     _lastSectionPoint = currentPoint;
     _lastARSectionPoint = self.arscnView.session.currentFrame;
     _rectifyCount++;
-    NSLog(@"纠偏完成");
+    [self.container makeToast:@"设备纠偏完成"];
     
     
     //重新生成AR路线 ，用当前位置点刷新路线
@@ -2349,165 +2987,144 @@
 
 
 #pragma mark - 纠偏尝试：中间距离的三米纠偏
-- (BOOL)subRectifyAtTenMeters:(ARFrame *)frame {
-    // 0.5s记录一次累计行走距离
-    if (_sectionWalkDistance != -1 && frame.timestamp - _sectionLastFrameUpdateTime > 0.5) {
-        // 记录当前cam的AR位置
-        simd_float4 camPos = simd_make_float4(0,0,0,1);
-        camPos = simd_mul(frame.camera.transform, camPos);
-        // 累加行走距离
-        if (_sectionWalkDistance >= 0) {
-            float dx = camPos[0]-_sectionPrePos[0];
-            float dz = camPos[2]-_sectionPrePos[2];
-            float distance = sqrtf((dx*dx + dz*dz));
-            if (distance > 0.4) {
-                _sectionWalkDistance += distance;
-                _sectionPrePos[0] = camPos[0];
-                _sectionPrePos[1] = camPos[1];
-                _sectionPrePos[2] = camPos[2];
+- (void)subRectifyAtTenMeters:(ARFrame *)frame {
+    NSLog(@"开始三米纠偏");
+    //当前位置的AR点
+    
+    simd_float4 camARPos = simd_make_float4(0,0,0,1);
+    camARPos = simd_mul(frame.camera.transform, camARPos);
+    //转换成实际点位
+    [self findNearestPointIndex:camARPos];
+    // 从_currentIndex开始往后搜索，找到与当前位置最近的点
+    
+    
+    float x0 = _tempArPaths[_currentIndex].pathPosition[0];
+    float y0 = _tempArPaths[_currentIndex].pathPosition[2];
+    float x1 = _tempArPaths[_currentIndex + 1].pathPosition[0];
+    float y1 = _tempArPaths[_currentIndex + 1].pathPosition[2];
+    
+    
+    NSLog(@"");
+    // 假设两个点在一条直线(y=kx+b)上，根据点(x0,y0)和点(x1,y1)求k和b
+    float k = (y1 - y0)/(x1 - x0);
+//    float b = (x1 * y0 - x0 * y1)/(x1 - x0);
+    float b = y1 - k * x1;
+    NSLog(@"三米纠偏k=%lf,b=%lf,index = %d",k,b,_currentIndex);
+    
+    // 相机位置在直线上的投影
+    // 参考 https://blog.csdn.net/guyuealian/article/details/53954005
+//    float t1 = camARPos[1]/camARPos[3] - b;
+//    float t2 = camARPos[0]/camARPos[3];
+//    float resultX = (k*t1 + t2) / (k*k +1);
+//    float resultY = k*resultX+b;
+    float b1 = camARPos[2] - (1 / k) * camARPos[0];
+    float resultX = (b1 - b) / (k - (1 / k));
+    float resultY = k*resultX+b;
+//    float resultX = ((camARPos[1] - b) * k + camARPos[0]) / (k*k +1);
+//    float resultY = k*resultX+b;
+    
+    
+    //取起点到上一位置点的长度
+    float dx = camARPos[0] - resultX;
+    float dz = camARPos[2] - resultY;
+    float distance = sqrtf((dx*dx + dz*dz));
+    
+    NSLog(@"三米纠偏的距离为%lf",distance);
+    [self pedalPoint1:CGPointMake(x0, y0) p2:CGPointMake(x1, y1) x0:CGPointMake(camARPos[0], camARPos[2])];
+    
+    
+    CGFloat xDistan = camARPos[0] - resultX;
+    CGFloat yDistan = camARPos[2] - resultY;
+    NSLog(@"AR坐标点为%@",NSStringFromCGVector(CGVectorMake(camARPos[0], camARPos[2])));
+    NSLog(@"映射点为%@",NSStringFromCGVector(CGVectorMake(resultX, resultY)));
+    NSLog(@"三米纠偏x距离为=》%lf,y距离为=》%lf",xDistan,yDistan);
+#warning 三米纠偏范围修改
+    if (fabsf(distance) > 0.5 && fabsf(distance) < 5) {
+        NSMutableArray<InWalkNavigationPathPoint *> *tmpPath = [[NSMutableArray alloc] initWithCapacity:self.navigationManager.navigationPath.count];
+        int count = 0;
+        for (InWalkNavigationPathPoint *pathPoint in self.navigationManager.navigationPath) {
+            InWalkNavigationPathPoint *tmpArPoint = [InWalkNavigationPathPoint new];
+            
+            InWalkPath *path = [self getPathById: pathPoint.pathID];
+            pathPoint.floor = path.floor.intValue;
+            
+            float height = -1.3;
+            if (count == _s2) {
+                height = 0.2; // 摆放视频(竖立图标)时用到
             }
-            //NSLog(@" ** walkDistance: %f", _walkDistance);
+            count++;
+            
+            NSArray<NSNumber *> *position = @[[NSNumber numberWithFloat:pathPoint.pathPosition[0]], // tango.x
+                                              [NSNumber numberWithFloat:pathPoint.pathPosition[1]], // tango.y
+                                              [NSNumber numberWithFloat:height]];
+            //此处为转换为AR坐标加上对应的位置偏移量
+            simd_float4 simd_position = simd_make_float4(position[0].floatValue + xDistan,position[1].floatValue + yDistan,position[2].floatValue,1);
+            simd_float4 result = simd_mul(_tranformMatix, simd_position);
+            
+            tmpArPoint.pathPosition = simd_make_float3(result.x,result.z,result.y); // swap(y,z)
+            tmpArPoint.angleToNext = pathPoint.angleToNext;
+            tmpArPoint.turnFlag = pathPoint.turnFlag;
+            [tmpPath addObject:tmpArPoint];
         }
+        _arPath = tmpPath;
+        //
+        //    //step5 更新路径点
+        [self updateNavigationGuide];
         
-        //当前行走距离到三米的时候纠偏一次
-        if (_sectionWalkDistance >= 3) {
-            NSLog(@"开始三米纠偏");
-            // 找到原始数据中距离起点10m的point，对比{起点AR坐标->Cam的AR坐标}与{起点AR坐标->原始数据距离起点5m的点对应的AR坐标}的角度
-            float x0 = self.navigationManager.completeNavigationPath[0].pathPosition[0];
-            float y0 = self.navigationManager.completeNavigationPath[0].pathPosition[1];
-//
-//            float vX = 0, vY = 0;
-            InWalkNavigationPathPoint * currentPoint;
-            for (InWalkNavigationPathPoint *pathPoint in self.navigationManager.completeNavigationPath) {
-                float dx = pathPoint.pathPosition[0] - x0;
-                float dy = pathPoint.pathPosition[1] - y0;
-                float tmpDelta = sqrtf(dx*dx + dy*dy);
-                //NSLog(@" tmpDelta: %f", tmpDelta);
-                if (tmpDelta > _distance) {
-                    currentPoint = pathPoint;
-                    //NSLog(@" tmpDelta.2: %f  %f", tmpDelta, _walkDistance);
-                    break;
-                }
-            }
-            //当前位置的AR点
-            simd_float4 camARPos = simd_make_float4(0,0,0,1);
-            camARPos = simd_mul(frame.camera.transform, camARPos);
-            
-            // 转换上一点位cam的AR位置
-            
-            simd_float4 lastCamPos = simd_make_float4(0,0,0,1);
-            lastCamPos = simd_mul(_lastARSectionPoint.camera.transform, lastCamPos);
-            
-            // 起点AR坐标
-            simd_float4 last = simd_make_float4(_lastSectionPoint.x.floatValue,_lastSectionPoint.y.floatValue,0,1);
-            //    simd_float4 last = simd_make_float4(self.navigationManager.completeNavigationPath[0].pathPosition[0],self.navigationManager.completeNavigationPath[0].pathPosition[1],0,1);
-            last = simd_mul(_tranformMatix, last); // 注意：Tango数据通过转换矩阵转为ARKit坐标后，y值是实际对应ARKit坐标系中Z轴的值
-            //当前点对应的AR坐标
-            simd_float4 current = simd_make_float4(currentPoint.x.floatValue, currentPoint.y.floatValue, 0, 1);
-            current = simd_mul(_tranformMatix, current); // 注意：Tango数据通过转换矩阵转为ARKit坐标后，y值是实际对应ARKit坐标系中Z轴的值
-            
-            //    _currentPoistion = CGPointMake(cs///////                                                                                                                                                                                                                              urrent[0], current[1]);
-            //    [_mapManager updateCurrentForwardPosition:_currentPoistion];
-            // 角度1:向量{起上一点位AR坐标->Cam的AR坐标}到向量{上一点位转换后AR坐标->当前点对应转换后的AR坐标}的顺时针夹角
-            simd_float4 t1 = simd_make_float4(camARPos[0]-lastCamPos[0],0,camARPos[2]-lastCamPos[2],1);
-            simd_float4 t2 = simd_make_float4(current[0]-last[0],0,current[1]-last[1],1);
-            
-            float anglet = [self calcVectorAngleFrom:t1 to:t2];
-            NSLog(@"%lf",anglet);    // 叠加到原始数据中
-            float angle3 = _mapData.northOffset.floatValue;
-            //    if (_rectifyCount == 0) {
-            //        angle3 = angle3 + 360 - anglet +5;
-            //    }else{
-            //
-            //    }
-            angle3 = angle3 + 360 - anglet;
-            //NSLog(@" ** wa angle4: %f", angle3);_
-            _mapData.northOffset = [NSNumber numberWithFloat:angle3];
-            
-            //    if(_rectifyCount == 0){
-            //        _mapData.northOffset = [NSNumber numberWithFloat:angle3 - 5];
-            //    }else{
-            //        _mapData.northOffset = [NSNumber numberWithFloat:angle3];
-            //    }
-            
-            // step2, update 小地图.
-            [_mapManager updateMap:_mapData];
-            
-            // step3, update Tango坐标到ARKit坐标的转换矩阵.
-            // 第一次坐标变换：将新坐标系平移，使Tango起点和新坐标系起点重合
-            SCNMatrix4 tranformMatix = SCNMatrix4Identity;
-            tranformMatix = SCNMatrix4Translate(tranformMatix, -_mapPoint[0].floatValue, -_mapPoint[1].floatValue,-_mapPoint[2].floatValue);
-            float rotateAngle = _mapData.northOffset.floatValue *M_PI / 180;
-            // 第二次坐标变换：将新坐标系旋转，使其+Y轴与ARKit坐标系的-Z轴方向一致
-            tranformMatix = SCNMatrix4Rotate(tranformMatix, rotateAngle, 0, 0, 1);
-            // 第三次坐标变换：将新坐标系平移，使其与ARKit坐标系完全重合
-            tranformMatix = SCNMatrix4Translate(tranformMatix, _corTransformV.x,_corTransformV.y,_corTransformV.z);
-            //
-            _tranformMatix =  SCNMatrix4ToMat4(tranformMatix);
-            _inverseMatix = simd_inverse(_tranformMatix);
-            
-            
-            NSMutableArray<InWalkNavigationPathPoint *> *tmpPath = [[NSMutableArray alloc] initWithCapacity:self.navigationManager.navigationPath.count];
-            int count = 0;
-            for (InWalkNavigationPathPoint *pathPoint in self.navigationManager.navigationPath) {
-                InWalkNavigationPathPoint *tmpArPoint = [InWalkNavigationPathPoint new];
-                
-                InWalkPath *path = [self getPathById: pathPoint.pathID];
-                pathPoint.floor = path.floor.intValue;
-                
-                float height = -1.3;
-                if (count == _s2) {
-                    height = 0.2; // 摆放视频(竖立图标)时用到
-                }
-                count++;
-                
-                NSArray<NSNumber *> *position = @[[NSNumber numberWithFloat:pathPoint.pathPosition[0]], // tango.x
-                                                  [NSNumber numberWithFloat:pathPoint.pathPosition[1]], // tango.y
-                                                  [NSNumber numberWithFloat:height]];
-                //[NSNumber numberWithFloat:-1.3]];
-                //此处为转换为AR坐标
-                simd_float4 simd_position = simd_make_float4(position[0].floatValue,position[1].floatValue,position[2].floatValue,1);
-                simd_float4 result = simd_mul(_tranformMatix, simd_position);
-                
-                tmpArPoint.pathPosition = simd_make_float3(result.x,result.z,result.y); // swap(y,z)
-                tmpArPoint.angleToNext = pathPoint.angleToNext;
-                tmpArPoint.turnFlag = pathPoint.turnFlag;
-                [tmpPath addObject:tmpArPoint];
-            }
-            _arPath = tmpPath;
-            //
-            //    //step5 更新路径点
-            [self updateNavigationGuide];
-            
-            //    _lastFrameUpdateTime = currentFrame.timestamp;
-            NSLog(@"三米纠偏完成");
-            
-            _sectionWalkDistance = 0;
-            _sectionLastFrameUpdateTime = frame.timestamp;
-            _lastSectionPoint = currentPoint;
-            _sectionPrePos = simd_make_float4(0, 0, 0, 0);
-            //十米纠偏完成，进行纠偏 避免冲突
-            //开始搜索ibeacon
-//            __weak typeof(self) weakSelf = self;
-            
-            //            [[InWalkIbeaconManager manager] startSearchIbeaconWithUUIDS:self.UUIDS iBeaconResultBlcok:^(BRTBeacon * _Nonnull beacon) {
-            //                [weakSelf rectifyAtBeaconsWithBeacon:beacon];
-            //            }];
-            
-                        [self.container makeToast:@"已经行走10m了，纠偏完成"];
-            return YES; // 已进行纠偏
-        }
-        _sectionLastFrameUpdateTime = frame.timestamp;
+        //    _lastFrameUpdateTime = currentFrame.timestamp;
+        NSLog(@"三米纠偏完成");
+        
+        //    _sectionWalkDistance = 0;
+        //    _sectionLastFrameUpdateTime = frame.timestamp;
+        //    _lastSectionPoint = currentPoint;
+        //    _sectionPrePos = simd_make_float4(0, 0, 0, 0);
+        //    // 0.5s记录一次累计行走距离
+        //    if (_sectionWalkDistance != -1 && frame.timestamp - _sectionLastFrameUpdateTime > 0.5) {
+        //        // 记录当前cam的AR位置
+        //        simd_float4 camPos = simd_make_float4(0,0,0,1);
+        //        camPos = simd_mul(frame.camera.transform, camPos);
+        //        // 累加行走距离
+        //        if (_sectionWalkDistance >= 0) {
+        //            float dx = camPos[0]-_sectionPrePos[0];
+        //            float dz = camPos[2]-_sectionPrePos[2];
+        //            float distance = sqrtf((dx*dx + dz*dz));
+        //            if (distance > 0.4) {
+        //                _sectionWalkDistance += distance;
+        //                _sectionPrePos[0] = camPos[0];
+        //                _sectionPrePos[1] = camPos[1];
+        //                _sectionPrePos[2] = camPos[2];
+        //            }
+        //            NSLog(@" ** walkDistance: %f", _sectionWalkDistance);
+        //        }
+        //        //当前行走距离到三米的时候纠偏一次
+        //        if (_sectionWalkDistance >= 3) {
+        //
+        //            //十米纠偏完成，进行纠偏 避免冲突
+        //            //开始搜索ibeacon
+        ////            __weak typeof(self) weakSelf = self;
+        //
+        //            //            [[InWalkIbeaconManager manager] startSearchIbeaconWithUUIDS:self.UUIDS iBeaconResultBlcok:^(BRTBeacon * _Nonnull beacon) {
+        //            //                [weakSelf rectifyAtBeaconsWithBeacon:beacon];
+        //            //            }];
+        //
+        //                        [self.container makeToast:@"已经行走三米了，位移纠偏完成"];
+        //            return YES; // 已进行纠偏
+        //        }
+        //        _sectionLastFrameUpdateTime = frame.timestamp;
+        //    }
+        //    return NO; // 未纠偏
     }
-    return NO; // 未纠偏
+    
+    
 }
 
 
 //新增位移纠偏相关逻辑
 
 #pragma mark - 纠偏尝试：位移纠偏
--(void)offsetRectifyAtTenMeters:(ARFrame *)frame{
+-(void)offsetRectifyAtTenMeters{
     //转换当前的AR点位
+    ARFrame * frame = self.arscnView.session.currentFrame;
     simd_float4 camARPos = simd_make_float4(0,0,0,1);
     camARPos = simd_mul(frame.camera.transform, camARPos);
     //获取当前点位的的映射点
@@ -2612,10 +3229,68 @@
     float B=p1.x-p2.x;
     float C=p2.x*p1.y-p1.x*p2.y;
 
+    float x=(B*B*x0.x-A*B*x0.y-A*C)/(A*A+B*B);
+    float y=(-A*B*x0.x+A*A*x0.y-B*C)/(A*A+B*B);
     
+    NSLog(@"%@",NSStringFromCGPoint(CGPointMake(x, y)));
     //点到直线距离
     float d=(A*x0.x+B*x0.y+C)/sqrt(A*A+B*B);
     return d;
 }
+
+
+//根据当前用户所在的AR点位 和上一实际点位，计算出上一AR点位，回溯点位计算
+-(simd_float4)getLastARPointWihtCurrentArPoint:(simd_float4)currentArPoint{
+    //已知三个点位，用户当前AR点位，用户当前ibeacon点位，上一设备点位，求出当前用户的的上一AR点位
+    
+    // 上一点对应的AR坐标
+    simd_float4 last = simd_make_float4(_lastIbeaconPoint.x.floatValue,_lastIbeaconPoint.y.floatValue,0,1);
+    //    simd_float4 last = simd_make_float4(self.navigationManager.completeNavigationPath[0].pathPosition[0],self.navigationManager.completeNavigationPath[0].pathPosition[1],0,1);
+    last = simd_mul(_tranformMatix, last); // 注意：Tango数据通过转换矩阵转为ARKit坐标后，y值是实际对应ARKit坐标系中Z轴的值
+    //当前点对应的AR坐标
+    simd_float4 current = simd_make_float4(_currentIbeaconPoint.x.floatValue, _currentIbeaconPoint.y.floatValue, 0, 1);
+    current = simd_mul(_tranformMatix, current); // 注意：Tan
+    
+    //转换起点对应的AR坐标
+    float x0 = self.navigationManager.completeNavigationPath[0].pathPosition[0];
+    float y0 = self.navigationManager.completeNavigationPath[0].pathPosition[1];
+    // 起点AR坐标
+    simd_float4 start = simd_make_float4(x0,y0,0,1);
+    start = simd_mul(_tranformMatix, start); // 注意：Tango数据通过转换矩阵转为ARKit坐标后，y值是实际对应ARKit坐标系中Z轴的值
+    
+    //起点与X轴平行线上的任意点坐标
+    simd_float4 startX = simd_make_float4(x0 + 65535,y0,0,1);
+    startX = simd_mul(_tranformMatix, startX);
+    
+    // 角度1:向量{起点AR坐标->实际位置点的AR坐标}到向量{起点AR坐标->当前用户AR的坐标}的顺时针夹角
+    simd_float4 t1 = simd_make_float4(currentArPoint[0]-start[0],0,currentArPoint[2]-start[1],1);
+    simd_float4 t2 = simd_make_float4(current[0]-start[0],0,current[1]-start[1],1);
+    //计算角度
+    float angle1 = [self calcVectorAngleFrom:t1 to:t2];
+    
+    //角度2 向量（起点AR坐标->上一点位的AR坐标）到向量 (起点AR坐标->起点与X轴任意点的转换AR坐标)
+
+    simd_float4 t3 = simd_make_float4(last[0]-start[0],0,last[2]-start[1],1);
+    simd_float4 t4 = simd_make_float4(startX[0]-start[0],0,startX[1]-start[1],1);
+    //计算角度
+    float angle2 = [self calcVectorAngleFrom:t3 to:t4];
+    
+    
+    //计算角度3
+    float angle3 = fabsf(angle2 - angle1);
+    
+    //取起点到上一位置点的长度
+    float dx = start[0] - last[0];
+    float dz = start[2] - last[2];
+    float distance = sqrtf((dx*dx + dz*dz));
+    
+    simd_float4 lastArPoint = simd_make_float4(distance * sin(angle3), 0, distance * cos(angle3), 1);
+    
+    NSLog(@"回溯纠偏的点位为x=%lf y=%lf",lastArPoint[0],lastArPoint[2]);
+    
+    return lastArPoint;
+    
+}
+
 
 @end
