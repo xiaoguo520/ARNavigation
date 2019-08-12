@@ -1,4 +1,6 @@
 PODS:
+  - FDFullscreenPopGesture (1.1)
+  - Masonry (1.1.0)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -11,17 +13,31 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
+  - SSKeychain (1.4.1)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - FDFullscreenPopGesture (= 1.1)
+  - Masonry
   - MMDrawerController (~> 0.5.7)
+  - SSKeychain
+  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - FDFullscreenPopGesture
+    - Masonry
     - MMDrawerController
+    - SSKeychain
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
+  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
+  SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: e6cae40f5842851e811b23b27ae29df3ef99c0e4
+PODFILE CHECKSUM: 2fbd52cd50fc1f3de9870e9515847644b8191bd2
 
 COCOAPODS: 1.5.3

@@ -9,5 +9,9 @@ target 'InWalkDemo' do
   project 'InWalkDemo/InWalkDemo.xcodeproj'
    # pod 'inWalkExtension'
    pod 'MMDrawerController', '~> 0.5.7'
+   pod 'Masonry'
+   pod 'SVProgressHUD'
+   pod 'SSKeychain'
+   pod 'FDFullscreenPopGesture', '1.1'
 
 end

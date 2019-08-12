@@ -152,7 +152,7 @@
         [self.container addSubview:self.mapManager.mapView];
         
         _walkDistance = -1;
-        _rectifyDistance = 10;//0.1;//10; // 10米处纠偏
+        _rectifyDistance = 0.1;//0.1;//10; // 10米处纠偏
         //_rectifyDistance = 0.1;
         _rectifyCount = 0;
         _distance = 0;
@@ -293,7 +293,7 @@
             _distancePrePos[1] = camPos[1];
             _distancePrePos[2] = camPos[2];
         }
-        NSLog(@" ** Ar walkDistance: %f", _distance);
+//        NSLog(@" ** Ar walkDistance: %f", _distance);
     }
 }
 
@@ -483,7 +483,7 @@
 
 #pragma mark - 纠偏尝试：从起点行走到10米处进行角度纠偏
 - (BOOL)rectifyAtTenMeters:(ARFrame *)frame {
-    // 0.4s记录一次累计行走距离
+    // 0.4s记录一次累计行走距离v
     if (_walkDistance != -1 && frame.timestamp - _lastFrameUpdateTime > 0.4) {
         // 记录当前cam的AR位置
         simd_float4 camPos = simd_make_float4(0,0,0,1);
